@@ -1,0 +1,3 @@
+[submodule "ccg2lambda"]
+	path = ccg2lambda
+	url = https://github.com/mynlp/ccg2lambda.git
