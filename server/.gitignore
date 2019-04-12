@@ -67,3 +67,6 @@ fabric.properties
 
 # Environment files
 py3
+
+# Python cache
+__pycache__
