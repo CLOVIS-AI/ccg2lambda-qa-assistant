@@ -1,5 +1,4 @@
 from message import Message
-from network import Server
 from utils import byte_to_message
 
 
@@ -9,7 +8,7 @@ from utils import byte_to_message
 
 class Client:
 
-    def __init__(self, server: Server, socket):
+    def __init__(self, server, socket):
         self.__socket = socket
         self.__server = server
         self.coords = socket.getpeername()
@@ -20,7 +19,7 @@ class Client:
         while True:
             try:
                 self.__receive_messages()
-            except ConnectionResetError:
+            except (ConnectionResetError, OSError):
                 break
         self.close(clientside=True)
 
@@ -34,10 +33,10 @@ class Client:
 
         for message in byte_to_message(msg):
             if message.name in self.__server.commands:
-                print("Server:", self.coords, ">>>", message)
+                print("Server:", self.coords, "sent [", message, "]")
                 self.__server.commands[message.name](self.__server, self, *message.args)
             else:
-                print("Server WARNING: Unknown command:", message.name)
+                print("Server WARNING: Unknown command [", message.name, "]")
 
     def send(self, command, *args):
         """
@@ -47,7 +46,7 @@ class Client:
         """
 
         msg = Message(command, *args)
-        print("Server:", self.coords, "<<<", msg)
+        print("Server: sending [", msg, "] to", self.coords)
         msg.send(self.__socket)
 
     def close(self, clientside=False):

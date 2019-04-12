@@ -1,4 +1,4 @@
-from network import ESCAPE_CHARACTER
+from constants import ESCAPE_CHARACTER
 
 
 class Message:
@@ -38,6 +38,7 @@ class Message:
             s += ESCAPE_CHARACTER + arg.encode()
         s += b"\n"
         try:
+            print("Internal: Sending [", s.decode().replace('\n', ''), "]")
             socket.send(s)
         except OSError:
             print("Warning: Cannot send message, invalid connection.")

@@ -1,0 +1,1 @@
+ESCAPE_CHARACTER = '§'.encode()
