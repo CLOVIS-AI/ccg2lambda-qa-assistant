@@ -1,10 +1,9 @@
-# coding=utf-8
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 # url where the query has to be sent through the wrapper
 sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
 
-query = """
+sparql.setQuery("""
     #Les dix êtres humains les plus lourds
     #defaultView:BubbleChart
     #TEMPLATE={ "template": "The top 10 heaviest ?type ", "variables": { "?type": { "query": "SELECT DISTINCT ?id WHERE { ?i wdt:P2067 ?v. ?i wdt:P31 ?id}" } } }
@@ -21,6 +20,7 @@ query = """
     SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" }
     }
     """
+
 sparql.setQuery(query)
 
 sparql.setReturnFormat(JSON)
