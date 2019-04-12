@@ -1,5 +1,4 @@
 from message import Message
-from network import Server
 from utils import byte_to_message
 
 
@@ -9,7 +8,7 @@ from utils import byte_to_message
 
 class Client:
 
-    def __init__(self, server: Server, socket):
+    def __init__(self, server, socket):
         self.__socket = socket
         self.__server = server
         self.coords = socket.getpeername()
