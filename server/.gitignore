@@ -66,7 +66,7 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # Environment files
-py3
+venv/
 
 # Python cache
 __pycache__
