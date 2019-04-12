@@ -1,7 +1,7 @@
 from typing import List
 
+from constants import ESCAPE_CHARACTER
 from message import Message
-from network import ESCAPE_CHARACTER
 
 
 def byte_to_message(contents) -> List[Message]:
@@ -15,7 +15,8 @@ def byte_to_message(contents) -> List[Message]:
     if contents != b'':
         for command in contents.split(b'\n'):
             if command != b'':
-                parts = command.split(ESCAPE_CHARACTER, 1)
+                print("Internal: Received [", command.decode(), "]")
+                parts = command.split(ESCAPE_CHARACTER)
                 name = parts[0].decode()
                 params = [parts[i].decode() for i in range(1, len(parts))]
 

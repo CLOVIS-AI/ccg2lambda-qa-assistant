@@ -1,4 +1,4 @@
-from network import ESCAPE_CHARACTER
+from constants import ESCAPE_CHARACTER
 
 
 class Message:
