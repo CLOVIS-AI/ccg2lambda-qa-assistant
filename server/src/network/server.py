@@ -26,7 +26,8 @@ class Server:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.bind(("", port))
         self.socket.listen(max_connections)
-        print("Server: Connected on port", self.socket.getsockname()[1])
+        self.is_running = True
+        print("Server: Connected on port", self.socket.getsockname()[1], "\n")
         atexit.register(self.kill)  # Close the server automatically when the program is killed externally
 
     def run(self):
@@ -35,9 +36,14 @@ class Server:
         """
 
         print("Server: Running")
-        while True:
-            client, infos = self.socket.accept()
-            Thread(target=self.__connect_to_client, args=[client]).start()
+        while self.is_running:
+            try:
+                self.socket.settimeout(1)
+                client, infos = self.socket.accept()
+                Thread(target=self.__connect_to_client, args=[client]).start()
+            except (socket.timeout, OSError):
+                pass
+        print("Server: The socket was closed, stopped listening.")
 
     def __connect_to_client(self, client):
         """
@@ -65,4 +71,6 @@ class Server:
         """
 
         self.socket.close()
+        self.is_running = False
+        [client.close() for client in self.clients]
         print("Server: Disconnected.")

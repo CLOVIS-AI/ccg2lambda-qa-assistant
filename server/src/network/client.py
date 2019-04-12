@@ -19,7 +19,7 @@ class Client:
         while True:
             try:
                 self.__receive_messages()
-            except ConnectionResetError:
+            except (ConnectionResetError, OSError):
                 break
         self.close(clientside=True)
 
