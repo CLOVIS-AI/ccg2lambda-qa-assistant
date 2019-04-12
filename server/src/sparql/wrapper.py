@@ -1,3 +1,4 @@
+# coding=utf-8
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 # url where the query has to be sent through the wrapper
@@ -20,7 +21,6 @@ query = """
     SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" }
     }
     """
-
 sparql.setQuery(query)
 
 sparql.setReturnFormat(JSON)
