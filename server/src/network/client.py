@@ -33,10 +33,10 @@ class Client:
 
         for message in byte_to_message(msg):
             if message.name in self.__server.commands:
-                print("Server:", self.coords, ">>>", message)
+                print("Server:", self.coords, "sent [", message, "]")
                 self.__server.commands[message.name](self.__server, self, *message.args)
             else:
-                print("Server WARNING: Unknown command:", message.name)
+                print("Server WARNING: Unknown command [", message.name, "]")
 
     def send(self, command, *args):
         """
@@ -46,7 +46,7 @@ class Client:
         """
 
         msg = Message(command, *args)
-        print("Server:", self.coords, "<<<", msg)
+        print("Server: sending [", msg, "] to", self.coords)
         msg.send(self.__socket)
 
     def close(self, clientside=False):

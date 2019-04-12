@@ -63,7 +63,7 @@ class Server:
         """
 
         self.commands[name] = callback
-        print("Server: Registered command:", name)
+        print("Server: Registered command [", name, "]")
 
     def kill(self):
         """
