@@ -10,5 +10,3 @@
 #
 #   All installation guides are described on their respective link.
 #
-
-

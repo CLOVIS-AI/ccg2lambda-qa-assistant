@@ -3,6 +3,8 @@ certifi==2019.3.9
 chardet==3.0.4
 idna==2.8
 isodate==0.6.0
+pipenv==2018.11.26
+pycodestyle==2.5.0
 pyparsing==2.4.0
 rdflib==4.2.2
 requests==2.21.0
@@ -11,4 +13,5 @@ soupsieve==1.9
 SPARQLWrapper==1.8.2
 urllib3==1.24.1
 virtualenv==16.0.0
+virtualenv-clone==0.5.3
 wikipedia==1.4.0

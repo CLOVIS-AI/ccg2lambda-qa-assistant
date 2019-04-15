@@ -70,3 +70,6 @@ venv/
 
 # Python cache
 __pycache__
+
+# IntelliJ GitToolbox plugin
+git_toolbox_prj.xml

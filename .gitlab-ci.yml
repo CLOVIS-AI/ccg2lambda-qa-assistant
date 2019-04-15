@@ -1,0 +1,16 @@
+stages:
+ - test
+
+test-server:
+  stage: test
+  image: python:3.5
+  before_script:
+    - cd server
+    - python3 -m venv venv/
+    - source venv/bin/activate
+    - pip install -r requirements.txt
+  script:
+    - cd src
+    - python3 -m unittest discover
+    - pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 --benchmark .
+  retry: 1
