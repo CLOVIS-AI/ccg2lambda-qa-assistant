@@ -1,7 +1,7 @@
 from typing import List
 
-from constants import ESCAPE_CHARACTER
-from message import Message
+from .constants import ESCAPE_CHARACTER
+from .message import Message
 
 
 def byte_to_message(contents) -> List[Message]:

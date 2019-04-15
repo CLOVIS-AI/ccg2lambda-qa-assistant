@@ -1,7 +1,7 @@
 import socket
 
-from message import Message
-from utils import byte_to_message
+from .message import Message
+from .utils import byte_to_message
 
 
 class _Client:
