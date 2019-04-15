@@ -12,5 +12,5 @@ test-server:
   script:
     - cd src
     - python3 -m unittest discover
-    - pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 .
+    - pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 --benchmark .
   retry: 1
