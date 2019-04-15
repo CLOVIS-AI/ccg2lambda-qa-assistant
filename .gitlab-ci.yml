@@ -5,8 +5,10 @@ test-server:
   stage: test
   image: python:3.5
   before_script:
-    - python3 -m venv server/venv/
-    - source server/venv/bin/activate
-    - pip install -r server/requirements.txt
+    - cd server
+    - python3 -m venv venv/
+    - source venv/bin/activate
+    - pip install -r requirements.txt
   script:
-    - echo "Hello world"
+    - cd src
+    - python3 -m unittest discover
