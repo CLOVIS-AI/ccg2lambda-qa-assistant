@@ -28,12 +28,12 @@ class WikiSearcher:
 
     def search_wikidata_label(self):
         url = self.search_wikipedia()
-        http = urllib3.PoolManager()
-        html = http.request('GET', self.search_wikipedia())
-        if html.startswith("\""):
+        if url.startswith("\""):
             return None
         else:
-            soup = bs4.BeautifulSoup(html, 'lxml')
+            http = urllib3.PoolManager()
+            html = http.request('GET', self.search_wikipedia())
+            soup = bs4.BeautifulSoup(html.data, 'lxml')
             # extracting page title
             q_number = soup.find('li', {'id' : 't-wikibase'})
 
