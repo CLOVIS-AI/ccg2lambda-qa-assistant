@@ -1,4 +1,4 @@
-#People who received both an Oscar and a Nobel Prize
+#Who received both an Oscar and a Nobel Prize?
 SELECT DISTINCT ?item ?itemLabel WHERE {
   ?item wdt:P166/wdt:P31? wd:Q7191 .
   ?item wdt:P166/wdt:P31? wd:Q19020 .

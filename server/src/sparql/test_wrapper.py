@@ -10,5 +10,4 @@ class TestWrapper(TestCase):
         expected_result = open("test_wrapper_expected_result.txt", "r")
         actual_result = self.wrapper.make_request()
         self.assertEqual(expected_result.read(), actual_result)
-        #print(actual_result)
         expected_result.close()
