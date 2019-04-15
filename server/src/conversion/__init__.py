@@ -1,12 +1,8 @@
-# this package purpose is to convert natural language into
+# this package purpose is to convert natural language into SPARQL requests
 #
 # In order to run, this package uses the following imports:
-#   - Wikipedia, the Python library:
-#           https://pypi.org/project/wikipedia/
-#   - Beautiful Soup, library used for pulling data out from HTML and XML files:
-#           https://www.crummy.com/software/BeautifulSoup/bs4/doc/
-#   - SPARQLWrapper, Python wrapper around SPARQL (https://en.wikipedia.org/wiki/SPARQL) services:
-#           https://pypi.org/project/SPARQLWrapper/
+#   - ccg2lambda :
+#           https://github.com/mynlp/ccg2lambda
 #
 #   All installation guides are described on their respective link.
 #

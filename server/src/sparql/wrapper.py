@@ -1,15 +1,29 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-# url where the query has to be sent through the wrapper
-sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
 
-query = open("query.sparql", "r")
+#
+# query wrapper to request to the source
+#
 
 
-sparql.setQuery(query.read())
+class Wrapper:
 
-sparql.setReturnFormat(JSON)
-results = sparql.query().convert()
+    def __init__(self, url, query):
+        self._wrapper = SPARQLWrapper(url)
+        self.__query_path = query
 
-for result in results["results"]["bindings"]:
-    print(result)
+    # Creates the request of the query given in its parameter and sends it to the URL. Returns the result of the query.
+    def make_request(self):
+        file = open(self.__query_path, "r")
+        self._wrapper.setQuery(file.read())
+
+        self._wrapper.setReturnFormat(JSON)
+        results = self._wrapper.query().convert()
+
+        string_result = ""
+        # Will end by a new empty line.
+        for result in results["results"]["bindings"]:
+            string_result += result["itemLabel"]["value"] + "\n"
+
+        file.close()
+        return string_result

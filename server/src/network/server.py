@@ -2,7 +2,7 @@ import atexit
 import socket
 from threading import Thread
 
-from client import Client
+from .client import Client
 
 
 #
