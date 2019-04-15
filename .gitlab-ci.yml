@@ -12,3 +12,4 @@ test-server:
   script:
     - cd src
     - python3 -m unittest discover
+  retry: 1
