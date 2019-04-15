@@ -1,17 +1,8 @@
-#Les dix êtres humains les plus lourds
-#defaultView:BubbleChart
-#TEMPLATE={ "template": "The top 10 heaviest ?type ", "variables": { "?type": { "query": "SELECT DISTINCT ?id WHERE { ?i wdt:P2067 ?v. ?i wdt:P31 ?id}" } } }
-SELECT ?item ?itemLabel ?mass
-WHERE
-{
-    {
-        SELECT ?item ?mass WHERE
-        {
-            ?item wdt:P31 wd:Q5;
-            p:P2067/psn:P2067/wikibase:quantityAmount ?mass.
-        }
-        ORDER BY DESC(?mass)
-        LIMIT 10
-    }
-    SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" }
+#People who received both an Oscar and a Nobel Prize
+SELECT DISTINCT ?item ?itemLabel WHERE {
+  ?item wdt:P166/wdt:P31? wd:Q7191 .
+  ?item wdt:P166/wdt:P31? wd:Q19020 .
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" .
+  }
 }
