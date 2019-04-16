@@ -45,9 +45,10 @@ class WikiSearcher:
             http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
             html = http.request('GET', self.search_wikipedia())
             soup = bs4.BeautifulSoup(html.data, 'lxml')
-            # extracting page title
-            q_number = soup.find('li', {'id' : 't-wikibase'})
-
+            # extracting page code
+            q_number_container = soup.find('li', {'id': 't-wikibase'})
+            q_number = q_number_container.a['href'].rsplit('/')[-1]
+    
             return q_number
 
     def set_words(self, words):
