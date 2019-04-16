@@ -44,4 +44,3 @@ class TestWikiSearcher(TestCase):
         # Must use instead a dictionary of all common fields.
         wiki_searcher.set_words("Instance of")
         self.assertNotEqual("P31", wiki_searcher.search_wikidata_q_label())
-
