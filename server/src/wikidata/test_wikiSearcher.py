@@ -10,7 +10,6 @@ class TestWikiSearcher(TestCase):
         self.assertEqual("https://en.wikipedia.org/wiki/Aristide_Briand", wiki_searcher.search_wikipedia())
 
         # several results possible, picks the first available
-        # will produce a warning: it is from the wikipedia library
         wiki_searcher.set_words("New York")
         self.assertEqual("https://en.wikipedia.org/wiki/New_York_City", wiki_searcher.search_wikipedia())
 
@@ -26,5 +25,23 @@ class TestWikiSearcher(TestCase):
 
     # admits that search_wikipedia works.
     def test_search_wikidata_label(self):
+        # search for items (q-codes in wikidata)
         wiki_searcher = WikiSearcher("Aristide Briand")
-        print(wiki_searcher.search_wikidata_label())
+        ar_briand_q_code = "Q179888"
+        self.assertEqual(ar_briand_q_code, wiki_searcher.search_wikidata_q_label())
+
+        wiki_searcher.set_words("Aristude Briand")
+        self.assertEqual(ar_briand_q_code, wiki_searcher.search_wikidata_q_label())
+
+        wiki_searcher.set_words("New York")
+        self.assertEqual("Q60", wiki_searcher.search_wikidata_q_label())
+
+        # should return no result
+        wiki_searcher.set_words("erroeroereoreorero")
+        self.assertEqual(None, wiki_searcher.search_wikidata_q_label())
+
+        # search for fields (p-codes in wikidata). Is not supposed to work as it passes by wikipedia.
+        # Must use instead a dictionary of all common fields.
+        wiki_searcher.set_words("Instance of")
+        self.assertNotEqual("P31", wiki_searcher.search_wikidata_q_label())
+

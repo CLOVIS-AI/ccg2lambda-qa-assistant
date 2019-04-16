@@ -37,7 +37,7 @@ class WikiSearcher:
 
         return page.url
 
-    def search_wikidata_label(self):
+    def search_wikidata_q_label(self):
         url = self.search_wikipedia()
         if url.startswith("\""):
             return None
@@ -48,7 +48,7 @@ class WikiSearcher:
             # extracting page code
             q_number_container = soup.find('li', {'id': 't-wikibase'})
             q_number = q_number_container.a['href'].rsplit('/')[-1]
-    
+
             return q_number
 
     def set_words(self, words):
