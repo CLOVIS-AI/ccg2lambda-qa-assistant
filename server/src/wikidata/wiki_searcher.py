@@ -6,6 +6,8 @@ import bs4
 import urllib3
 # signing certificates lib for http
 import certifi
+# suppresses warning of other libs (that we didn't raise ourselves)
+import warnings
 
 #
 # Wikidata codes fetcher
@@ -15,8 +17,12 @@ import certifi
 class WikiSearcher:
     def __init__(self, words):
         self._words = words
+        # ignores warning from Wikipedia package about its use of bs4
+        warnings.filterwarnings("ignore", category=UserWarning, module='wikipedia')
+        # ignores warning of unclosed socket, existing only in unittest (hence suppressed to have a clear
+        warnings.filterwarnings("ignore", category=ResourceWarning)
 
-    # returns url of wikipedia page resulting of a search on words var
+# returns url of wikipedia page resulting of a search on words var
     def search_wikipedia(self):
         try:
             page = wikipedia.page(self._words)
