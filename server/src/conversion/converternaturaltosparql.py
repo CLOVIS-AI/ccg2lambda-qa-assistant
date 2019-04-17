@@ -39,7 +39,9 @@ def _output_checker(returned_output, cmd):
     if not returned_output == 0:
         print("Error while converting Natural to SPARQL : " + cmd)
         print("Code error : %d", returned_output)
-        exit(1)
+
+        returned_output_msg = subprocess.check_output(cmd)
+        raise Exception("Problem encountered while converting into SPARQL. output : " + returned_output_msg)
 
 
 def _tokenizing(sentences):
@@ -75,15 +77,21 @@ def visualize_semantic():
     _execute_cmd(cmd)
 
 
-def convert(sentences):
+def convert(sentences) -> bool:
     _setup_checker()
 
-    # Converting the sentences in Jigg's XML
-    _tokenizing(sentences)
-    _candc_conversion()
+    try:
+        # Converting the sentences in Jigg's XML
+        _tokenizing(sentences)
+        _candc_conversion()
 
-    # Converting using ccg2lambda
-    _ccg2lambda_conversion()
+        # Converting using ccg2lambda
+        _ccg2lambda_conversion()
 
-    # Create a visualization
-    visualize_semantic()
+        # Create a visualization
+        visualize_semantic()
+    except Exception as error:
+        print(error)
+        return False
+    return True
+
