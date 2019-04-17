@@ -13,7 +13,16 @@ class ConverterNaturalToSPARQL:
     def __init__(self, sentences):
         self._sentences = sentences
 
+    def _tmp_check(self):
+        if not os.path.isdir(PATH_TO_TMP):
+            print("Creating temporary directory at :" + PATH_TO_TMP)
+            cmd = "mkdir " + PATH_TO_TMP
+            returned_output = subprocess.call(cmd, shell=True)
+            self._output_checker(returned_output, cmd)
+
     def cleanTmpDir(self):
+        self._tmp_check()
+
         if not len(os.listdir(PATH_TO_TMP)) == 0:
             cmd = "rm -r " + PATH_TO_TMP + "/*"
             subprocess.call(cmd, shell=True)
@@ -24,11 +33,7 @@ class ConverterNaturalToSPARQL:
                   "README.md on : https://github.com/CLOVIS-AI/ccg2lambda-qa-assistant")
             sys.exit(1)
 
-        if not os.path.isdir(PATH_TO_TMP):
-            print("Creating temporary directory at :" + PATH_TO_TMP)
-            cmd = "mkdir " + PATH_TO_TMP
-            returned_output = subprocess.call(cmd, shell=True)
-            self._output_checker(returned_output, cmd)
+        self._tmp_check()
 
     def _output_checker(self, returned_output, cmd):
         if not returned_output == 0:
