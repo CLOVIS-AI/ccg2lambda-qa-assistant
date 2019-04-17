@@ -10,14 +10,14 @@ import os
 class TestConvertCcg2lambda(TestCase):
     def setUp(self):
         test_questions = open("conversion/test_converter_questions.txt", "r")
-        self.converter = ConverterNaturalToSPARQL(test_questions.read())
+        self.sentences= test_questions.read()
 
     def test_makeRequest(self):
         self.test_cleanUp()
 
         # Converting the sentences with ccg2lambda
-        self.converter.convert()
-        self.converter.visualize_semantic()
+        convert(self.sentences)
+        visualize_semantic()
 
         # Checking the output files
         self.assertTrue(os.path.isdir(PATH_TO_TMP))
@@ -31,5 +31,5 @@ class TestConvertCcg2lambda(TestCase):
 
     def test_cleanUp(self):
         # Cleaning temporary folders
-        self.converter.cleanTmpDir()
+        cleanTmpDir()
         self.assertEqual(0, len(os.listdir(PATH_TO_TMP)))
