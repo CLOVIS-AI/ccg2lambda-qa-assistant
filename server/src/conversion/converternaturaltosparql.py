@@ -13,6 +13,11 @@ class ConverterNaturalToSPARQL:
     def __init__(self, sentences):
         self._sentences = sentences
 
+    def cleanTmpDir(self):
+        if not len(os.listdir(PATH_TO_TMP)) == 0:
+            cmd = "rm -r " + PATH_TO_TMP + "/*"
+            subprocess.call(cmd, shell=True)
+
     def _settup_checker(self):
         if not os.path.isdir(PATH_TO_CCG2LAMBDA):
             print("ccg2lambda not found : Please install from : https://github.com/mynlp/ccg2lambda or follow the "
@@ -21,12 +26,14 @@ class ConverterNaturalToSPARQL:
 
         if not os.path.isdir(PATH_TO_TMP):
             print("Creating temporary directory at :" + PATH_TO_TMP)
-            os.system("mkdir " + PATH_TO_TMP)
+            cmd = "mkdir " + PATH_TO_TMP
+            returned_output = subprocess.call(cmd, shell=True)
+            self._output_checker(returned_output, cmd)
 
     def _output_checker(self, returned_output, cmd):
         if not returned_output == 0:
             print("Error while converting Natural to SPARQL : " + cmd)
-            print("Code error : " + returned_output)
+            print("Code error : %d", returned_output)
             exit(1)
 
     def _tokenizing(self):

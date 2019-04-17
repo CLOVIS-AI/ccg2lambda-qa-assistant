@@ -4,17 +4,32 @@ from .converternaturaltosparql import *
 
 from lxml import etree
 
+import os
 
-class TestWrapper(TestCase):
+
+class TestConvertCcg2lambda(TestCase):
     def setUp(self):
-        self.converter = ConverterNaturalToSPARQL("What are the languages in China ? \n Who is John Watson ? \
-                                                    \n How many dogs were in my house in 2014 ?")
+        test_questions = open("conversion/test_converter_questions.txt", "r")
+        self.converter = ConverterNaturalToSPARQL(test_questions.read())
 
     def test_makeRequest(self):
+        self.test_cleanUp()
+
+        # Converting the sentences with ccg2lambda
         self.converter.convert()
         self.converter.visualize_semantic()
 
-        parser = etree.XMLParser(ns_clean=True)
-        tree = etree.parse(PATH_TO_TMP + "/sentences.sem.xml", parser)
+        # Checking the output files
+        self.assertTrue(os.path.isdir(PATH_TO_TMP))
+        self.assertFalse(len(os.listdir(PATH_TO_TMP)) == 0)
+        events = ("start", "end")
+        context = etree.iterparse(PATH_TO_TMP + "/sentences.sem.xml", events=events, tag="semantics")
+        for action, elem in context:
+            self.assertEqual("success", elem.attrib["status"])
 
-        print(etree.tostring(tree, pretty_print=True))
+        self.test_cleanUp()
+
+    def test_cleanUp(self):
+        # Cleaning temporary folders
+        self.converter.cleanTmpDir()
+        self.assertEqual(0, len(os.listdir(PATH_TO_TMP)))
