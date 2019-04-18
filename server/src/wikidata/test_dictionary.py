@@ -10,6 +10,6 @@ class TestDictionary(TestCase):
 
     def test_load_dictionary(self):
         dictionary = Dictionary("../res/HTML")
-        assert dictionary.get_dictionary() == {}
+        assert dictionary.__getitem__("instance of") is None
         dictionary.load_dictionary()
-        assert dictionary.get_dictionary() != {}
+        assert dictionary.__getitem__("instance of") == "P31"

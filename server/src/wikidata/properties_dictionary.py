@@ -39,4 +39,7 @@ class Dictionary:
         f.close()
 
     def __getitem__(self, item):
-        return self.__dictionary[item]
+        if self.__dictionary.__contains__(item):
+            return self.__dictionary[item]
+        else:
+            return None
