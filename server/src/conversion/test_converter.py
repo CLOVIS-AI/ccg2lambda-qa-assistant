@@ -13,7 +13,7 @@ class TestConvertCcg2lambda(TestCase):
         self.sentences= test_questions.read()
 
     def test_makeRequest(self):
-        self.test_cleanUp()
+        cleanTmpDir()
 
         # Converting the sentences with ccg2lambda
         convert(self.sentences)
@@ -27,7 +27,7 @@ class TestConvertCcg2lambda(TestCase):
         for action, elem in context:
             self.assertEqual("success", elem.attrib["status"])
 
-        self.test_cleanUp()
+        cleanTmpDir()
 
     def test_cleanUp(self):
         # Cleaning temporary folders
