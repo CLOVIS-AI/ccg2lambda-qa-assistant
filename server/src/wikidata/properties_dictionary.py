@@ -15,7 +15,7 @@ class Dictionary:
     # fills a dictionary under the form of a txt. Uses html pages https://tools.wmflabs.org/prop-explorer/
 
     def fill_dictionary(self):
-        dictionary = open("dictionary.txt", "w")
+        dictionary = open("wikidata/dictionary.txt", "w")
         for filename in os.listdir(self.__html_path):
             if filename.endswith(".html"):
                 f = open(self.__html_path + '/' + filename)
@@ -32,10 +32,10 @@ class Dictionary:
         dictionary.close()
 
     def load_dictionary(self):
-        f = open("dictionary.txt", "r")
+        f = open("wikidata/dictionary.txt", "r")
         for line in f.readlines():
             self.__dictionary[line.split(':')[0]] = line.split(':')[1].split('\n')[0]
         f.close()
 
-    def get_dictionary(self):
-        return self.__dictionary
+    def __getitem__(self, item):
+        return self.__dictionary[item]
