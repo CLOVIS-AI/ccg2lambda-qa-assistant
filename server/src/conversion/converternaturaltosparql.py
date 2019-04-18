@@ -1,6 +1,6 @@
+import os
 import subprocess
 import sys
-import os
 
 PATH_TO_CCG2LAMBDA = "../../ccg2lambda"
 PATH_TO_CANDC = PATH_TO_CCG2LAMBDA + "/candc-1.00"
@@ -45,7 +45,7 @@ def _output_checker(returned_output, cmd):
 
 
 def _tokenizing(sentences):
-    cmd = "echo " + "\"" + sentences + "\"" + " | sed -f " + PATH_TO_CCG2LAMBDA + "/en/tokenizer.sed > " \
+    cmd = 'echo "' + sentences + '" | sed -f ' + PATH_TO_CCG2LAMBDA + "/en/tokenizer.sed > " \
           + PATH_TO_TMP + "/sentences.tok;"
     _execute_cmd(cmd)
 
@@ -56,24 +56,25 @@ def _candc_conversion():
         print("Please ensure that ccg2lambda is correctly installed : https://github.com/mynlp/ccg2lambda")
         exit(1)
 
-    cmd = PATH_TO_CANDC + "/bin/candc --models " + PATH_TO_CANDC + "/models --candc-printer xml --input " \
-          + PATH_TO_TMP + "/sentences.tok > " + PATH_TO_TMP + "/sentences.candc.xml"
+    cmd = "{0}/bin/candc --models {1}/models --candc-printer xml --input {2}/sentences.tok > {3}/sentences.candc.xml" \
+        .format(PATH_TO_CANDC, PATH_TO_CANDC, PATH_TO_TMP, PATH_TO_TMP)
     _execute_cmd(cmd)
 
-    cmd = "python " + PATH_TO_CCG2LAMBDA + "/en/candc2transccg.py " + PATH_TO_TMP + "/sentences.candc.xml > " \
-          + PATH_TO_TMP + "/sentences.xml"
+    cmd = "python {0}/en/candc2transccg.py {1}/sentences.candc.xml > {2}/sentences.xml".format(PATH_TO_CCG2LAMBDA,
+                                                                                               PATH_TO_TMP, PATH_TO_TMP)
     _execute_cmd(cmd)
 
 
 def _ccg2lambda_conversion():
-    cmd = "python " + PATH_TO_CCG2LAMBDA + "/scripts/semparse.py " + PATH_TO_TMP + "/sentences.xml " \
-          + TEMPLATE + " " + PATH_TO_TMP + "/sentences.sem.xml"
+    cmd = "python {0}/scripts/semparse.py {1}/sentences.xml {2} {3}/sentences.sem.xml".format(PATH_TO_CCG2LAMBDA,
+                                                                                              PATH_TO_TMP, TEMPLATE,
+                                                                                              PATH_TO_TMP)
     _execute_cmd(cmd)
 
 
 def visualize_semantic():
-    cmd = "python " + PATH_TO_CCG2LAMBDA + "/scripts/visualize.py " + PATH_TO_TMP + "/sentences.sem.xml > " \
-          + PATH_TO_TMP + "/sentences.html"
+    cmd = "python {0}/scripts/visualize.py {1}/sentences.sem.xml > {2}/sentences.html".format(PATH_TO_CCG2LAMBDA,
+                                                                                              PATH_TO_TMP, PATH_TO_TMP)
     _execute_cmd(cmd)
 
 
