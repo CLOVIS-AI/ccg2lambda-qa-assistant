@@ -1,0 +1,1250 @@
+together with:P1706
+passive voice:P5560
+has fruit type:P4000
+home port:P504
+game mechanics:P4151
+shape:P1419
+narrative role:P5800
+uncertainty corresponds to:P2571
+surface played on:P765
+increased expression in:P1911
+gene duplication association with:P1913
+IMDA rating:P5201
+gene inversion association with:P1915
+pseudo crystal habit:P2156
+located on astronomical location:P376
+chairperson:P488
+rating:P4271
+plea:P1437
+fare zone:P3610
+phase of matter:P515
+supports programming language:P3985
+INEP IGC discrete grade:P6095
+used by:P1535
+regular expression syntax:P4240
+regulates (molecular biology):P128
+newspaper format:P3912
+subject has role:P2868
+discography:P358
+coolant:P588
+series spin-off:P2512
+Saros cycle of eclipse:P3592
+attributed to:P1773
+greater than:P5135
+grants:P5460
+applies to part:P518
+ACB Rating:P3156
+location:P276
+hymenium type:P783
+NatureServe conservation status:P3648
+collection:P195
+used metre:P2551
+template's main topic:P1423
+state of conservation:P5816
+connecting service:P1192
+occupation:P106
+basin country:P205
+WFD Ecological status:P4002
+Medierådet rating:P5970
+type of orbit:P522
+original network:P449
+ambitus:P2279
+metrically compatible typeface:P4099
+source of income:P2770
+physically interacts with:P129
+developer:P178
+diplomatic relation:P530
+temporal range start:P523
+head of state:P35
+does not have part:P3113
+fracturing:P538
+character role:P453
+fabrication method:P2079
+temporal range end:P524
+handedness:P552
+elector:P2319
+colorist:P6338
+development of anatomical structure:P4843
+sexually homologous with:P4545
+statement describes:P2384
+country of origin:P495
+safety classification and labelling:P4952
+activating neurotransmitter:P928
+exemplar of:P1574
+MediaWiki hooks used:P2377
+conflict:P607
+chord progression:P6116
+country:P17
+list of characters:P1881
+adapted by:P5202
+minor planet group:P196
+language style:P6191
+gender of a scientific name of a genus:P2433
+executive body:P208
+allegiance:P945
+found in taxon:P703
+interchange station:P833
+distributary:P5998
+parent of this hybrid, breed, or cultivar:P1531
+mountain range:P4552
+biological variant of:P3433
+co-driver:P2095
+isocaudomer:P4915
+central bank/issuer:P562
+island of location  (DEPRECATED):P5130
+applies to taxon:P2352
+subclass of:P279
+scenographer:P4608
+port of registry:P532
+streak color:P534
+Kijkwijzer rating:P2684
+official residence:P263
+Han character in this lexeme:P5425
+present in work:P1441
+culture:P2596
+designed to carry:P3349
+dedicated to:P825
+military casualty classification:P1347
+image captured with:P4082
+has vertex figure:P1678
+disrupting agent for:P3775
+school district:P5353
+track gauge:P1064
+seed:P5828
+lakes on river:P469
+supervisory board member:P5052
+director/manager:P1037
+decreased expression in:P1910
+maintenance method:P6440
+B-side (DEPRECATED):P1432
+title of chess player:P2962
+card network:P4443
+railway traffic side:P5658
+conjugation class:P5186
+inverse of:P1696
+CHVRS Classification:P6657
+endemic to:P183
+after a work by:P1877
+deprecated in version:P2379
+cleavage:P693
+classification of race:P2502
+feast day:P841
+speaker:P823
+dan/kyu rank:P468
+penalty:P1596
+open period from:P3027
+manifestation of:P1557
+FPB rating:P4437
+official symbol:P2238
+takeoff and landing capability:P1956
+FAO risk status:P2371
+commanded by:P4791
+antisense inhibitor of:P3777
+advertises:P6291
+signatory:P1891
+family name identical to this given name:P1533
+highest judicial authority:P209
+has grammatical gender:P5109
+public holiday:P832
+publication in which this taxon name was established:P5326
+ICTV virus genome composition:P4628
+identity of object in context:P4626
+aspect ratio:P2061
+part of the series:P179
+shown with features:P1354
+replaced synonym (for nom. nov.):P694
+corrigendum / erratum:P2507
+relegated:P2882
+RARS rating:P2637
+follows:P155
+currency symbol description:P489
+bowling style:P2545
+host:P2975
+home world:P1165
+connecting line:P81
+notation:P913
+JMK film rating:P3650
+member of sports team:P54
+record or record progression:P2869
+category for alumni of educational institution:P3876
+Hangul of a Chinese character:P5537
+nominee:P2453
+flower color:P2827
+incarnation of:P3701
+data interval:P6339
+main regulatory text:P92
+mushroom cap shape:P784
+mushroom ecological type:P788
+calculated from:P4934
+category for pictures taken with camera:P2033
+coat of arms:P237
+GUI toolkit or framework:P1414
+sex or gender:P21
+student of:P1066
+candidacy in election:P3602
+investigated by:P1840
+approved by:P790
+destination point:P1444
+substrate of:P2414
+manner of death:P1196
+pathogen transmission process:P1060
+writable file format:P1073
+reference vocabulary:P5967
+positive prognostic predictor:P3358
+owner of:P1830
+maintained by WikiProject:P6104
+criterion used:P1013
+agonist of:P3772
+excluding:P1011
+first appearance:P4584
+input set:P1851
+repealed by:P2568
+contributing factor of:P1537
+Gram staining:P2597
+fossil found in this unit:P1137
+venous drainage:P2289
+place of burial:P119
+connector:P2935
+location of sense usage:P6084
+parent cell line:P3432
+special rank:P5012
+BBFC rating:P2629
+may prevent:P4954
+license:P275
+side effect:P1909
+script directionality:P1406
+plaintiff:P1620
+health specialty:P1995
+refine date:P4241
+position held:P39
+means of locomotion:P3512
+qualifies for event:P3085
+basic form of government:P122
+depositor:P2058
+GSRR rating:P916
+base:P3263
+satellite bus:P707
+location of first performance:P4647
+phase point:P873
+successful candidate:P991
+printed by:P872
+target:P533
+Wi-Fi access:P2848
+affiliation:P1416
+has inflection class:P5913
+different from:P1889
+inflorescence:P3739
+inferred from:P3452
+film crew member:P3092
+twinned administrative body:P190
+avionics:P878
+main subject:P921
+subject item of this property:P1629
+is verso of:P2682
+lymphatic drainage:P2288
+crosses:P177
+legal status (medicine):P3493
+next crossing upstream:P2673
+PEGI rating:P908
+headquarters location:P159
+next crossing downstream:P2674
+taxon author:P405
+instrument:P1303
+iconographic symbol:P4185
+replaced by:P1366
+category of people buried here:P1791
+pregnancy category:P3489
+transmitted signal type:P1170
+category for value different from Wikidata:P3709
+archives at:P485
+list of episodes:P1811
+by-product of:P2822
+category of associated people:P1792
+reference has role:P6184
+socket supported:P1041
+birthday:P3150
+crystal habit:P565
+closed on:P3026
+mount:P3091
+Vox-ATypI classification:P1878
+permanent resident of:P5389
+follower of:P1775
+located in protected area:P3018
+encodes:P688
+direction:P560
+distribution:P437
+corporate officer:P2828
+results:P2501
+platform:P400
+has facility:P912
+season starts:P4794
+property constraint:P2302
+image of function:P2396
+office held by head of government:P1313
+charge:P1595
+altered regulation leads to:P1918
+territory claimed by:P1336
+KML file:P3096
+commander of:P598
+readable file format:P1072
+has grammatical case:P2989
+has conjugation class:P5206
+laws applied:P3014
+ESRB rating:P852
+volcano observatory:P3815
+docking port:P546
+category for employees of the organization:P4195
+space group:P690
+for work:P1686
+sports season of league or competition:P3450
+depends on software:P1547
+stock market index:P3679
+review score by:P447
+presynaptic connection:P925
+kit supplier:P5995
+people or cargo transported:P3437
+depicted part:P5961
+property scope:P5314
+has effect:P1542
+sport:P641
+language of work or name:P407
+software quality assurance:P2992
+produced sound:P4733
+has melody:P1625
+political ideology:P1142
+pendant of:P1639
+victory:P2522
+guest of honor:P967
+exclave of:P500
+child astronomical body:P398
+ideographic description sequences:P5753
+addressee:P1817
+charted in:P2291
+companion of:P399
+constraint status:P2316
+Digital Rights Management system:P1032
+defendant:P1591
+circle of:P1776
+location of discovery:P189
+regulated by:P3719
+depicted by:P1299
+is pollinator of:P1704
+points classification:P3494
+make-up artist:P4805
+chief operating officer:P1789
+fictional universe described in:P1445
+UNESCO language status:P1999
+emergency phone number:P2852
+business division:P199
+topic's main category:P910
+chivalric order:P550
+has cause:P828
+Unicode block:P5522
+sports discipline competed in:P2416
+stage classification:P2417
+wears:P3828
+notable work:P800
+wheelchair accessibility:P2846
+decays to:P816
+dual to:P1322
+symptoms:P780
+acquisition transaction:P1642
+has anatomical branch:P3262
+solved by:P1136
+radix:P3264
+by-product:P2821
+has program committee member:P5804
+list related to category:P1753
+connects with:P2789
+has evaluation:P5133
+derivative work:P4969
+test taken:P5021
+camera setup:P4312
+father:P22
+has list:P2354
+manufacturer:P176
+depicts:P180
+class:P2308
+modified version of:P5059
+subproperty of:P1647
+drafted by:P647
+editor-in-chief:P5769
+wheel arrangement:P2978
+rules for classification:P3822
+see also:P1659
+lighting designer:P5026
+original film format:P3803
+fuel system:P1211
+language regulatory body:P1018
+bodies of water basin category:P1200
+time period:P2348
+objective of project or action:P3712
+librettist:P87
+emulates:P4043
+homoglyph:P2444
+object has role:P3831
+production statistics:P2746
+month of the year:P2922
+Roman cognomen:P2365
+contains administrative territorial entity:P150
+parent taxon:P171
+intangible cultural heritage status:P3259
+value hierarchy property:P6609
+combination classification:P4324
+killed by:P157
+oath made by:P543
+fastest lap:P5053
+uses:P2283
+parliamentary group:P4100
+score method:P1443
+clinical trial phase:P6099
+structure replaces:P1398
+microstructure:P5589
+founded by:P112
+edition or translation of:P629
+majority opinion by:P5826
+blood type:P1853
+heat treating:P6212
+mascot:P822
+hazard on site:P3335
+this taxon is source of:P1672
+totem:P2831
+Eight Banner register:P470
+rector:P1075
+theme music:P942
+ethnic group:P172
+official religion:P3075
+package management system:P3033
+legislated by:P467
+taxa especially protected in area:P6569
+quotes work:P6166
+adjacent station:P197
+curator:P1640
+named after:P138
+parent organization:P749
+has quality:P1552
+home venue:P115
+lake outflow:P201
+located on linear feature:P795
+right to vote:P2964
+legislative body:P194
+author of foreword:P2679
+copyright status:P6216
+author of afterword:P2680
+league system:P6587
+permanent duplicated item:P2959
+stereoisomer of:P3364
+shares border with:P47
+exhibition history:P608
+office contested:P541
+taxonomic type:P427
+guidance system:P624
+spore print color:P787
+indigenous to:P2341
+prime factor:P5236
+category related to list:P1754
+properties for this type:P1963
+statement is subject of:P805
+item operated:P121
+International Nuclear Event Scale:P2127
+dramaturge:P6086
+political coalition:P5832
+type locality (geology):P2695
+second family name in Spanish name:P1950
+promoted:P2881
+stated in:P248
+expected completeness:P2429
+foundational text:P457
+prerequisite:P4967
+teams classification by time:P3497
+material used:P186
+programmer:P943
+sidekick of:P2546
+income classification (Philippines):P1879
+proxy:P1393
+dam:P4792
+family name:P734
+biosafety level:P1604
+backup or reserve team or crew:P3015
+strand orientation:P2548
+film editor:P1040
+topic's main Wikimedia portal:P1151
+spatial reference system:P3037
+mountains classification:P4320
+OSI Model layer location:P5805
+maintained by:P126
+flag:P163
+sports competition competed at:P5249
+nominated by:P4353
+has natural reservoir:P1605
+start period:P3415
+given name version for other gender:P1560
+version type:P548
+isoschizomer:P4873
+Code of nomenclature:P944
+EC enzyme classification:P660
+published in:P1433
+translator:P655
+screenwriter:P58
+dialect of:P4913
+list of monuments:P1456
+normalized Unicode character:P5591
+established from medical condition:P5166
+mother house:P612
+biological process:P682
+Wikidata property example for properties:P2271
+analog or derivative of:P5000
+type of water supply:P5623
+open period to:P3028
+movement:P135
+place of marriage:P2842
+separated from:P807
+fanqie:P5523
+mouthpiece:P2813
+tracklist:P658
+valid in place:P3005
+World Heritage criteria:P2614
+heritage designation:P1435
+statement disputed by:P1310
+had as last meal:P3902
+court:P4884
+WFD Chemical status:P4202
+innervates:P3190
+natural reservoir of:P1606
+approximation algorithm:P1171
+diaspora:P3833
+positive diagnostic predictor:P3356
+appears in the form of:P4675
+award received:P166
+talk show guest:P5030
+original combination:P1403
+standards body:P1462
+professorship:P803
+determination method:P459
+record label:P264
+applies to people:P6001
+binding of software library:P1372
+stage crew member:P5802
+member of political party:P102
+IUCN protected areas category:P814
+issued by:P2378
+sitter:P2634
+place of birth:P19
+editor:P98
+defender:P1593
+conjugate acid:P4147
+league points system:P3195
+corresponding template:P2667
+foods traditionally associated:P868
+output method:P5196
+member of:P463
+codomain:P1571
+cause of death:P509
+located in time zone:P421
+display technology:P5307
+central bank:P1304
+has boundary:P4777
+religious order:P611
+school of:P1780
+broader concept:P4900
+ClassInd rating:P3216
+has works in the collection(s):P6379
+parent astronomical body:P397
+gene substitution association with:P1916
+has superpartner:P2375
+anatomical branch of:P3261
+soundtrack album:P406
+reward program:P4446
+trophy awarded:P4622
+metasubclass of:P2445
+type of rear suspension:P6534
+negative diagnostic predictor:P3357
+negative prognostic predictor:P3359
+CNC film rating (Romania):P3402
+overlies:P568
+ancestral home:P66
+radical:P5280
+research intervention:P4844
+studies:P2578
+group by:P2304
+operating area:P2541
+video designer:P5880
+Wikidata property example:P1855
+nominated for:P1411
+KMRB film rating:P3818
+has grammatical mood:P3161
+incertae sedis:P678
+electoral district:P768
+military branch:P241
+use:P366
+repeals:P3148
+terminus location:P609
+powerplant:P516
+sponsor:P859
+student:P802
+measured by:P1880
+Roman praenomen:P2358
+launch contractor:P1079
+test method:P4988
+scheduled service destination:P521
+distinctive jersey:P2912
+terminus:P559
+canonization status:P411
+crystal system:P556
+solves:P2159
+mode of derivation:P5886
+airline hub:P113
+vehicle normally used:P3438
+day of week:P2894
+opposite of:P461
+replaces:P1365
+significant environmental impact:P3643
+reason for deprecation:P2241
+product certification:P1389
+located on terrain feature:P706
+measured physical quantity:P111
+type of variable star:P881
+projection designer:P5881
+doctoral student:P185
+candidate:P726
+United Kingdom Department for Transport railway station category:P5330
+programming paradigm:P3966
+given name:P735
+professional name (Japan):P2838
+valvetrain configuration:P1078
+inhibitor of:P3776
+tempo marking:P1558
+director:P57
+General Material Designation:P6608
+has parts of the class:P2670
+coextensive with:P3403
+lyrics by:P676
+deletion association with:P1912
+convicted of:P1399
+reads environment variable:P4810
+publisher:P123
+space tug:P1201
+family:P53
+Catholic rite:P3501
+donated by:P1028
+category for members of a team:P6112
+evaluation of:P5134
+natural product of taxon:P1582
+input method:P479
+educated at:P69
+uses property:P3176
+described by source:P1343
+name day:P1750
+Wikimedia portal's main topic:P1204
+species kept:P1990
+stability of property value:P2668
+honorific suffix:P1035
+commissioned by:P88
+consecrator:P1598
+less than:P5136
+member of the crew of:P5096
+executive producer:P1431
+child:P40
+creates lexeme type:P5923
+original language of film or TV show:P364
+main food source:P1034
+first attested from:P6684
+attested in:P5323
+risk factor:P5642
+Wikimedia outline:P5125
+ploidy:P1349
+intended public:P2360
+torch lit by:P545
+model item:P5869
+armament:P520
+represented by:P1875
+IUCN conservation status:P141
+content deliverer:P3274
+edibility:P789
+enclave within:P501
+patronym or matronym for this name:P2976
+parent peak:P3137
+CNC film rating (France):P2758
+Fach:P1731
+hair color:P1884
+hymenium attachment:P785
+official app:P4290
+in opposition to:P5004
+software engine:P408
+points/goal scored by:P1363
+season ends:P6118
+type of kinship:P1039
+teams classification by points:P3496
+location of formation:P740
+antagonist muscle:P2329
+research site:P6153
+plot expanded in:P5940
+captain:P634
+structure replaced by:P167
+Carnegie Classification of Institutions of Higher Education:P2643
+uses capitalization for:P6106
+separator:P4155
+highway system:P16
+mouth of the watercourse:P403
+arterial supply:P2286
+main building contractor:P193
+musical conductor:P3300
+place of detention:P2632
+Japanese pitch accent type:P5426
+interested in:P2650
+highest point:P610
+fault:P5095
+place of origin (Switzerland):P1321
+property:P2306
+cathedral:P1885
+conferred by:P1027
+afflicts:P689
+participant of:P1344
+crew member:P1029
+CPU:P880
+filming location:P915
+CBFC rating:P6452
+doctoral thesis:P1026
+field of this occupation:P425
+positive therapeutic predictor:P3354
+neurological function:P970
+reservoir created:P4661
+ecoregion (WWF):P1425
+in work:P2553
+representation of:P4646
+perfume note:P5872
+eye color:P1340
+production designer:P2554
+location of landing:P1158
+MPAA film rating:P1657
+from fictional universe:P1080
+volcanic explosivity index:P1903
+topic's main template:P1424
+record held:P1000
+league level above:P2499
+film script:P3816
+illustrator:P110
+valid in period:P1264
+costume designer:P2515
+KAVI rating:P5152
+diocese:P708
+end cause:P1534
+is pollinated by:P1703
+anthem:P85
+located on street:P669
+composer:P86
+adjacent building:P3032
+writing system:P282
+diplomatic mission sent:P531
+muscle insertion:P3491
+genre:P136
+relative:P1038
+muscle origin:P3490
+inscription mentions:P6568
+statement supported by:P3680
+multi-channel network:P6540
+official language:P37
+domain:P1568
+squadron embarked:P4624
+debut participant:P2318
+tourist office:P2872
+reading pattern of Han character:P5244
+worshipped by:P1049
+mother:P25
+category combines topics:P971
+positive allosteric modulator of:P3778
+appointed by:P748
+instruction set:P1068
+Roman agnomen:P2366
+French standard size for oil paintings:P5070
+located in or next to body of water:P206
+origin of the watercourse:P885
+board member:P3320
+producer:P162
+dissertation submitted to:P4101
+identifier shared with:P4070
+item inherits value from:P5852
+superpartner of:P2376
+index case of:P1677
+takes place in fictional universe:P1434
+source of material:P2647
+driving side:P1622
+asteroid taxonomy:P1016
+research measurement:P5439
+GPU:P2560
+located in the administrative territorial entity:P131
+head coach of sports team:P6087
+partially coincident with:P1382
+applies to jurisdiction:P1001
+end period:P3416
+point group:P589
+commemorates:P547
+continent:P30
+partnership with:P2652
+participant:P710
+has decorative pattern:P5422
+protocol:P2700
+grammatical option indicates:P2591
+architectural style:P149
+excavation director:P4345
+next higher rank:P3730
+competition class:P2094
+discovery method:P1046
+start point:P1427
+postsynaptic connection:P926
+invasive to:P5588
+currency:P38
+lithography:P2157
+doctoral advisor:P184
+colonel-in-chief:P3460
+color space:P929
+sibling:P3373
+parliamentary term:P2937
+partner:P451
+occupant:P466
+taxon rank:P105
+academic major:P812
+gender inflection of surname:P5278
+this zoological name is coordinate with:P2743
+is a hydrated form of:P4770
+season:P4908
+RTC film rating:P3834
+jockey:P5317
+dataset distribution:P2702
+property usage tracking category:P2875
+academic minor:P811
+flag bearer:P3022
+JMA Seismic Intensity Scale:P5386
+reply to:P2675
+based on heuristic:P887
+significant person:P3342
+production company:P272
+epoch:P6259
+genomic assembly:P659
+noble title:P97
+order of battle:P4220
+medical condition:P1050
+animal breed:P4743
+category's main topic:P301
+operating system:P306
+is proceedings from:P4745
+type locality (biology):P5304
+mandates:P4424
+chief executive officer:P169
+symbolizes:P4878
+next lower rank:P3729
+history of topic:P2184
+game mode:P404
+place served by transport hub:P931
+followed by:P156
+magnetic ordering:P922
+sourcing circumstances:P1480
+autologous cell line:P3578
+recording or performance of:P2550
+linguistic typology:P4132
+playing hand:P741
+IGAC rating:P5150
+officially opened by:P542
+therapeutic area:P4044
+FSK film rating:P1981
+officeholder:P1308
+native language:P103
+type of electrification:P930
+location of final assembly:P1071
+spouse:P26
+time signature:P3440
+model year:P5444
+presenter:P371
+demonym of:P6271
+language used:P2936
+military rank:P410
+vessel:P1876
+category contains:P4224
+GHS hazard statement:P5041
+has index case:P1660
+significant drug interaction:P769
+running mate:P6149
+file format:P2701
+has contributing factor:P1479
+study or design for:P6606
+has listed ingredient:P4543
+has edition:P747
+asteroid spectral type:P720
+expression of:P6524
+introduced feature:P751
+item for this sense:P5137
+railway signalling system:P3019
+registration district:P5564
+negative allosteric modulator of:P3779
+interleaves with:P514
+game artist:P3080
+participating team:P1923
+USK rating:P914
+statistical unit:P2353
+NMHH film rating:P2363
+tributary:P974
+patient of:P3205
+proved by:P1318
+domain of saint or deity:P2925
+cover artist:P736
+workshop of:P1774
+pronunciation variety:P5237
+cabinet:P5054
+Deutsche Bahn station category:P5105
+practiced by:P3095
+anatomical location:P927
+choreographer:P1809
+young rider classification:P4323
+voice type:P412
+requires grammatical feature:P5713
+motto:P1546
+decay mode:P817
+tonality:P826
+medicine marketing authorization:P3464
+medical evacuation to:P5248
+performer:P175
+premiere type:P4634
+accreditation:P5514
+underlies:P567
+copyright holder:P3931
+work sampled:P5707
+territory overlaps:P3179
+member category:P6365
+biological phase:P4774
+neoschizomer:P4875
+patron saint:P417
+league:P118
+top-level Internet domain:P78
+imported from Wikimedia project:P143
+statistical leader:P3279
+structural engineer:P631
+genetic association:P2293
+cardinality of this set:P2820
+vessel class:P289
+relation:P2309
+constellation:P59
+designed by:P287
+honorific prefix:P511
+contributed to creative work:P3919
+professional or sports partner:P1327
+does not have quality:P6477
+cuisine:P2012
+via:P2825
+implementation of:P4428
+innervated by:P3189
+discoverer or inventor:P61
+GHS hazard pictogram:P5040
+reviewed by:P4032
+season of club or team:P5138
+Mercalli intensity scale:P2784
+officialized by:P5194
+best sprinter classification:P4322
+drug used for treatment:P2176
+topographic map:P5203
+primary destinations:P1302
+organizer:P664
+gens:P5025
+Sandbox-Property:P2368
+towards:P5051
+airline alliance:P114
+contains:P4330
+best combative classification:P4321
+nomenclatural status:P1135
+disjoint union of:P2738
+Y-DNA Haplogroup:P4426
+ex taxon author:P697
+of:P642
+judge:P1594
+winner:P1346
+category for people born here:P1464
+art director:P3174
+located in the ecclesiastical territorial entity:P5607
+category for value same as Wikidata:P3734
+designated as terrorist by:P3461
+has part:P527
+gait:P2839
+list of works:P1455
+seed dispersal:P3741
+part of:P361
+EIRIN film rating:P2756
+place of publication:P291
+union of:P2737
+received signal type:P1194
+negative therapeutic predictor:P3355
+source of energy:P618
+activity policy in this place:P5023
+has phoneme:P2587
+place of death:P20
+industry:P452
+prosecutor:P1592
+collection creator:P6241
+Köppen climate classification:P2564
+first aid measures:P2239
+forgery after:P1778
+payment types accepted:P2851
+INCAA film rating:P3428
+league level below:P2500
+digital representation of:P6243
+CERO rating:P853
+possessed by spirit:P4292
+undercarriage:P1637
+measures:P2575
+has tense:P3103
+removed feature:P756
+social classification:P3716
+field of work:P101
+manner of:P1777
+medical treatment:P924
+copyright representative:P6275
+state of use:P5817
+parent club:P831
+solid solution series with:P2155
+develops from:P3094
+molecule conformation:P3149
+has role in modeling:P6530
+category for films in this language:P5996
+programming language:P277
+fictional analog of:P1074
+train depot:P834
+appears in the heritage monument list:P2817
+relevant qualification:P4968
+religion:P140
+category for films shot at this location:P1740
+radio format:P415
+owned by:P127
+grammatical gender:P5185
+instrumentation:P870
+taxon synonym:P1420
+director of photography:P344
+superhuman feature or ability:P2563
+head coach:P286
+has immediate cause:P1478
+authority:P797
+category for recipients of this award:P2517
+website account on:P553
+referee:P1652
+shooting handedness:P423
+real estate developer:P6237
+ratified by:P6193
+final event:P3967
+category for value not in Wikidata:P3713
+teaching method:P2392
+pole position:P3764
+mirrors data from:P3447
+named by:P3938
+key performance indicator:P6563
+sets environment variable:P4809
+activator of:P3771
+subsidiary:P355
+asteroid family:P744
+expression, gesture or body pose:P6022
+complies with:P5009
+located in present-day administrative territorial entity:P3842
+is recto of:P2681
+sexual orientation:P91
+member of the deme:P2462
+blocker of:P3774
+unveiled by:P1656
+political alignment:P1387
+amended by:P2567
+day of regular release:P6437
+monomer of:P4599
+recovered by:P3093
+possible medical findings:P5131
+polymer of:P4600
+damaged:P3081
+cites:P2860
+has lyrics:P6439
+category for eponymous categories:P6186
+encoded by:P702
+open days:P3025
+mode of inheritance:P1199
+cast member:P161
+has facet polytope:P1312
+item of property constraint:P2305
+storage device:P4788
+Thibaudeau classification:P4452
+set in period:P2408
+GHS precautionary statement:P5042
+conjugate base:P4149
+supercharger:P1210
+permitted food additive:P4850
+residence:P551
+office held by head of the organisation:P2388
+vaccine for:P1924
+Sandbox-Item:P369
+grade of kanji:P5277
+place of devotion:P5873
+legal form:P1454
+godparent:P1290
+signum:P5438
+opponent during disputation:P3323
+country for sport:P1532
+lifestyle:P1576
+has pet:P1429
+geography of topic:P2633
+carries:P2505
+observed in:P6531
+solvent:P2178
+space launch vehicle:P375
+employer:P108
+relative to:P2210
+secretary general:P3975
+electrical plug type:P2853
+languages spoken, written or signed:P1412
+licensed to broadcast to:P1408
+medical examinations:P923
+enclosure:P3158
+signed form:P3969
+creator:P170
+instance of:P31
+exception to constraint:P2303
+segmental innervation:P4882
+ammunition:P739
+type of unit for this property:P2876
+distributor:P750
+recorded at:P483
+astronaut mission:P450
+destroyed:P3082
+cause of destruction:P770
+active ingredient in:P3780
+stock exchange:P414
+basionym:P566
+influenced by:P737
+stipe character:P786
+represents:P1268
+posttranslational modification association with:P1917
+on focus list of Wikimedia project:P5008
+narrator:P2438
+vice-county:P1887
+classification of the best at metas volantes:P4958
+organisation directed from the office or person:P2389
+muscle action:P3310
+capital of:P1376
+wing configuration:P1654
+has active ingredient:P3781
+antiparticle:P2152
+position played on team / speciality:P413
+lowest point:P1589
+author:P50
+drainage basin:P4614
+gene insertion association with:P1914
+choral conductor:P5024
+Status in the Red List of Threatened Species in the Czech Republic:P5841
+significant event:P793
+update method:P4387
+NATO code for grade:P1611
+assistant director:P5126
+GHS signal word:P1033
+lowest note:P1898
+broadcast by:P3301
+expressed in:P5572
+has grammatical person:P5110
+voice actor:P725
+capital:P36
+type foundry:P4586
+Wikidata property:P1687
+contains settlement:P1383
+chromosome:P1057
+type of reference:P3865
+office held by head of state:P1906
+describes a project that uses:P4510
+work location:P937
+produced by:P2849
+cell component:P681
+general classification of race participants:P2321
+CJKV variant character:P5475
+astronomical filter:P1227
+investor:P1951
+carries scientific instrument:P1202
+country of citizenship:P27
+route diagram:P3858
+reward:P4444
+engine configuration:P1002
+medical condition treated:P2175
+Wikimedia template that populates this category:P4329
+party chief representative:P210
+Ethnologue language status:P3823
+departure transaction:P1643
+encoding:P3294
+funding scheme:P6195
+direction relative to location:P654
+route of administration:P636
+inspired by:P941
+presented in:P5072
+twinning:P537
+color:P462
+is a list of:P360
+inflection class:P5911
+stage reached:P2443
+age of onset:P2841
+typeface/font used:P2739
+Classification RCQ:P6658
+site of astronomical discovery:P65
+admissible rule in:P2577
+storyboard artist:P3275
+RightsStatement status according to source website:P6426
+reference value:P5446
+online service:P2361
+youth wing:P4379
+official color:P6364
+based on:P144
+overrules:P4006
+architect:P84
+level of description:P6224
+antagonist of:P3773
+interaction:P517
+immediate cause of:P1536
+type of front suspension:P6533
+contributor(s) to the creative work:P767
+lake inflows:P200
+endianness:P3374
+said to be the same as:P460
+habitat:P2974
+patronym or matronym for this person:P5056
+catalog:P972
+Filmiroda rating:P2747
+elected in:P2715
+substitute/deputy/replacement of office/officeholder:P2098
+Lagrangian point:P1145
+mtDNA haplogroup:P4425
+identity of subject in context:P4649
+brand:P1716
+IMA status and/or rank:P579
+ICAA rating:P3306
+mapping relation type:P4390
+offers view on:P3173
+tributary orientation:P3871
+revival or touring version of:P5328
+product or material produced:P1056
+day in year for periodic occurrence:P837
+geomorphological unit:P4688
+general manager:P505
+including:P1012
+nature of statement:P5102
+tautomer of:P6185
+sound designer:P5028
+facet of:P1269
+narrative location:P840
+stepparent:P3448
+operator:P137
+suggests the existence of:P5132
+molecular function:P680
+is retracted by:P5824
+filmography:P1283
+has dialect (DEPRECATED):P134
+possible creator:P1779
+has phenotype:P6532
+academic degree:P512
+compressor type:P1221
+partition table type:P4653
+Roman nomen gentilicium:P2359
+seal description:P418
+highest note:P1897
+ortholog:P684
+characters:P674
+constraint scope:P4680
+station category:P5606
+members have occupation:P3989
+category for people who died here:P1465
+studied by:P2579
