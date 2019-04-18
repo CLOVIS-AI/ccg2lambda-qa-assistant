@@ -2,8 +2,8 @@ import os
 import subprocess
 
 PATH_TO_CCG2LAMBDA = "../../ccg2lambda"
-PATH_TO_CANDC = PATH_TO_CCG2LAMBDA + "/candc-1.00"
-PATH_TO_TMP = "./tmp"
+PATH_TO_CANDC = "/app/parsers/" + "/candc-1.00"
+PATH_TO_TMP = "tmp"
 TEMPLATE = PATH_TO_CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
 
 
