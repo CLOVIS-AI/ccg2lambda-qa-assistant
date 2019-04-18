@@ -11,10 +11,11 @@ class Dictionary:
         self.__html_path = html_path
         self.__dictionary = {}
 
-    # temporary solution, may change in the future
-    # fills a dictionary under the form of a txt. Uses html pages https://tools.wmflabs.org/prop-explorer/
-
     def fill_dictionary(self):
+        """
+        temporary solution, may change in the future
+        fills a dictionary under the form of a txt. Uses html pages https://tools.wmflabs.org/prop-explorer/
+        """
         dictionary = open("wikidata/dictionary.txt", "w")
         for filename in os.listdir(self.__html_path):
             if filename.endswith(".html"):
