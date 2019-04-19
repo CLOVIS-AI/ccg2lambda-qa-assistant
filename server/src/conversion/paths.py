@@ -7,18 +7,57 @@ TEMPLATE = PATH_TO_CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
 PATHS_READY = False
 
 
+def test_directory(path):
+    path = os.path.abspath(path)
+    if os.path.isdir(path):
+        if len(os.listdir(path)) > 0:
+            print("Found [", path, "], and it is not empty.")
+            return True
+        else:
+            print("Found [", path, "], but it is empty!")
+            return False
+    else:
+        print("Directory not found [", path, "]")
+        return False
+
+
+def test_file(path):
+    path = os.path.abspath(path)
+    if os.path.isfile(path):
+        print("Found file [", path, "]")
+        return True
+    else:
+        print("File not found [", path, "]")
+        return False
+
+
 def init_paths():
-    global PATHS_READY
+    global PATHS_READY, PATH_TO_CANDC
     if PATHS_READY:
         print("Paths are already ready; exiting init_paths function")
         return
 
-    print("Trying to find the different tools that are required...")
+    print("\nSearching for the tools...")
     print("Working directory is [", os.getcwd(), "]")
-    if os.path.isfile(PATH_TO_CCG2LAMBDA + "/README.md"):
-        print("ccg2lambda is installed as a submodule")
+    if test_file(PATH_TO_CCG2LAMBDA + "/README.md"):
+        print(" › ccg2lambda is installed as a submodule")
+
+        if test_directory(PATH_TO_CCG2LAMBDA + "/candc-1.00"):
+            print(" › C&C is installed correctly")
+            PATH_TO_CANDC = PATH_TO_CCG2LAMBDA + "/candc-1.00"
+        else:
+            print(" › C&C is not installed")
+            raise Exception("Couldn't find C&C. Since you installed ccg2lambda as a submodule, "
+                            "check that you installed C&C correctly according to ccg2lambda's documentation.")
     else:
-        print("ccg2lambda is not installed as a submodule, assuming we're in the Docker container")
-    print("Done initializing.")
+        print(" › ccg2lambda is not installed as a submodule, assuming we're in the Docker container")
+
+        if test_directory("/app/parsers/candc-1.00"):
+            print(" › C&C is installed correctly")
+            PATH_TO_CANDC = "/app/parsers/candc-1.00"
+        else:
+            print(" › C&C is not installed")
+            raise Exception("Couldn't find C&C. Expected to find it in the Docker container.")
+    print("Done initializing.\n")
     PATHS_READY = True
     exit(1)
