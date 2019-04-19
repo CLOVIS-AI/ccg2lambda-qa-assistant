@@ -8,6 +8,7 @@ nltk==3.4.1
 pipenv==2018.11.26
 pycodestyle==2.5.0
 pyparsing==2.4.0
+PyYAML==5.1
 rdflib==4.2.2
 requests==2.21.0
 simplejson==3.16.0
