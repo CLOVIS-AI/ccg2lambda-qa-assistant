@@ -2,11 +2,13 @@ from unittest import TestCase
 
 from lxml import etree
 
+from conversion import init_paths
 from .converternaturaltosparql import *
 
 
 class TestConvertCcg2lambda(TestCase):
     def setUp(self):
+        init_paths()
         test_questions = open("conversion/test_converter_questions.txt", "r")
         self.sentences = test_questions.read()
         test_questions.close()

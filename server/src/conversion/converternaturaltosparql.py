@@ -1,10 +1,7 @@
 import os
 import subprocess
 
-PATH_TO_CCG2LAMBDA = "../../ccg2lambda"
-PATH_TO_CANDC = "/app/parsers/" + "/candc-1.00"
-PATH_TO_TMP = "tmp"
-TEMPLATE = PATH_TO_CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
+from conversion.paths import PATH_TO_TMP, PATH_TO_CCG2LAMBDA, PATH_TO_CANDC, TEMPLATE
 
 
 def _tmp_check():
@@ -32,7 +29,7 @@ def _execute_cmd(cmd):
     Executes the cmd in shell, Raises an exception if the cmd did not go well
     :param cmd: the command
     """
-    returned_output = subprocess.call(cmd, shell = True)
+    returned_output = subprocess.call(cmd, shell=True)
     _output_checker(returned_output, cmd)
 
 
@@ -116,17 +113,13 @@ def convert(sentences) -> bool:
     """
     _setup_checker()
 
-    try:
-        # Converting the sentences in Jigg's XML
-        _tokenizing(sentences)
-        _candc_conversion()
+    # Converting the sentences in Jigg's XML
+    _tokenizing(sentences)
+    _candc_conversion()
 
-        # Converting using ccg2lambda
-        _ccg2lambda_conversion()
+    # Converting using ccg2lambda
+    _ccg2lambda_conversion()
 
-        # Create a visualization
-        visualize_semantic()
-    except Exception as error:
-        print(error)
-        return False
+    # Create a visualization
+    visualize_semantic()
     return True

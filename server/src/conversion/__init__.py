@@ -7,5 +7,6 @@
 #
 #   All installation guides are described on their respective link.
 #
+from conversion.paths import init_paths
 
-
+init_paths()
