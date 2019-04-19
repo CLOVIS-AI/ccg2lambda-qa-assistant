@@ -29,6 +29,10 @@ class Dictionary:
                     if len(code) > 2:
                         label = tab_line.contents[0].contents[2].contents[0].contents[0].string
                         dictionary.write(label + ":" + code + "\n")
+                        sub_labels = tab_line.contents[0].contents[2].contents[0].find("span")
+                        if sub_labels:
+                            for sub_label in sub_labels.string.split(" | "):
+                                dictionary.write(sub_label + ":" + code + "\n")
                 f.close()
         dictionary.close()
 

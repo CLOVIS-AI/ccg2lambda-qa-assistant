@@ -1,10 +1,21 @@
 stages:
  - test
 
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
 test-server:
   stage: test
-  image: python:3.5
+  image: masashiy/ccg2lambda
   before_script:
+    - find -name "candc-1.00/"
+    - cat /app/en/candc_location.txt
+    - ls /app
+    - ls ccg2lambda
+    - pwd
+    - git submodule init
+    - git submodule update
+    - coqc ccg2lambda/coqlib.v
     - cd server
     - python3 -m venv venv/
     - source venv/bin/activate
@@ -13,6 +24,10 @@ test-server:
     - cd src
     - python3 -m unittest discover
     - pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 --benchmark .
+
+  retry: 0
   tags:
     - docker
     - debian
+    - python
+
