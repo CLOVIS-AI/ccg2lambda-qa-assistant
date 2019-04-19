@@ -14,8 +14,10 @@ class Server(ip: String, port: Int) : Closeable {
 
     fun send(command: String, vararg params: String) = send(Command(command, *params))
 
-    fun send(command: Command) {
+    fun send(command: Command): Command {
         command.writeTo(output)
+        return Command.readFrom(input)
+                ?: Command("end", "The socket was closed")
     }
 
     override fun close() {

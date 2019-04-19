@@ -2,6 +2,8 @@ package network
 
 import EOL_CHAR
 import SEPARATION_CHAR
+import utils.get
+import java.io.BufferedReader
 import java.io.PrintWriter
 
 data class Command(val name: String, val params: List<String>) {
@@ -20,4 +22,13 @@ data class Command(val name: String, val params: List<String>) {
         writer.flush()
     }
 
+    companion object {
+
+        fun readFrom(reader: BufferedReader): Command? = splitLine(reader)?.let { words ->
+            Command(words[0], words[1 until words.size])
+        }
+
+        private fun splitLine(reader: BufferedReader) = reader.readLine()?.split(SEPARATION_CHAR)
+
+    }
 }
