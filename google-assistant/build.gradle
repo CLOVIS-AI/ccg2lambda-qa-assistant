@@ -19,7 +19,7 @@ apply plugin: 'kotlin'
 apply from: 'build-gcp.gradle'
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.2.41'
 
     repositories {
         mavenCentral()
