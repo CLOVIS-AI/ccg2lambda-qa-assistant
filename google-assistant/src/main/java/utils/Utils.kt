@@ -19,3 +19,5 @@ fun bundle(name: String, locale: Locale = Locale.ENGLISH): ResourceBundle = Reso
  * @see ResourceBundle.getString
  */
 operator fun ResourceBundle.get(name: String): String = getString(name)
+
+operator fun <T> List<T>.get(range: IntRange) = range.map { this[it] }
