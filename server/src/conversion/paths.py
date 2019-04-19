@@ -80,4 +80,3 @@ def init_paths():
             raise Exception("Couldn't find the template.")
     print("Done initializing.\n")
     PATHS_READY = True
-    exit(1)
