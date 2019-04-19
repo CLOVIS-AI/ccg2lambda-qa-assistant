@@ -13,4 +13,17 @@ test-server:
     - cd src
     - python3 -m unittest discover
     - pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 --benchmark .
-  retry: 1
+  tags:
+    - debian
+    - docker
+
+deploy-assistant:
+  stage: deploy
+  image: java:latest
+  before_script:
+    - cd google-assistant
+  script:
+    - ./gradlew appEngineDeploy
+  tags:
+    - debian
+    - docker
