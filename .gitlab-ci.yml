@@ -1,5 +1,6 @@
 stages:
  - test
+ - deploy
 
 test-server:
   stage: test
@@ -14,3 +15,11 @@ test-server:
     - python3 -m unittest discover
     - pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 --benchmark .
   retry: 1
+
+deploy-assistant:
+  stage: deploy
+  image: java:latest
+  before_script:
+    - cd google-assistant
+  script:
+    - ./gradlew appEngineDeploy
