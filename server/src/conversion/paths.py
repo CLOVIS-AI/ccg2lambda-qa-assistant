@@ -32,7 +32,7 @@ def test_file(path):
 
 
 def init_paths():
-    global PATHS_READY, PATH_TO_CANDC
+    global PATHS_READY, PATH_TO_CANDC, PATH_TO_CCG2LAMBDA
     if PATHS_READY:
         print("Paths are already ready; exiting init_paths function")
         return
@@ -40,7 +40,7 @@ def init_paths():
     print("\nSearching for the tools...")
     print("Working directory is [", os.getcwd(), "]")
     if test_file(PATH_TO_CCG2LAMBDA + "/README.md"):
-        print(" › ccg2lambda is installed as a submodule")
+        print(" › ccg2lambda is installed correctly (submodule)")
 
         if test_directory(PATH_TO_CCG2LAMBDA + "/candc-1.00"):
             print(" › C&C is installed correctly")
@@ -50,7 +50,14 @@ def init_paths():
             raise Exception("Couldn't find C&C. Since you installed ccg2lambda as a submodule, "
                             "check that you installed C&C correctly according to ccg2lambda's documentation.")
     else:
-        print(" › ccg2lambda is not installed as a submodule, assuming we're in the Docker container")
+        print(" › ccg2lambda is not installed as a submodule")
+
+        if test_directory("/app"):
+            print(" › ccg2lambda is installed correctly (Docker)")
+            PATH_TO_CCG2LAMBDA = "/app"
+        else:
+            print(" › ccg2lambda is not installed as a Docker directory")
+            raise Exception("Couldn't find ccg2lambda. Tried submodule installation & Docker installation.")
 
         if test_directory("/app/parsers/candc-1.00"):
             print(" › C&C is installed correctly")
