@@ -18,7 +18,6 @@ package com.example
 
 import org.slf4j.LoggerFactory
 import java.io.IOException
-import java.util.*
 import java.util.concurrent.ExecutionException
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
@@ -79,17 +78,10 @@ class ActionsServlet : HttpServlet() {
 
     }
 
-    private fun getHeadersMap(request: HttpServletRequest): Map<String, String> {
-        val map = HashMap<String, String>()
-
-        val headerNames = request.headerNames
-        while (headerNames.hasMoreElements()) {
-            val key = headerNames.nextElement() as String
-            val value = request.getHeader(key)
-            map[key] = value
-        }
-        return map
-    }
+    private fun getHeadersMap(request: HttpServletRequest): Map<String, String> =
+            request.headerNames.asSequence()
+                    .map { it to request.getHeader(it) }
+                    .toMap()
 
     companion object {
         private val LOG = LoggerFactory.getLogger(ActionsServlet::class.java)
