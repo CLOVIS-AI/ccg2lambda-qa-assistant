@@ -10,6 +10,7 @@ pycodestyle==2.5.0
 pyparsing==2.4.0
 rdflib==4.2.2
 requests==2.21.0
+simplejson==3.16.0
 six==1.12.0
 soupsieve==1.9
 SPARQLWrapper==1.8.2
