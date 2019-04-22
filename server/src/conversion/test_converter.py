@@ -25,7 +25,7 @@ class TestConvertCcg2lambda(TestCase):
         self.assertTrue(os.path.isdir(PATH_TO_TMP))
         self.assertFalse(len(os.listdir(PATH_TO_TMP)) == 0)
         events = ("start", "end")
-        context = etree.iterparse(PATH_TO_TMP + "/sentences.sem.xml", events = events, tag = "semantics")
+        context = etree.iterparse(PATH_TO_TMP + "/sentences.sem.xml", events=events, tag="semantics")
         for action, elem in context:
             self.assertEqual("success", elem.attrib["status"])
 
