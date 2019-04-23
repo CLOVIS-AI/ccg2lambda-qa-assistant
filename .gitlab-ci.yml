@@ -3,6 +3,8 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+  PIP_DOWNLOAD_CACHE: /cache/pip-dll
+  PIP_CACHE_DIR: /cache/pip-cache
 
 test-server:
   stage: test
@@ -21,3 +23,4 @@ test-server:
     - docker
     - debian
     - python
+  retry: 1
