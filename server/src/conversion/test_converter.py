@@ -22,10 +22,10 @@ class TestConvertCcg2lambda(TestCase):
         visualize_semantic()
 
         # Checking the output files
-        self.assertTrue(os.path.isdir(PATH_TO_TMP))
-        self.assertFalse(len(os.listdir(PATH_TO_TMP)) == 0)
+        self.assertTrue(os.path.isdir(TMP))
+        self.assertFalse(len(os.listdir(TMP)) == 0)
         events = ("start", "end")
-        context = etree.iterparse(PATH_TO_TMP + "/sentences.sem.xml", events=events, tag="semantics")
+        context = etree.iterparse(TMP + "/sentences.sem.xml", events=events, tag="semantics")
         for action, elem in context:
             self.assertEqual("success", elem.attrib["status"])
 
@@ -34,4 +34,4 @@ class TestConvertCcg2lambda(TestCase):
     def test_cleanUp(self):
         # Cleaning temporary folders
         cleanTmpDir()
-        self.assertEqual(0, len(os.listdir(PATH_TO_TMP)))
+        self.assertEqual(0, len(os.listdir(TMP)))
