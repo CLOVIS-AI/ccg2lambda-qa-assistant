@@ -1,4 +1,16 @@
+###########################################################
+#                                                         #
+#      Contains the paths to the different external       #
+#      tools used by this project.                        #
+#                                                         #
+###########################################################
+
 import os
+
+# Note that the paths written here are for initialization
+# purpose only, and should not be used as-is; when the
+# package is loaded they are updated to follow the real
+# paths of the tools.
 
 CCG2LAMBDA = "../../../ccg2lambda"
 CANDC = "/app/parsers/candc-1.00"
@@ -8,6 +20,11 @@ PATHS_READY = False
 
 
 def test_directory(path):
+    """
+    Checks if a directory exists, and is not empty.
+    :param path: The path to that directory (absolute or relative)
+    :return: True if the directory exists & is not empty, False otherwise.
+    """
     path = os.path.abspath(path)
     if os.path.isdir(path):
         if len(os.listdir(path)) > 0:
@@ -22,6 +39,11 @@ def test_directory(path):
 
 
 def test_file(path):
+    """
+    Checks if a file exists.
+    :param path: The path to that file (absolute or relative)
+    :return: True if the file exists, False otherwise.
+    """
     path = os.path.abspath(path)
     if os.path.isfile(path):
         print("Found file [", path, "]")
@@ -32,6 +54,11 @@ def test_file(path):
 
 
 def init_paths():
+    """
+    Searches for the tools in known location and finds their paths,
+    or reports if they are missing.
+    Searches in the submodule or in a Docker container.
+    """
     global PATHS_READY, CANDC, CCG2LAMBDA, TEMPLATE
     if PATHS_READY:
         print("Paths are already ready; exiting init_paths function")
