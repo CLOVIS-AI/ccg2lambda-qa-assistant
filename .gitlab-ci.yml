@@ -11,6 +11,7 @@ test-server:
   image: masashiy/ccg2lambda
   before_script:
     - coqc ccg2lambda/coqlib.v
+    - make ELMO_DOWNLOAD=/cache/elmo
     - cd server
     - python3 -m venv venv/
     - source venv/bin/activate
