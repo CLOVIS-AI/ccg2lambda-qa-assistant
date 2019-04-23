@@ -1,3 +1,6 @@
 [submodule "ccg2lambda"]
 	path = ccg2lambda
 	url = https://github.com/mynlp/ccg2lambda.git
+[submodule "depccg"]
+	path = depccg
+	url = https://github.com/masashi-y/depccg.git
