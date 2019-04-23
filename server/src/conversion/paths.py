@@ -1,9 +1,9 @@
 import os
 
-PATH_TO_CCG2LAMBDA = "../../../ccg2lambda"
-PATH_TO_CANDC = "/app/parsers/candc-1.00"
-PATH_TO_TMP = "tmp"
-TEMPLATE = PATH_TO_CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
+CCG2LAMBDA = "../../../ccg2lambda"
+CANDC = "/app/parsers/candc-1.00"
+TMP = "tmp"
+TEMPLATE = CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
 PATHS_READY = False
 
 
@@ -32,19 +32,19 @@ def test_file(path):
 
 
 def init_paths():
-    global PATHS_READY, PATH_TO_CANDC, PATH_TO_CCG2LAMBDA, TEMPLATE
+    global PATHS_READY, CANDC, CCG2LAMBDA, TEMPLATE
     if PATHS_READY:
         print("Paths are already ready; exiting init_paths function")
         return
 
     print("\nSearching for the tools...")
     print("Working directory is [", os.getcwd(), "]")
-    if test_file(PATH_TO_CCG2LAMBDA + "/README.md"):
+    if test_file(CCG2LAMBDA + "/README.md"):
         print(" › ccg2lambda is installed correctly (submodule)")
 
-        if test_directory(PATH_TO_CCG2LAMBDA + "/candc-1.00"):
+        if test_directory(CCG2LAMBDA + "/candc-1.00"):
             print(" › C&C is installed correctly")
-            PATH_TO_CANDC = PATH_TO_CCG2LAMBDA + "/candc-1.00"
+            CANDC = CCG2LAMBDA + "/candc-1.00"
         else:
             print(" › C&C is not installed")
             raise Exception("Couldn't find C&C. Since you installed ccg2lambda as a submodule, "
@@ -60,21 +60,21 @@ def init_paths():
 
         if test_directory("/app"):
             print(" › ccg2lambda is installed correctly (Docker)")
-            PATH_TO_CCG2LAMBDA = "/app"
+            CCG2LAMBDA = "/app"
         else:
             print(" › ccg2lambda is not installed as a Docker directory")
             raise Exception("Couldn't find ccg2lambda. Tried submodule installation & Docker installation.")
 
         if test_directory("/app/parsers/candc-1.00"):
             print(" › C&C is installed correctly")
-            PATH_TO_CANDC = "/app/parsers/candc-1.00"
+            CANDC = "/app/parsers/candc-1.00"
         else:
             print(" › C&C is not installed")
             raise Exception("Couldn't find C&C. Expected to find it in the Docker container.")
 
-        if test_file(PATH_TO_CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"):
+        if test_file(CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"):
             print(" › Template found")
-            TEMPLATE = PATH_TO_CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
+            TEMPLATE = CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
         else:
             print(" › Template not found")
             raise Exception("Couldn't find the template.")
