@@ -15,7 +15,7 @@ import os
 CCG2LAMBDA = "../../../ccg2lambda"
 CANDC = "/app/parsers/candc-1.00"
 TMP = "tmp"
-TEMPLATE = CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
+TEMPLATE = "../res/parser/semantic_templates_en_qa.yaml"
 PATHS_READY = False
 
 
@@ -76,12 +76,6 @@ def init_paths():
             print(" › C&C is not installed")
             raise Exception("Couldn't find C&C. Since you installed ccg2lambda as a submodule, "
                             "check that you installed C&C correctly according to ccg2lambda's documentation.")
-
-        if test_file(TEMPLATE):
-            print(" › Found the template file")
-        else:
-            print(" › Template file not found")
-            raise Exception("Couldn't find the template file.")
     else:
         print(" › ccg2lambda is not installed as a submodule")
 
@@ -99,11 +93,11 @@ def init_paths():
             print(" › C&C is not installed")
             raise Exception("Couldn't find C&C. Expected to find it in the Docker container.")
 
-        if test_file(CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"):
-            print(" › Template found")
-            TEMPLATE = CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
-        else:
-            print(" › Template not found")
-            raise Exception("Couldn't find the template.")
+    if test_file(TEMPLATE):
+        print(" › Found the template file")
+    else:
+        print(" › Template file not found")
+        raise Exception("Couldn't find the template file.")
+
     print("Done initializing.\n")
     PATHS_READY = True
