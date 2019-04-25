@@ -19,12 +19,14 @@ CANDC = "/app/parsers/candc-1.00"
 DEPCCG = PROJECT_ROOT + "depccg"
 TMP = "tmp"
 TEMPLATE = "../res/parser/semantic_templates_en_qa.yaml"
+RTE = ""
 PATHS_READY = False
 
 
 def test_directory(path, allow_empty=False):
     """
     Checks if a directory exists, and is not empty.
+    :param allow_empty: Are empty directories successful or not?
     :param path: The path to that directory (absolute or relative)
     :return: True if the directory exists & is not empty, False otherwise.
     """
@@ -62,7 +64,7 @@ def init_paths():
     or reports if they are missing.
     Searches in the submodule or in a Docker container.
     """
-    global PATHS_READY, CANDC, CCG2LAMBDA, TEMPLATE
+    global PATHS_READY, CANDC, CCG2LAMBDA, TEMPLATE, RTE
     if PATHS_READY:
         print("Paths are already ready; exiting init_paths function")
         return
@@ -114,6 +116,13 @@ def init_paths():
         print(" › Creating the temporary directory...", end='')
         os.mkdir(TMP)
         print(" Done.")
+
+    RTE = CCG2LAMBDA + "/en/rte_en_qa.sh"
+    if test_file(RTE):
+        print(" › Found the rte_en_qa script")
+    else:
+        print(" › rte_en_qa not found")
+        raise Exception("Couldn't find the rte_en_qa script.")
 
     print("Done initializing.\n")
     PATHS_READY = True
