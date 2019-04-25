@@ -22,7 +22,7 @@ TEMPLATE = "../res/parser/semantic_templates_en_qa.yaml"
 PATHS_READY = False
 
 
-def test_directory(path):
+def test_directory(path, allow_empty=False):
     """
     Checks if a directory exists, and is not empty.
     :param path: The path to that directory (absolute or relative)
@@ -35,7 +35,7 @@ def test_directory(path):
             return True
         else:
             print("Found [", path, "], but it is empty!")
-            return False
+            return allow_empty
     else:
         print("Directory not found [", path, "]")
         return False
@@ -107,6 +107,13 @@ def init_paths():
     else:
         print(" › depccg not found")
         raise Exception("Couldn't find depccg; expected to find it as a submodule.")
+
+    if test_directory(TMP, allow_empty=True):
+        print(" › Found the temporary directory")
+    else:
+        print(" › Creating the temporary directory...", end='')
+        os.mkdir(TMP)
+        print(" Done.")
 
     print("Done initializing.\n")
     PATHS_READY = True
