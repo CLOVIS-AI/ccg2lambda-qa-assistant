@@ -12,16 +12,19 @@ import os
 # package is loaded they are updated to follow the real
 # paths of the tools.
 
-CCG2LAMBDA = "../../../ccg2lambda"
+PROJECT_ROOT = "../../"
+SERVER_ROOT = PROJECT_ROOT + "../"
+CCG2LAMBDA = SERVER_ROOT + "ccg2lambda"
 CANDC = "/app/parsers/candc-1.00"
 TMP = "tmp"
 TEMPLATE = "../res/parser/semantic_templates_en_qa.yaml"
 PATHS_READY = False
 
 
-def test_directory(path):
+def test_directory(path, allow_empty=False):
     """
     Checks if a directory exists, and is not empty.
+    :param allow_empty: Report a success even if the directory is empty
     :param path: The path to that directory (absolute or relative)
     :return: True if the directory exists & is not empty, False otherwise.
     """
@@ -32,7 +35,7 @@ def test_directory(path):
             return True
         else:
             print("Found [", path, "], but it is empty!")
-            return False
+            return allow_empty
     else:
         print("Directory not found [", path, "]")
         return False

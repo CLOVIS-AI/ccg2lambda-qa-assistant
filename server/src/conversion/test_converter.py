@@ -2,7 +2,6 @@ from unittest import TestCase
 
 from lxml import etree
 
-from conversion import init_paths
 from .converternaturaltosparql import *
 
 
@@ -14,7 +13,7 @@ class TestConvertCcg2lambda(TestCase):
         test_questions.close()
 
     def test_makeRequest(self):
-        cleanTmpDir()
+        clean_tmp_dir()
 
         # Converting the sentences with ccg2lambda
         succes = convert(self.sentences)
@@ -29,9 +28,9 @@ class TestConvertCcg2lambda(TestCase):
         for action, elem in context:
             self.assertEqual("success", elem.attrib["status"])
 
-        cleanTmpDir()
+        clean_tmp_dir()
 
     def test_cleanUp(self):
         # Cleaning temporary folders
-        cleanTmpDir()
+        clean_tmp_dir()
         self.assertEqual(0, len(os.listdir(TMP)))
