@@ -18,4 +18,4 @@ def get_qnumber(wikiarticle):
 
 answer = get_qnumber(wikiarticle="New York")
 for page in answer['search']:
-    print(page['description'])
+    print(page['id'] + " : " + page['description'])
