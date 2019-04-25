@@ -73,3 +73,6 @@ __pycache__
 
 # IntelliJ GitToolbox plugin
 git_toolbox_prj.xml
+
+# Dictionary
+src/wikidata/dictionary.txt
