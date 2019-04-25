@@ -1,6 +1,6 @@
 # Makefile for the project
 
-ELMO_DOWNLOAD=/tmp/elmo
+ELMO_DOWNLOAD=~/.cache/elmo
 PREVIOUS=$(pwd)
 
 all: submodules elmo depccg
