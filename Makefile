@@ -19,3 +19,4 @@ elmo:
 
 depccg: submodules
 	chmod u+x depccg/bin/depccg_en
+	cp server/res/parser/rte_en_qa.sh ccg2lambda/en/
