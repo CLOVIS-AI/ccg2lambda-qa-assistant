@@ -12,8 +12,11 @@ import os
 # package is loaded they are updated to follow the real
 # paths of the tools.
 
-CCG2LAMBDA = "../../../ccg2lambda"
+PROJECT_ROOT = "../../"
+SERVER_ROOT = PROJECT_ROOT + "../"
+CCG2LAMBDA = SERVER_ROOT + "ccg2lambda"
 CANDC = "/app/parsers/candc-1.00"
+DEPCCG = PROJECT_ROOT + "depccg"
 TMP = "tmp"
 TEMPLATE = "../res/parser/semantic_templates_en_qa.yaml"
 PATHS_READY = False
@@ -98,6 +101,12 @@ def init_paths():
     else:
         print(" › Template file not found")
         raise Exception("Couldn't find the template file.")
+
+    if test_directory(DEPCCG):
+        print(" › Found depccg")
+    else:
+        print(" › depccg not found")
+        raise Exception("Couldn't find depccg; expected to find it as a submodule.")
 
     print("Done initializing.\n")
     PATHS_READY = True
