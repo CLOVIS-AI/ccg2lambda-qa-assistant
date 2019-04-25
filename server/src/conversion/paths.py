@@ -13,8 +13,8 @@ import os
 # paths of the tools.
 
 PROJECT_ROOT = "../../"
-SERVER_ROOT = PROJECT_ROOT + "../"
-CCG2LAMBDA = SERVER_ROOT + "ccg2lambda"
+SERVER_ROOT = PROJECT_ROOT + "server/"
+CCG2LAMBDA = PROJECT_ROOT + "ccg2lambda"
 CANDC = "/app/parsers/candc-1.00"
 DEPCCG = PROJECT_ROOT + "depccg"
 TMP = "tmp"
@@ -117,7 +117,7 @@ def init_paths():
         os.mkdir(TMP)
         print(" Done.")
 
-    RTE = CCG2LAMBDA + "/en/rte_en_qa.sh"
+    RTE = SERVER_ROOT + "res/parser/rte_en_qa.sh"
     if test_file(RTE):
         print(" › Found the rte_en_qa script")
     else:
