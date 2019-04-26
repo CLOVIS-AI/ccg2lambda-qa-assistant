@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from conversion.paths import TMP, CCG2LAMBDA, CANDC, TEMPLATE, init_paths
+from conversion.paths import TMP, CCG2LAMBDA, CANDC, TEMPLATE, init_paths, RTE
 
 
 def clean_tmp_dir() -> None:
@@ -18,7 +18,7 @@ def _execute_cmd(cmd: str) -> None:
     Executes the cmd in shell, Raises an exception if the cmd did not go well
     :param cmd: the command
     """
-    returned_output = subprocess.call(cmd, shell=True)
+    returned_output = subprocess.call(cmd, shell = True)
     _output_checker(returned_output, cmd)
 
 
@@ -75,6 +75,28 @@ def visualize_semantic() -> None:
     cmd = "python3 {0}/scripts/visualize.py {1}/sentences.sem.xml > {1}/sentences.html" \
         .format(CCG2LAMBDA, TMP)
     _execute_cmd(cmd)
+
+
+def _create_txt_document(text: str) -> None:
+    cmd = "echo {0} > {1}/sentences.txt" \
+        .format(text, TMP)
+    _execute_cmd(cmd)
+
+
+def _execute_rte_script() -> None:
+    TMP_PATH_FROM_CCG = "../server/src/tmp"
+    RES_PATH_FROM_CCG = "../server/res"
+    cmd = "cd {0} && /en/rte_en_qa.sh {1}/sentences.txt {2}/parser/semantic_templates_en_qa.yaml" \
+        .format(CCG2LAMBDA, TMP_PATH_FROM_CCG, RES_PATH_FROM_CCG)
+    _execute_cmd(cmd)
+
+
+def convertQA(question: str) -> None:
+    init_paths()
+
+    _create_txt_document(question)
+
+    _execute_rte_script()
 
 
 def convert(sentences: str) -> bool:

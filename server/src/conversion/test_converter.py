@@ -15,9 +15,12 @@ class TestConvertCcg2lambda(TestCase):
     def test_makeRequest(self):
         clean_tmp_dir()
 
+        # Converting the sentences with RTE script
+        # convertQA(self.sentences)
+
         # Converting the sentences with ccg2lambda
-        succes = convert(self.sentences)
-        self.assertTrue(succes)
+        success = convert(self.sentences)
+        self.assertTrue(success)
         visualize_semantic()
 
         # Checking the output files
@@ -28,7 +31,7 @@ class TestConvertCcg2lambda(TestCase):
         for action, elem in context:
             self.assertEqual("success", elem.attrib["status"])
 
-        clean_tmp_dir()
+        # clean_tmp_dir()
 
     def test_cleanUp(self):
         # Cleaning temporary folders
