@@ -1,5 +1,5 @@
-family = 'wikidata_bot'
-mylang = 'en'
-usernames['wikidata']['wikidata'] = u'Wikidata_bot'
+mylang = 'wikidata'
+family = 'wikidata'
+usernames['wikidata']['wikidata'] = u'WikidataBot'
 
 console_encoding = 'utf-8'
