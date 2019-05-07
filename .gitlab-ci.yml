@@ -21,8 +21,4 @@ test-server:
     - cd src
     - python3 -m unittest discover
     - pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 --benchmark .
-  tags:
-    - docker
-    - debian
-    - python
   retry: 1
