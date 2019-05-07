@@ -134,7 +134,7 @@ def init_paths():
     if test_file(PARSER_LOCATION_FILE):
         print(" › Successfully created the parser_location file")
     else:
-        print(" › parser_location not found, but I just created it!")
+        print(" › I just created parser_location, but I can't find it!")
         raise Exception("Couldn't find the parser_location file.")
 
     print("Done initializing.\n")
