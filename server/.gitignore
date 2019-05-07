@@ -76,3 +76,6 @@ git_toolbox_prj.xml
 
 # Dictionary
 src/wikidata/dictionary.txt
+
+# Temporary file
+src/tmp
