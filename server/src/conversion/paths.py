@@ -12,15 +12,20 @@ import os
 # package is loaded they are updated to follow the real
 # paths of the tools.
 
-PROJECT_ROOT = "../../"
-SERVER_ROOT = PROJECT_ROOT + "server/"
-CCG2LAMBDA = PROJECT_ROOT + "ccg2lambda"
-CANDC = "/app/parsers/candc-1.00"
-DEPCCG = PROJECT_ROOT + "depccg"
-TMP = "tmp"
-TEMPLATE = "../res/parser/simple_templates_qa.yaml"
-RTE = ""
-PARSER_LOCATION_FILE = ""
+PROJECT_ROOT: str = os.path.abspath("../../")
+SERVER_ROOT: str = PROJECT_ROOT + "/server/"
+CCG2LAMBDA: str = PROJECT_ROOT + "/ccg2lambda"
+CANDC: str = "/app/parsers/candc-1.00"
+DEPCCG: str = PROJECT_ROOT + "/depccg"
+DEPCCG_BIN: str = DEPCCG + "/bin"
+TMP: str = os.path.abspath("tmp")
+RES: str = os.path.abspath("../res/")
+TEMPLATE: str = RES + "/parser/simple_templates_qa.yaml"
+TEMPLATE_QA: str = RES + "/parser/semantic_templates_en_qa.yaml"
+RTE: str = ""
+PARSER_LOCATION_FILE: str = ""
+SENTENCES_TXT: str = TMP + "/sentences.txt"
+MODEL: str = SERVER_ROOT + "venv/lib/"
 PATHS_READY = False
 
 
@@ -72,6 +77,7 @@ def init_paths():
 
     print("\nSearching for the tools...")
     print("Working directory is [", os.getcwd(), "]")
+    CCG2LAMBDA = os.path.abspath(CCG2LAMBDA)
     if test_file(CCG2LAMBDA + "/README.md"):
         print(" › ccg2lambda is installed correctly (submodule)")
 
@@ -99,17 +105,35 @@ def init_paths():
             print(" › C&C is not installed")
             raise Exception("Couldn't find C&C. Expected to find it in the Docker container.")
 
+    if test_directory(RES):
+        print(" › Found the resource directory")
+    else:
+        print(" › Resource directory not found")
+        raise Exception("Couldn't find the resource directory.")
+
     if test_file(TEMPLATE):
         print(" › Found the template file")
     else:
         print(" › Template file not found")
         raise Exception("Couldn't find the template file.")
 
+    if test_file(TEMPLATE_QA):
+        print(" › Found the QA template file")
+    else:
+        print(" › QA Template file not found")
+        raise Exception("Couldn't find the QA template file.")
+
     if test_directory(DEPCCG):
         print(" › Found depccg")
     else:
         print(" › depccg not found")
         raise Exception("Couldn't find depccg; expected to find it as a submodule.")
+
+    if test_directory(DEPCCG_BIN):
+        print(" › Found depccg/bin")
+    else:
+        print(" › depccg/bin not found")
+        raise Exception("Couldn't find depccg/bin; expected to find it in depccg.")
 
     if test_directory(TMP, allow_empty=True):
         print(" › Found the temporary directory")
@@ -118,7 +142,7 @@ def init_paths():
         os.mkdir(TMP)
         print(" Done.")
 
-    RTE = CCG2LAMBDA + "/en/rte_en_qa.sh"
+    RTE = os.path.abspath(CCG2LAMBDA + "/en/rte_en_mp_any.sh")
     if test_file(RTE):
         print(" › Found the rte_en_qa script")
     else:
@@ -129,7 +153,7 @@ def init_paths():
     print("Writing depccg's location to [", os.path.abspath(PARSER_LOCATION_FILE), "]")
 
     parser_location = open(PARSER_LOCATION_FILE, "w+")
-    parser_location.write("depccg:" + os.path.abspath(DEPCCG))
+    parser_location.write("depccg:\n")
     parser_location.close()
     if test_file(PARSER_LOCATION_FILE):
         print(" › Successfully created the parser_location file")
