@@ -18,11 +18,11 @@ def _execute_cmd(cmd: str) -> None:
     Executes the cmd in shell, Raises an exception if the cmd did not go well
     :param cmd: the command
     """
-    returned_output = subprocess.call(cmd, shell = True)
-    _output_checker(returned_output, cmd)
+    returned_output = subprocess.call(cmd, shell=True)
+    __check_output(returned_output, cmd)
 
 
-def _output_checker(returned_output: int, cmd: str) -> None:
+def __check_output(returned_output: int, cmd: str) -> None:
     """
     Checks if the returned_output is 0 and raise an exception with the output if not
     :param returned_output: the output code of the cmd
@@ -32,8 +32,7 @@ def _output_checker(returned_output: int, cmd: str) -> None:
         print("Error while converting Natural to SPARQL : " + cmd)
         print("Code error : %d", returned_output)
 
-        returned_output_msg = subprocess.check_output(cmd)
-        raise Exception("Problem encountered while converting into SPARQL. output : " + returned_output_msg)
+        raise Exception("Problem encountered while converting into SPARQL. output : " + cmd)
 
 
 def _tokenizing(sentences: str) -> None:
