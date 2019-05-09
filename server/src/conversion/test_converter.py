@@ -9,14 +9,11 @@ class TestConvertCcg2lambda(TestCase):
     def setUp(self):
         init_paths()
         test_questions = open("conversion/test_converter_questions.txt", "r")
-        self.sentences = test_questions.read()
+        self.sentences: str = test_questions.read()
         test_questions.close()
 
     def test_makeRequest(self):
         clean_tmp_dir()
-
-        # Converting the sentences with RTE script
-        # convertQA(self.sentences)
 
         # Converting the sentences with ccg2lambda
         success = convert(self.sentences)
