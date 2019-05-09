@@ -12,9 +12,9 @@ import os
 # package is loaded they are updated to follow the real
 # paths of the tools.
 
-PROJECT_ROOT = "../../"
-SERVER_ROOT = PROJECT_ROOT + "../"
-CCG2LAMBDA = SERVER_ROOT + "ccg2lambda"
+PROJECT_ROOT = os.path.abspath("../")
+SERVER_ROOT = PROJECT_ROOT + "/.."
+CCG2LAMBDA = SERVER_ROOT + "/ccg2lambda"
 CANDC = "/app/parsers/candc-1.00"
 TMP = "tmp"
 TEMPLATE = "../res/parser/semantic_templates_en_qa.yaml"
