@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from conversion.paths import TMP, CCG2LAMBDA, CANDC, TEMPLATE, init_paths, RTE
+from conversion.paths import TMP, CCG2LAMBDA, CANDC, TEMPLATE, init_paths, RTE, TEMPLATE_QA, SENTENCES_TXT
 
 
 def clean_tmp_dir() -> None:
@@ -76,26 +76,28 @@ def visualize_semantic() -> None:
     _execute_cmd(cmd)
 
 
-def _create_txt_document(text: str) -> None:
-    cmd = "echo {0} > {1}/sentences.txt" \
-        .format(text, TMP)
-    _execute_cmd(cmd)
+def _execute_rte_script(text: str) -> None:
+    """
+    Executes the rte_en_qa.sh script from DepCCG.
+    :param text: The input on which DepCCG runs.
+    """
+    sentences = open(SENTENCES_TXT, "w+")
+    sentences.write(text)
+    sentences.close()
+
+    working_dir = os.getcwd()
+    os.chdir(CCG2LAMBDA)
+    result = subprocess.Popen([RTE, SENTENCES_TXT, TEMPLATE_QA], shell=False, stdout=subprocess.PIPE)
+    __check_output(result.returncode, str(result.communicate()[0].decode()))
+    os.chdir(working_dir)
 
 
-def _execute_rte_script() -> None:
-    TMP_PATH_FROM_CCG = "../server/src/tmp"
-    RES_PATH_FROM_CCG = "../server/res"
-    cmd = "cd {0} && /en/rte_en_qa.sh {1}/sentences.txt {2}/parser/semantic_templates_en_qa.yaml" \
-        .format(CCG2LAMBDA, TMP_PATH_FROM_CCG, RES_PATH_FROM_CCG)
-    _execute_cmd(cmd)
-
-
-def convertQA(question: str) -> None:
+def convert_qa(question: str) -> None:
     init_paths()
 
-    _create_txt_document(question)
+    _execute_rte_script(question)
 
-    _execute_rte_script()
+    # TODO: Return something useful
 
 
 def convert(sentences: str) -> bool:

@@ -30,6 +30,12 @@ class TestConvertCcg2lambda(TestCase):
 
         # clean_tmp_dir()
 
+    def test_qa(self):
+        clean_tmp_dir()
+
+        # Converting the sentences
+        convert_qa(self.sentences)
+
     def test_cleanUp(self):
         # Cleaning temporary folders
         clean_tmp_dir()
