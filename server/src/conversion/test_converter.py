@@ -1,36 +1,23 @@
 from unittest import TestCase
 
-from lxml import etree
-
-from .converternaturaltosparql import *
+from conversion import init_paths
+from .converter import *
 
 
 class TestConvertCcg2lambda(TestCase):
+
     def setUp(self):
         init_paths()
         test_questions = open("conversion/test_converter_questions.txt", "r")
         self.sentences = test_questions.read()
         test_questions.close()
 
-    def test_makeRequest(self):
-        clean_tmp_dir()
-
-        # Converting the sentences with ccg2lambda
-        succes = convert(self.sentences)
-        self.assertTrue(succes)
-        visualize_semantic()
-
-        # Checking the output files
-        self.assertTrue(os.path.isdir(TMP))
-        self.assertFalse(len(os.listdir(TMP)) == 0)
-        events = ("start", "end")
-        context = etree.iterparse(TMP + "/sentences.sem.xml", events=events, tag="semantics")
-        for action, elem in context:
-            self.assertEqual("success", elem.attrib["status"])
-
-        clean_tmp_dir()
-
-    def test_cleanUp(self):
-        # Cleaning temporary folders
-        clean_tmp_dir()
-        self.assertEqual(0, len(os.listdir(TMP)))
+    def test_convert(self):
+        sentences = [
+            "This is a test.",
+            "Is Barack Obama a president?",
+            "Who is this person?",
+            "The son of my mother is me",
+            "Can you eat fish?"
+        ]
+        [print(ast) for ast in convert(sentences)]
