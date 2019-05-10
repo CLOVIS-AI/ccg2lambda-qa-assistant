@@ -14,9 +14,6 @@ import os
 
 PROJECT_ROOT: str = os.path.abspath("../../")
 SERVER_ROOT: str = PROJECT_ROOT + "/server"
-CCG2LAMBDA: str = PROJECT_ROOT + "/ccg2lambda"
-CANDC: str = "/app/parsers/candc-1.00"
-TMP: str = "/tmp/ccg2lambda-qa"
 TEMPLATE: str = SERVER_ROOT + "/res/parser/semantic_templates_en_qa.yaml"
 MODEL: str = SERVER_ROOT + "/model"
 
@@ -64,7 +61,7 @@ def init_paths():
     or reports if they are missing.
     Searches in the submodule or in a Docker container.
     """
-    global PATHS_READY, CANDC, CCG2LAMBDA, TEMPLATE
+    global PATHS_READY, TEMPLATE
     if PATHS_READY:
         print("Paths are already ready; exiting init_paths function")
         return
@@ -73,32 +70,16 @@ def init_paths():
     print("Working directory is [", os.getcwd(), "]")
     print("Project root is [", PROJECT_ROOT, "]")
     print("Server project root is [", SERVER_ROOT, "]")
-    if test_file(CCG2LAMBDA + "/README.md"):
-        print(" › ccg2lambda is installed correctly (submodule)")
 
-        if test_directory(CCG2LAMBDA + "/candc-1.00"):
-            print(" › C&C is installed correctly")
-            CANDC = CCG2LAMBDA + "/candc-1.00"
-        else:
-            print(" › C&C is not installed")
-            raise Exception("Couldn't find C&C. Since you installed ccg2lambda as a submodule, "
-                            "check that you installed C&C correctly according to ccg2lambda's documentation.")
+    if test_directory(PROJECT_ROOT):
+        print(" › Found the project root")
     else:
-        print(" › ccg2lambda is not installed as a submodule")
+        print(" › Cannot find the project root!")
 
-        if test_directory("/app"):
-            print(" › ccg2lambda is installed correctly (Docker)")
-            CCG2LAMBDA = "/app"
-        else:
-            print(" › ccg2lambda is not installed as a Docker directory")
-            raise Exception("Couldn't find ccg2lambda. Tried submodule installation & Docker installation.")
-
-        if test_directory("/app/parsers/candc-1.00"):
-            print(" › C&C is installed correctly")
-            CANDC = "/app/parsers/candc-1.00"
-        else:
-            print(" › C&C is not installed")
-            raise Exception("Couldn't find C&C. Expected to find it in the Docker container.")
+    if test_directory(SERVER_ROOT):
+        print(" › Found the server root")
+    else:
+        print(" › Cannot find the server root!")
 
     if test_file(TEMPLATE):
         print(" › Found the template file")
