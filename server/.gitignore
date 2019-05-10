@@ -76,3 +76,7 @@ git_toolbox_prj.xml
 
 # Dictionnary
 src/wikidata/dictionary.txt
+
+# DepCCG models
+model/
+model.tar.gz
