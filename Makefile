@@ -50,11 +50,13 @@ ccg2lambda/coqlib.glob:
 server/venv:
 	@echo -e "${GREEN}Creating the virtual environnment...${RESET}"
 	python3 -m venv server/venv/
+
+python-requirements:
 	@echo -e "${GREEN}Installing dependencies (pip)...${RESET}"
 	source server/venv/bin/activate; pip install -r server/requirements.txt
 	source server/venv/bin/activate; pip install depccg
 
-server/model: server/venv
+server/model: server/venv python-requirements
 	@echo -e "${GREEN}Downloading english model for DepCCG...${RESET}"
 	source server/venv/bin/activate; depccg_en download
 	mv server/venv/lib/python*/site-packages/depccg/models/tri_headfirst.tar.gz server/model.tar.gz
@@ -66,15 +68,15 @@ ccg2lambda/candc-1.00: submodule-init
 	@echo -e "${GREEN}Installing C&C...${RESET}"
 	cd ccg2lambda; ./en/install_candc.sh
 
-spacy-en: submodule-init server/venv
+spacy-en: submodule-init server/venv python-requirements
 	@echo -e "${GREEN}Downloading the SpaCy English model...${RESET}"
 	source server/venv/bin/activate; python -m spacy download en
 
-test-server-local-unittest: submodule-init dep-py ccg2lambda/coqlib.glob server/model spacy-en
+test-server-local-unittest: submodule-init dep-py ccg2lambda/coqlib.glob server/model spacy-en python-requirements
 	@echo -e "${GREEN}Running unittest...${RESET}"
 	source server/venv/bin/activate; cd server/src; python -m unittest discover
 
-test-server-local-lint: submodule-init dep-py
+test-server-local-lint: submodule-init dep-py python-requirements
 	@echo -e "${GREEN}Linting Python code (PEP8)...${RESET}"
 	source server/venv/bin/activate; pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 --benchmark server/src
 
