@@ -5,7 +5,6 @@ chainer==5.4.0
 chardet==3.0.4
 cymem==2.0.2
 Cython==0.29.7
-en-core-web-sm==2.1.0
 filelock==3.0.10
 googledrivedownloader==0.3
 idna==2.8
