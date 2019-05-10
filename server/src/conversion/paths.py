@@ -12,12 +12,14 @@ import os
 # package is loaded they are updated to follow the real
 # paths of the tools.
 
-PROJECT_ROOT = os.path.abspath("../")
-SERVER_ROOT = PROJECT_ROOT + "/.."
-CCG2LAMBDA = SERVER_ROOT + "/ccg2lambda"
-CANDC = "/app/parsers/candc-1.00"
-TMP = "tmp"
-TEMPLATE = "../res/parser/semantic_templates_en_qa.yaml"
+PROJECT_ROOT: str = os.path.abspath("../../")
+SERVER_ROOT: str = PROJECT_ROOT + "/server"
+CCG2LAMBDA: str = PROJECT_ROOT + "/ccg2lambda"
+CANDC: str = "/app/parsers/candc-1.00"
+TMP: str = "/tmp/ccg2lambda-qa"
+TEMPLATE: str = SERVER_ROOT + "/res/parser/semantic_templates_en_qa.yaml"
+MODEL: str = SERVER_ROOT + "/model"
+
 PATHS_READY = False
 
 
@@ -69,6 +71,8 @@ def init_paths():
 
     print("\nSearching for the tools...")
     print("Working directory is [", os.getcwd(), "]")
+    print("Project root is [", PROJECT_ROOT, "]")
+    print("Server project root is [", SERVER_ROOT, "]")
     if test_file(CCG2LAMBDA + "/README.md"):
         print(" › ccg2lambda is installed correctly (submodule)")
 
