@@ -35,13 +35,17 @@ docker-init: dep-ci
 	@echo -e "${GREEN}Pulling needed Docker images...${RESET}"
 	sudo docker pull masashiy/ccg2lambda
 
+.PHONY: ccg2lambda
 ccg2lambda: .gitmodules | dep
-	@echo -e "${GREEN}Updating the submodules...${RESET}"
-	git submodule init
-	git submodule update
+	# Tests if the submodule has been updated (new path, new sha1, missing)
+	@if git submodule status | egrep -q '^[-]|^[+]' ; then \
+    	echo -e "${GREEN}Updating the submodules...${RESET}"; \
+    	echo "git submodule update --init"; \
+        git submodule update --init; \
+    fi
 
 .PHONY: test-server-ci
-test-server-ci: docker-init dep
+test-server-ci: docker-init | dep
 	@echo -e "${GREEN}GitLab CI: test-server${RESET}"
 	sudo gitlab-runner exec docker test-server
 
@@ -51,7 +55,7 @@ gitlab-ci: test-server-ci
 .PHONY: local
 local: test-server-local
 
-ccg2lambda/coqlib.glob: ccg2lambda
+ccg2lambda/coqlib.glob: ccg2lambda/coqlib.v | ccg2lambda
 	@echo -e "${GREEN}Compiling the Coq templates...${RESET}"
 	coqc ccg2lambda/coqlib.v
 
@@ -74,7 +78,7 @@ server/model: server/venv | python-requirements
 	tar -xzvf server/model.tar.gz -C server/model
 	mv server/model/tri_headfirst/* server/model/
 
-ccg2lambda/candc-1.00: ccg2lambda
+ccg2lambda/candc-1.00: ccg2lambda/en/install_candc.sh | ccg2lambda
 	@echo -e "${GREEN}Installing C&C...${RESET}"
 	cd ccg2lambda; ./en/install_candc.sh
 
