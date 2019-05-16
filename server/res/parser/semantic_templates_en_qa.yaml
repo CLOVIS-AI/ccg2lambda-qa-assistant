@@ -792,17 +792,19 @@
   # semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.(x = y)) & F1(x)), F2)
 
 # For QA:
-# - category: (NP|NP)|NP
-#   semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.(x = y)) & F1(x)), F2)
-#   surf: of
+- category: (NP|NP)|NP
+  semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.(E(y) = x)) & F1(x)), F2)
+  surf: of
 
-# - category: (NP|NP)|NP
-#   semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.(x = y)) & F1(x)), F2)
-#   surf: for
+- category: (NP|NP)|NP
+  semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.(x = y)) & F1(x)), F2)
+  surf: for
 
-# - category: ((NP|NP)|(NP|NP))|NP
-#   semantics: \E Q1 M Q2 F1 F2. Q2(\y.True,\y.Q1(\x.((x = y) & M(\G1 G2.G1(x),\w.True,\w.True) & F1(x)), F2))
-#   surf: of
+- category: ((NP|NP)|(NP|NP))|NP
+  semantics: \E Q1 M Q2 F1 F2. Q2(\y.True,\y.Q1(\x.((E(y) = x) & M(\G1 G2.G1(x),\w.True,\w.True) & F1(x)), F2))
+  surf: of
+
+# end QA block
 
 - category: PP|NP
   semantics: \E Q e. Q(\x.True, \x.E(e,x))
@@ -1044,13 +1046,20 @@
 ### For QA
 
 - category: S|(S|NP)
-  semantics: \E V K. exists x. V(\G1 G2. (what(x) & G2(x)), \e.True)
+  semantics: \E V K. exists x. V(\G1 G2. (what(x) & QM(x) & G2(x)), \e.True)
   base: what
 
 - category: S|(S|NP)
-  semantics: \E V K. exists x. V(\G1 G2. (who(x) & G2(x)), \e.True)
+  semantics: \E V K. exists x. V(\G1 G2. (who(x) & QM(x) & G2(x)), \e.True)
   base: who
 
+- category: S|(S|NP)
+  semantics: \E V K. exists x. V(\G1 G2. (when(x) & QM(x) & G2(x)), \e.True)
+  base: when
+
+- category: S|(S|NP)
+  semantics: \E V K. exists x. V(\G1 G2. (where(x) & QM(x) & G2(x)), \e.True)
+  base: where
 
 ##### Templates for connectives #####
 
@@ -1220,12 +1229,23 @@
 
 - category: N
   semantics: \E x. (organization(x) & E(x))
-  entity: I-ORG
+  entity: B-GPE
+
+- category: N
+  semantics: \E x. (organization(x) & E(x))
+  entity: I-GPE
 
 - category: N
   semantics: \E x. (year(x) & E(x))
-  entity: I-DAT
+  entity: B-DATE
 
+- category: N
+  semantics: \E x. (People(x) & E(x))
+  entity: B-PERSON
+
+- category: N
+  semantics: \E x. (People(x) & E(x))
+  entity: I-PERSON
 
 ##### Lexical entries for NPs #####
 

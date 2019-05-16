@@ -82,6 +82,7 @@ def convert(sentences: List[str]) -> List[Expression]:
     announce("Beginning conversion of", len(sentences), "sentences, the first one is [", sentences[0], "]")
     annotated_sentences, split_sentences = __annotate_spacy(sentences)
     ccg_of_each_sentence = __convert_to_ccg(split_sentences)
+    print(annotated_sentences)
     lambda_expressions = __ccg_to_lambda(ccg_of_each_sentence, annotated_sentences)
     formulas = __lambda_to_drs(lambda_expressions)
     expr = __drs_to_python(formulas)

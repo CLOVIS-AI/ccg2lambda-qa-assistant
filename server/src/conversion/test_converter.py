@@ -14,10 +14,14 @@ class TestConvertCcg2lambda(TestCase):
 
     def test_convert(self):
         sentences = [
-            "This is a test.",
+            "Who is the president of the United States in 2017 ?",
+            "Who is Barack Obama ?"
             "Is Barack Obama a president?",
+            "What do I want to eat for dinner ?"
             "Who is this person?",
             "The son of my mother is me",
-            "Can you eat fish?"
+            "Can you eat fish from 2018?",
+            "When was the last snack?",
+            "Where is the USA ?"
         ]
         [verbose(ast) for ast in convert(sentences)]
