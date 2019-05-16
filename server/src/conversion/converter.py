@@ -10,6 +10,7 @@ from nltk import Expression
 from conversion import depccg_parser
 from conversion.paths import TEMPLATE
 from qalogging import info, verbose, announce
+from conversion import visualisation
 
 
 def __annotate_spacy(sentences: List[str]) -> Tuple[List[List[Token]], List[List[str]]]:
@@ -84,6 +85,9 @@ def convert(sentences: List[str]) -> List[Expression]:
     ccg_of_each_sentence = __convert_to_ccg(split_sentences)
     print(annotated_sentences)
     lambda_expressions = __ccg_to_lambda(ccg_of_each_sentence, annotated_sentences)
+
+    visualisation.visualize(lambda_expressions, "sentences.xml")
+
     formulas = __lambda_to_drs(lambda_expressions)
     expr = __drs_to_python(formulas)
     verbose("Conversion done.")
