@@ -1,5 +1,4 @@
-import os
-import bs4
+from sparql.wrapper import Wrapper
 
 #
 #   Dictionary reader and writer of Wikidata properties
@@ -7,39 +6,27 @@ import bs4
 
 
 class Dictionary:
-    def __init__(self, html_path):
-        self.__html_path = html_path
+    def __init__(self):
         self.__dictionary = {}
 
-    def fill_dictionary(self):
+    @staticmethod
+    def fill_dictionary_query():
         """
-        temporary solution, may change in the future
-        fills a dictionary under the form of a txt. Uses html pages https://tools.wmflabs.org/prop-explorer/
+        Fills a dictionary of properties under the of a .txt.
         """
         dictionary = open("wikidata/dictionary.txt", "w")
-        for filename in os.listdir(self.__html_path):
-            if filename.endswith(".html"):
-                f = open(self.__html_path + '/' + filename)
-                soup = bs4.BeautifulSoup(f.read(), 'lxml')
-                print("Found file: " + filename)
-                for tab_line in soup.find_all("div", "rt-tr-group"):
-                    code = tab_line.contents[0].contents[1].contents[0].contents[0].string
-                    # retrieving data from a tab that can have empty cells
-                    # Proper codes are at least of length 3
-                    if len(code) > 2:
-                        label = tab_line.contents[0].contents[2].contents[0].contents[0].string
-                        dictionary.write(label + ":" + code + "\n")
-                        sub_labels = tab_line.contents[0].contents[2].contents[0].find("span")
-                        if sub_labels:
-                            for sub_label in sub_labels.string.split(" | "):
-                                dictionary.write(sub_label + ":" + code + "\n")
-                f.close()
-        dictionary.close()
+        wrapper = Wrapper("https://query.wikidata.org/sparql", "wikidata/propertiesQuery.sparql")
+        result = wrapper.make_request_dictionary()
+        dictionary.write(result)
 
     def load_dictionary(self):
+        """
+        Some of the names have homonyms: this program doesn't manage it (yet?)
+        """
         f = open("wikidata/dictionary.txt", "r")
         for line in f.readlines():
-            self.__dictionary[line.split(':')[0]] = line.split(':')[1].split('\n')[0]
+            if not self.__dictionary.__contains__(line.split(':')[0]):
+                self.__dictionary[line.split(':')[0]] = line.split(':')[1].split('\n')[0]
         f.close()
 
     def __getitem__(self, item):
@@ -47,3 +34,4 @@ class Dictionary:
             return self.__dictionary[item]
         else:
             return None
+
