@@ -82,3 +82,5 @@ This project is split into multiple subprojects:
  - `server` is the main project. [More information](server/README.md)
  - `google-assistant` handles the integration of the project into the Google Assistant. [More information](google-assistant/README.md)
  - `web` handles the integration of the project with a web interface. [More information](web/README.md)
+
+For additionnal information on how to setup the different subprojects, read their README.md (linked above).
