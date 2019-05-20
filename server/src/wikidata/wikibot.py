@@ -6,4 +6,3 @@ item = pywikibot.ItemPage.fromPage(page)  # this can be used for any page object
 
 dictionary = item.get()  # you need to call it to access any data.
 print(dictionary.keys())
-
