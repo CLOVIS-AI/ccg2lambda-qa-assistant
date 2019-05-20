@@ -3,6 +3,7 @@ from typing import List
 from nltk2qo.entity import Entity
 from nltk2qo.event import Event
 from nltk2qo.variable import Variable
+from qalogging import verbose
 
 
 class Sentence:
@@ -34,7 +35,7 @@ class Sentence:
         """
         if variable not in [var.id for var in self.__variables]:
             self.__variables.append(Variable(variable))
-            print(" › New variable [", variable, "]")
+            verbose(" › New variable [", variable, "]")
 
     def add_event(self, event: str):
         """
@@ -43,7 +44,7 @@ class Sentence:
         """
         if event not in [event.id for event in self.events]:
             self.events.append(Event(event))
-            print(" › New event [", event, "]")
+            verbose(" › New event [", event, "]")
 
     def add_tag(self, tag: str, entity: str):
         """
@@ -52,7 +53,7 @@ class Sentence:
         :param entity: The entity on which the tag should be added
         """
         self.get_entity(entity).tags.append(tag)
-        print(" › New tag [", tag, "] on [", entity, "]")
+        verbose(" › New tag [", tag, "] on [", entity, "]")
 
     def add_link(self, variable: str, event: str, link_name: str):
         """
@@ -64,10 +65,10 @@ class Sentence:
         e = self.get_event(event)
         if link_name == "Subj":
             e.subject = self.__get_variable(variable)
-            print(" › The subject of [", event, "] is [", variable, "]")
+            verbose(" › The subject of [", event, "] is [", variable, "]")
         else:
             e.variables.append((link_name, self.__get_variable(variable)))
-            print(" › New link from [", event, "] to [", variable, "]:", link_name)
+            verbose(" › New link from [", event, "] to [", variable, "]:", link_name)
 
     def get_entity(self, id_: str) -> Entity:
         """
@@ -110,11 +111,11 @@ class Sentence:
         """
         Graphically display this Sentence, to make it easier to see what's going on.
         """
-        print(" › Sentence:")
-        print("  " * 1 + " events:")
+        verbose(" › Sentence:")
+        verbose("  " * 1 + " events:")
         for e in self.events:
-            print("  " * 2 + " - " + e.id + ":", "[ tags:", *[t for t in e.tags], "]")
-            print("  " * 4 + " subject:", e.subject.id, "[ tags:", *[t for t in e.subject.tags], "]")
-            print("  " * 4 + " variables:")
+            verbose("  " * 2 + " - " + e.id + ":", "[ tags:", *[t for t in e.tags], "]")
+            verbose("  " * 4 + " subject:", e.subject.id, "[ tags:", *[t for t in e.subject.tags], "]")
+            verbose("  " * 4 + " variables:")
             for v in e.variables:
-                print("  " * 4 + " - " + v[0] + ":", v[1].id, "[ tags:", *[t for t in v[1].tags], "]")
+                verbose("  " * 4 + " - " + v[0] + ":", v[1].id, "[ tags:", *[t for t in v[1].tags], "]")

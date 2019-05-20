@@ -99,3 +99,13 @@ test-server-local-lint: ccg2lambda dep-py python-requirements
 
 .PHONY: test-server-local
 test-server-local: test-server-local-unittest test-server-local-lint
+
+.PHONY: server
+server: dep dep-py ccg2lambda ccg2lambda/candc-1.00 python-requirements spacy-en
+	@echo -e "${GREEN}Starting the server...${RESET}"
+	source server/venv/bin/activate; cd server/src; python3 server.py
+
+.PHONY: client
+client: dep dep-py ccg2lambda ccg2lambda/candc-1.00 python-requirements spacy-en
+	@echo -e "${GREEN}Starting the client...${RESET}"
+	source server/venv/bin/activate; cd server/src; python3 client.py

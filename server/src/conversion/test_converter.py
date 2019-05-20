@@ -20,4 +20,4 @@ class TestConvertCcg2lambda(TestCase):
             "The son of my mother is me",
             "Can you eat fish?"
         ]
-        [print(ast) for ast in convert(sentences)]
+        [verbose(ast) for ast in convert(sentences)]

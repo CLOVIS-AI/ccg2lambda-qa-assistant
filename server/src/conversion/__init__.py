@@ -12,6 +12,7 @@ from pathlib import Path
 from depccg.parser import EnglishCCGParser
 
 from conversion.paths import init_paths, MODEL
+from qalogging import verbose
 
 init_paths()
 
@@ -51,3 +52,5 @@ depccg_parser = EnglishCCGParser.from_dir(
     load_tagger=True,
     **depccg_options
 )
+
+verbose("Loaded package 'conversion'")
