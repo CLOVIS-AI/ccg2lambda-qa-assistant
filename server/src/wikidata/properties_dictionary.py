@@ -18,6 +18,7 @@ class Dictionary:
         wrapper = Wrapper("https://query.wikidata.org/sparql", "wikidata/propertiesQuery.sparql")
         result = wrapper.make_request_dictionary()
         dictionary.write(result)
+        dictionary.close()
 
     def load_dictionary(self):
         """
