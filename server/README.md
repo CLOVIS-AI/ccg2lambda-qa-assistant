@@ -8,7 +8,7 @@ Follow the steps in the main [README](../README.md); they include the procedure 
 
 ## What does it do?
 
-The goal of this project is to expose a TCP interface from which any client can use the [ccg2lambda](https://github.com/mynlp/ccg2lambda), [DepCCG](https://github.com/masashi-y/depccg) and SPARQL projects.
+The goal of this project is to expose a TCP interface from which any client can use the [ccg2lambda](https://github.com/mynlp/ccg2lambda), [depccg](https://github.com/masashi-y/depccg) and SPARQL projects.
 
 The project is split into Python packages:
 
