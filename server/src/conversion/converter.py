@@ -86,9 +86,10 @@ def convert(sentences: List[str]) -> List[Expression]:
     print(annotated_sentences)
     lambda_expressions = __ccg_to_lambda(ccg_of_each_sentence, annotated_sentences)
 
-    visualisation.visualize(lambda_expressions, "sentences.xml")
+    # visualisation.visualize(lambda_expressions, "sentences.xml")
 
     formulas = __lambda_to_drs(lambda_expressions)
+    visualisation.visualize(lambda_expressions, "sentences.sem.xml")
     expr = __drs_to_python(formulas)
     verbose("Conversion done.")
     return expr
