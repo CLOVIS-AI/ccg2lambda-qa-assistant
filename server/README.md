@@ -8,7 +8,7 @@ Follow the steps in the main [README](../README.md); they include the procedure 
 
 ## What does it do?
 
-The goal of this project is to expose a TCP interface from which any client can use the [ccg2lambda](https://github.com/mynlp/ccg2lambda), [depccg](https://github.com/masashi-y/depccg) and SPARQL projects.
+The goal of this project is to expose a TCP interface from which any client can use the [ccg2lambda](https://github.com/mynlp/ccg2lambda), [depccg](https://github.com/masashi-y/depccg) and [SPARQL](https://en.wikipedia.org/wiki/SPARQL) projects.
 
 The project is split into Python packages:
 
@@ -23,5 +23,20 @@ The project is split into Python packages:
  - [nltk2qo](nltk2qo) handles the next step of the conversion: it parses the resulting `Expressions` (the output from the [conversion](conversion) package) into `Sentence` objects, which are simplified versions that are more convenient to use when it comes to SPARQL.
    - The `Expression` objects are recursively-parsed by [the nltk_to_query_objects function](nltk2qo/converter.py).
    - To see the structure of the generated Sentences, just call that method with any list of `Expression` from the [conversion](conversion) package; it will print the structure of the generated objects in an easy to read way.
- - [sparql](sparql) [TODO]
- - [wikidata](wikidata) [TODO]
+ - [sparql](sparql) Contains SPARQL wrapper and query builder (subpackage `queryBuilder`):
+   - The wrapper is a simple tool that sends a query to a determined endpoint. We use [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) as our endpoint. For more information, please see on the `Wikidata` section below.
+   - The query builder converts the resulting `Expressions` of the package nltk2go into SPARQL queries to be sent to the Wikidata structure in order to retrieve its results.
+ - [wikidata](wikidata) is a simple package that fetches from the Wiki group unique identifiers used by Wikidata. For more information, please see the `Wikidata` section below.
+
+
+## Wikidata knowledge & its uses in our project
+
+This project uses the [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) services to obtain the desired results of our SPARQL queries.
+Using such endpoint however requires some knowledge about its way of functionning.
+
+ - As Wikidata uses SPARQL, it has its own tutorial about its use of triples that you can find [here](https://en.wikibooks.org/wiki/SPARQL/Triples)
+ - It uses a unique set of `Q-codes` to describe Wikidata items and `P-codes` to describe Wikidata properties. [Find more about Wikidata Identifiers here](https://www.wikidata.org/wiki/Wikidata:Identifiers)
+ - Wikidata uses its own [datamodel](https://en.wikibooks.org/wiki/SPARQL/WIKIDATA_Qualifiers,_References_and_Ranks) that has to be known in order to query its elements.
+ - Wikidata offers a [Wikidata Query Service](https://query.wikidata.org/) that allows its users to try SPARQL queries on the Wikidata service.
+ 
+Although this lists the most basic data about Wikidata, please note that some information may be missing.

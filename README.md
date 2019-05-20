@@ -42,7 +42,7 @@ You will need to install the following dependencies, all of which are Free and O
 This project is integrated with GitLab's Continuous Integration tools. To run the pipeline on your computer, you will need the following dependencies:
 
  - `docker` to run the containers.
-   - [Install on Debian](hhttps://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce)
+   - [Install on Debian](https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce)
    - [Install on Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce)
    - [Arch community package](https://www.archlinux.org/packages/community/x86_64/docker/)
  - `gitlab-runner` to run the CI suites.
