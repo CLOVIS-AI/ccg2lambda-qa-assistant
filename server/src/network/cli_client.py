@@ -1,19 +1,19 @@
 import socket
 
-from qalogging import verbose, info, warning
+from qalogging import verbose, warning
 from .message import Message
 from .utils import byte_to_message
 
 
-class _Client:
+class CLIClient:
 
     def __init__(self, address, port):
-        info("Client: Starting...")
+        verbose("Client: Starting...")
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((address, port))
         self.__is_running = True
         self.__commands = {}
-        info("Client: Connected.")
+        verbose("Client: Connected.")
 
     def run(self):
         verbose("Client: Listening...")
@@ -24,7 +24,7 @@ class _Client:
                 break
 
             if msg == b'':
-                warning("Client: The server closed the connection...")
+                verbose("Client: The server closed the connection...")
                 break
 
             for message in byte_to_message(msg):
@@ -35,7 +35,7 @@ class _Client:
                     warning("Client: Unknown command", message.name)
 
         self.socket.close()
-        info("Client: Disconnected.")
+        verbose("Client: Disconnected.")
 
     def register_command(self, name, callback):
         self.__commands[name] = callback

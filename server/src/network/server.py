@@ -11,7 +11,6 @@ from .client import Client
 # one thread per client, which ables it to run with multiple clients at the same time.
 #
 
-
 class Server:
 
     def __init__(self, port: int, max_connections: int = 1):
@@ -75,3 +74,6 @@ class Server:
         self.is_running = False
         [client.close() for client in self.clients]
         info("Server: Disconnected.")
+
+
+server = Server(12800, 10)

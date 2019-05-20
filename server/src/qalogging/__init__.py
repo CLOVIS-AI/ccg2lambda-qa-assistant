@@ -1,4 +1,20 @@
 PRINT_VERBOSE = True
+SEND_TO_CLIENT = False  # Union[bool, Client], cannot specify it because of circular imports
+
+
+def set_client(client):  # Union[bool, Client], cannot specify it because of circular imports
+    global SEND_TO_CLIENT
+    SEND_TO_CLIENT = client
+
+
+def set_verbose(verbose: bool):
+    global PRINT_VERBOSE
+    PRINT_VERBOSE = verbose
+
+    if PRINT_VERBOSE:
+        info("This session will print verbose messages.")
+    else:
+        info("This session will not print verbose messages.")
 
 
 def print_format_table():
@@ -17,6 +33,10 @@ def print_format_table():
 
 def info(*args) -> None:
     print(*args)
+    # noinspection PySimplifyBooleanCheck
+    if SEND_TO_CLIENT is not False:
+        # noinspection PyUnresolvedReferences
+        SEND_TO_CLIENT.send('info', *args)
 
 
 def announce(*args) -> None:
@@ -37,8 +57,3 @@ def verbose(*args) -> None:
 
 
 verbose("Loaded package 'qalogging'")
-
-if PRINT_VERBOSE:
-    info("This session will print verbose messages.")
-else:
-    info("This session will not print verbose messages.")
