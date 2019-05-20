@@ -11,6 +11,7 @@ import os
 # purpose only, and should not be used as-is; when the
 # package is loaded they are updated to follow the real
 # paths of the tools.
+from qalogging import verbose, info, warning, error
 
 PROJECT_ROOT: str = os.path.abspath("../../")
 SERVER_ROOT: str = PROJECT_ROOT + "/server"
@@ -30,13 +31,13 @@ def test_directory(path, allow_empty=False):
     path = os.path.abspath(path)
     if os.path.isdir(path):
         if len(os.listdir(path)) > 0:
-            print("Found [", path, "], and it is not empty.")
+            verbose("Found [", path, "], and it is not empty.")
             return True
         else:
-            print("Found [", path, "], but it is empty!")
+            verbose("Found [", path, "], but it is empty!")
             return allow_empty
     else:
-        print("Directory not found [", path, "]")
+        warning("Directory not found [", path, "]")
         return False
 
 
@@ -48,10 +49,10 @@ def test_file(path):
     """
     path = os.path.abspath(path)
     if os.path.isfile(path):
-        print("Found file [", path, "]")
+        verbose("Found file [", path, "]")
         return True
     else:
-        print("File not found [", path, "]")
+        warning("File not found [", path, "]")
         return False
 
 
@@ -63,29 +64,29 @@ def init_paths():
     """
     global PATHS_READY, TEMPLATE
     if PATHS_READY:
-        print("Paths are already ready; exiting init_paths function")
+        verbose("Paths are already ready; exiting init_paths function")
         return
 
-    print("\nSearching for the tools...")
-    print("Working directory is [", os.getcwd(), "]")
-    print("Project root is [", PROJECT_ROOT, "]")
-    print("Server project root is [", SERVER_ROOT, "]")
+    info("\nSearching for the tools...")
+    verbose("Working directory is [", os.getcwd(), "]")
+    verbose("Project root is [", PROJECT_ROOT, "]")
+    verbose("Server project root is [", SERVER_ROOT, "]")
 
     if test_directory(PROJECT_ROOT):
-        print(" › Found the project root")
+        verbose(" › Found the project root")
     else:
-        print(" › Cannot find the project root!")
+        error(" › Cannot find the project root!")
 
     if test_directory(SERVER_ROOT):
-        print(" › Found the server root")
+        verbose(" › Found the server root")
     else:
-        print(" › Cannot find the server root!")
+        error(" › Cannot find the server root!")
 
     if test_file(TEMPLATE):
-        print(" › Found the template file")
+        verbose(" › Found the template file")
     else:
-        print(" › Template file not found")
+        error(" › Template file not found")
         raise Exception("Couldn't find the template file.")
 
-    print("Done initializing.\n")
+    verbose("Done initializing paths.\n")
     PATHS_READY = True

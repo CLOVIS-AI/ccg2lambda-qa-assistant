@@ -1,3 +1,4 @@
+from qalogging import info, verbose, warning
 from .message import Message
 from .utils import byte_to_message
 
@@ -12,7 +13,7 @@ class Client:
         self.__socket = socket
         self.__server = server
         self.coords = socket.getpeername()
-        print("Server:", self.__socket.getpeername(), "has connected.")
+        info("Server:", self.__socket.getpeername(), "has connected.")
         self.__listen()
 
     def __listen(self):
@@ -33,10 +34,10 @@ class Client:
 
         for message in byte_to_message(msg):
             if message.name in self.__server.commands:
-                print("Server:", self.coords, "sent [", message, "]")
+                verbose("Server:", self.coords, "sent [", message, "]")
                 self.__server.commands[message.name](self.__server, self, *message.args)
             else:
-                print("Server WARNING: Unknown command [", message.name, "]")
+                warning("Server: Unknown command [", message.name, "]")
 
     def send(self, command, *args):
         """
@@ -46,7 +47,7 @@ class Client:
         """
 
         msg = Message(command, *args)
-        print("Server: sending [", msg, "] to", self.coords)
+        verbose("Server: sending [", msg, "] to", self.coords)
         msg.send(self.__socket)
 
     def close(self, clientside=False):
@@ -56,7 +57,7 @@ class Client:
         """
 
         if clientside:
-            print("Server:", self.coords, "was disconnected.")
+            info("Server:", self.coords, "was disconnected.")
         else:
-            print("Server:", self.coords, "was disconnected by the server.")
+            info("Server:", self.coords, "was disconnected by the server.")
             self.__socket.close()

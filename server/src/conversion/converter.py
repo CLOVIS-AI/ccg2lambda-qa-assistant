@@ -9,6 +9,7 @@ from nltk import Expression
 
 from conversion import depccg_parser
 from conversion.paths import TEMPLATE
+from qalogging import info, verbose, announce
 
 
 def __annotate_spacy(sentences: List[str]) -> Tuple[List[List[Token]], List[List[str]]]:
@@ -17,7 +18,7 @@ def __annotate_spacy(sentences: List[str]) -> Tuple[List[List[Token]], List[List
     :param sentences: A list of English sentences.
     :return: a tuple of a list of all annotated tokens in each sentence, and a list of each word in each sentence.
     """
-    print(" › spaCy: annotating...")
+    info(" › spaCy: annotating...")
     return annotate_using_spacy([sentence.split(" ") for sentence in sentences], tokenize=True)
 
 
@@ -28,7 +29,7 @@ def __convert_to_ccg(sentences: List[List[str]]) -> List[List[Tuple[Tree]]]:
     :param sentences: A list of (sentence: list of words)
     :return: A list of CCG trees
     """
-    print(" › DepCCG: English 🠦 CCG")
+    info(" › DepCCG: English 🠦 CCG")
     return depccg_parser.parse_doc(sentences)
 
 
@@ -39,7 +40,7 @@ def __ccg_to_lambda(ccg: List[List[Tuple[Tree]]], annotated_sentences: List[List
     :param annotated_sentences: A list of all annotated tokens in each of the given sentences
     :return: A list of λ-expressions.
     """
-    print(" › ccg2lambda: CCG 🠦 λ")
+    info(" › ccg2lambda: CCG 🠦 λ")
     return to_jigg_xml(ccg, annotated_sentences)
 
 
@@ -49,7 +50,7 @@ def __lambda_to_drs(lambda_expressions: Any) -> List[List[str]]:
     :param lambda_expressions: A list of λ-expressions.
     :return: A list in which each element is the list of parsed DRS representations for each sentence.
     """
-    print(" › ccg2lambda: λ 🠦 DRS")
+    info(" › ccg2lambda: λ 🠦 DRS")
     return parse.parse(lambda_expressions, TEMPLATE)[1]
 
 
@@ -59,7 +60,7 @@ def __drs_to_python(all_drs: List[List[str]]) -> List[Expression]:
     :param all_drs: A list of DRS representations.
     :return: A list of Expressions, which are Python objects that represent the sentence.
     """
-    print(" › nltk: DRS 🠦 Python objects")
+    info(" › nltk: DRS 🠦 Python objects")
     return [lexpr(drs) for sentence in all_drs for drs in sentence]
 
 
@@ -78,11 +79,11 @@ def convert(sentences: List[str]) -> List[Expression]:
     if len(sentences) < 1:
         raise Exception("Cannot run the pipeline with less than 1 sentence: " + str(len(sentences)))
 
-    print("Beginning conversion of", len(sentences), "sentences, the first one is [", sentences[0], "]")
+    announce("Beginning conversion of", len(sentences), "sentences, the first one is [", sentences[0], "]")
     annotated_sentences, split_sentences = __annotate_spacy(sentences)
     ccg_of_each_sentence = __convert_to_ccg(split_sentences)
     lambda_expressions = __ccg_to_lambda(ccg_of_each_sentence, annotated_sentences)
     formulas = __lambda_to_drs(lambda_expressions)
     expr = __drs_to_python(formulas)
-    print("Conversion done.")
+    verbose("Conversion done.")
     return expr

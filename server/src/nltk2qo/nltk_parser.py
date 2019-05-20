@@ -1,6 +1,7 @@
 from nltk.sem.logic import ExistsExpression, Expression, AndExpression, ApplicationExpression, EqualityExpression
 
 from nltk2qo.sentence import Sentence
+from qalogging import error
 
 
 def read_expressions(value: Expression, sentence: Sentence):
@@ -24,5 +25,5 @@ def read_expressions(value: Expression, sentence: Sentence):
                           value.first.argument.variable.name,
                           value.first.function.variable.name)
     else:
-        print(" › Type [", t, "] unknown, aborting.")
+        error("Type [", t, "] unknown, aborting.")
         raise Exception("I do not know how to handle the type [", t, "] !")

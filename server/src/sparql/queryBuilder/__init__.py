@@ -4,3 +4,6 @@
 #       - Wikidata SPARQL tutorial: https://www.wikidata.org/wiki/Wikidata:SPARQL_tutorial
 #       - WIkidata Query Service (with tons of request examples) : https://query.wikidata.org/#
 #
+from qalogging import verbose
+
+verbose("Loaded package 'queryBuilder'")
