@@ -34,4 +34,3 @@ class Dictionary:
             return self.__dictionary[item]
         else:
             return None
-

@@ -26,5 +26,3 @@ class TestDictionary(TestCase):
         assert dictionary.__getitem__("neighborhood") == "P276"
         assert dictionary.__getitem__("location") == "P276"
         assert dictionary.__getitem__("place held") == "P276"
-
-
