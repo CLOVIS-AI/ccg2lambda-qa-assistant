@@ -792,7 +792,8 @@
 
 ## nominal modifiers
 - category: (NP|NP)|NP
-  semantics: \E Q1 M Q2 F1 F2. Q2(\y.True,\y.Q1(\x.((E(y) = x) & M(\G1 G2.G1(x),\w.True,\w.True) & F1(x)), F2))
+  # semantics: \E Q1 M Q2 F1 F2. Q2(\y.True,\y.Q1(\x.((E(y) = x) & M(\G1 G2.G1(x),\w.True,\w.True) & F1(x)), F2))
+  semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.exists e.((E(e)= y) & (Subj(e) = x) & F1(x)))), F2)
   coq_type: Event -> Entity -> Prop
   # semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.exists e.(E(e) & (Subj(e) = x) & (Dat(e) = y) & F1(x)))), F2)
   # coq_type: Event -> Prop
