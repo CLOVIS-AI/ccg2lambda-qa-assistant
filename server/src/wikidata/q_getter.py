@@ -5,8 +5,6 @@ import wikipedia
 # suppresses warning of other libs (that we didn't raise ourselves)
 import warnings
 # bot using wikidata API
-from pywikibot import pagegenerators
-import pywikibot
 
 
 def get_q_number(wikiarticle):
@@ -15,8 +13,7 @@ def get_q_number(wikiarticle):
         'language': 'en',
         'type': 'item',
         'search': wikiarticle,
-        'format': 'json',
-        'where': 'nearmatch'
+        'format': 'json'
 
     }).json()
 
@@ -47,11 +44,6 @@ def wikipedia_suggestion(words):
     return page.title
 
 
-def get_pages(words):
-    site = pywikibot.page.PropertyPage()
-    return resp
-
-
 def get_all_q_codes(words):
     title = wikipedia_suggestion(words)
     answer = get_q_number(wikiarticle=title)
@@ -64,4 +56,4 @@ def get_all_q_codes(words):
 
 
 # get_all_q_codes(words="Aristude Briand")
-print(get_pages("Aristude Briand"))
+print(get_all_q_codes("Aristote Briand"))
