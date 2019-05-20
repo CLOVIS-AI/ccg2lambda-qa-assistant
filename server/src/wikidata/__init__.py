@@ -3,3 +3,6 @@
 #   - searching a page through Wikipedia
 #   - fetching this page's html
 #   - fetching the wikidata item label in it
+from qalogging import verbose
+
+verbose("Loaded package 'wikidata'")

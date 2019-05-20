@@ -1,82 +1,92 @@
+###########################################################
+#                                                         #
+#      Contains the paths to the different external       #
+#      tools used by this project.                        #
+#                                                         #
+###########################################################
+
 import os
 
-PATH_TO_CCG2LAMBDA = "../../../ccg2lambda"
-PATH_TO_CANDC = "/app/parsers/candc-1.00"
-PATH_TO_TMP = "tmp"
-TEMPLATE = PATH_TO_CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
+# Note that the paths written here are for initialization
+# purpose only, and should not be used as-is; when the
+# package is loaded they are updated to follow the real
+# paths of the tools.
+from qalogging import verbose, info, warning, error
+
+PROJECT_ROOT: str = os.path.abspath("../../")
+SERVER_ROOT: str = PROJECT_ROOT + "/server"
+TEMPLATE: str = SERVER_ROOT + "/res/parser/semantic_templates_en_qa.yaml"
+MODEL: str = SERVER_ROOT + "/model"
+
 PATHS_READY = False
 
 
-def test_directory(path):
+def test_directory(path, allow_empty=False):
+    """
+    Checks if a directory exists, and is not empty.
+    :param allow_empty: Report a success even if the directory is empty
+    :param path: The path to that directory (absolute or relative)
+    :return: True if the directory exists & is not empty, False otherwise.
+    """
     path = os.path.abspath(path)
     if os.path.isdir(path):
         if len(os.listdir(path)) > 0:
-            print("Found [", path, "], and it is not empty.")
+            verbose("Found [", path, "], and it is not empty.")
             return True
         else:
-            print("Found [", path, "], but it is empty!")
-            return False
+            verbose("Found [", path, "], but it is empty!")
+            return allow_empty
     else:
-        print("Directory not found [", path, "]")
+        warning("Directory not found [", path, "]")
         return False
 
 
 def test_file(path):
+    """
+    Checks if a file exists.
+    :param path: The path to that file (absolute or relative)
+    :return: True if the file exists, False otherwise.
+    """
     path = os.path.abspath(path)
     if os.path.isfile(path):
-        print("Found file [", path, "]")
+        verbose("Found file [", path, "]")
         return True
     else:
-        print("File not found [", path, "]")
+        warning("File not found [", path, "]")
         return False
 
 
 def init_paths():
-    global PATHS_READY, PATH_TO_CANDC, PATH_TO_CCG2LAMBDA, TEMPLATE
+    """
+    Searches for the tools in known location and finds their paths,
+    or reports if they are missing.
+    Searches in the submodule or in a Docker container.
+    """
+    global PATHS_READY, TEMPLATE
     if PATHS_READY:
-        print("Paths are already ready; exiting init_paths function")
+        verbose("Paths are already ready; exiting init_paths function")
         return
 
-    print("\nSearching for the tools...")
-    print("Working directory is [", os.getcwd(), "]")
-    if test_file(PATH_TO_CCG2LAMBDA + "/README.md"):
-        print(" › ccg2lambda is installed correctly (submodule)")
+    info("\nSearching for the tools...")
+    verbose("Working directory is [", os.getcwd(), "]")
+    verbose("Project root is [", PROJECT_ROOT, "]")
+    verbose("Server project root is [", SERVER_ROOT, "]")
 
-        if test_directory(PATH_TO_CCG2LAMBDA + "/candc-1.00"):
-            print(" › C&C is installed correctly")
-            PATH_TO_CANDC = PATH_TO_CCG2LAMBDA + "/candc-1.00"
-        else:
-            print(" › C&C is not installed")
-            raise Exception("Couldn't find C&C. Since you installed ccg2lambda as a submodule, "
-                            "check that you installed C&C correctly according to ccg2lambda's documentation.")
-
-        if test_file(TEMPLATE):
-            print(" › Found the template file")
-        else:
-            print(" › Template file not found")
-            raise Exception("Couldn't find the template file.")
+    if test_directory(PROJECT_ROOT):
+        verbose(" › Found the project root")
     else:
-        print(" › ccg2lambda is not installed as a submodule")
+        error(" › Cannot find the project root!")
 
-        if test_directory("/app"):
-            print(" › ccg2lambda is installed correctly (Docker)")
-            PATH_TO_CCG2LAMBDA = "/app"
-        else:
-            print(" › ccg2lambda is not installed as a Docker directory")
-            raise Exception("Couldn't find ccg2lambda. Tried submodule installation & Docker installation.")
+    if test_directory(SERVER_ROOT):
+        verbose(" › Found the server root")
+    else:
+        error(" › Cannot find the server root!")
 
-        if test_directory("/app/parsers/candc-1.00"):
-            print(" › C&C is installed correctly")
-            PATH_TO_CANDC = "/app/parsers/candc-1.00"
-        else:
-            print(" › C&C is not installed")
-            raise Exception("Couldn't find C&C. Expected to find it in the Docker container.")
+    if test_file(TEMPLATE):
+        verbose(" › Found the template file")
+    else:
+        error(" › Template file not found")
+        raise Exception("Couldn't find the template file.")
 
-        if test_file(PATH_TO_CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"):
-            print(" › Template found")
-            TEMPLATE = PATH_TO_CCG2LAMBDA + "/en/semantic_templates_en_event.yaml"
-        else:
-            print(" › Template not found")
-            raise Exception("Couldn't find the template.")
-    print("Done initializing.\n")
+    verbose("Done initializing paths.\n")
     PATHS_READY = True

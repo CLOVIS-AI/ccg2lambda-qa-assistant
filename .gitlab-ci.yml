@@ -9,16 +9,8 @@ variables:
 test-server:
   stage: test
   image: masashiy/ccg2lambda
-  before_script:
-    - coqc ccg2lambda/coqlib.v
-    - cd server
-    - python3 -m venv venv/
-    - source venv/bin/activate
-    - pip install -r requirements.txt
   script:
-    - cd src
-    - python3 -m unittest discover
-    - pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 --benchmark .
+    - make local
   tags:
     - docker
     - debian
