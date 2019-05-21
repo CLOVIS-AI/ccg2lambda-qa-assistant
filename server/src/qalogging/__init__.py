@@ -40,11 +40,11 @@ def info(*args) -> None:
 
 
 def announce(*args) -> None:
-    print('\x1b[0;32;40m', *args, '\x1b[0m')
+    print('\x1b[32m', *args, '\x1b[0m')
 
 
 def warning(*args) -> None:
-    print('\x1b[0;33;40m', *args, '\x1b[0m')
+    print('\x1b[33m', *args, '\x1b[0m')
 
 
 def error(*args) -> None:
@@ -53,7 +53,7 @@ def error(*args) -> None:
 
 def verbose(*args) -> None:
     if PRINT_VERBOSE:
-        print('\x1b[1;30;40m', *args, '\x1b[0m')
+        print('\x1b[1;90m', *args, '\x1b[0m')
 
 
 verbose("Loaded package 'qalogging'")
