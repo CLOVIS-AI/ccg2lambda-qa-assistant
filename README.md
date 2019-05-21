@@ -79,8 +79,8 @@ In particular, the Makefile is crafted to not do useless steps: all the download
 
 This project is split into multiple subprojects:
 
- - `server` is the main project. [More information](server/README.md)
+ - `server` is the main project. It also includes a simple Command Line Interface (CLI) for the project. [More information](server/README.md)
  - `google-assistant` handles the integration of the project into the Google Assistant. [More information](google-assistant/README.md)
  - `web` handles the integration of the project with a web interface. [More information](web/README.md)
 
-For additionnal information on how to setup the different subprojects, read their README.md (linked above).
+For additional information on how to setup the different subprojects, read their README.md (linked above).
