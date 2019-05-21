@@ -80,3 +80,8 @@ src/wikidata/dictionary.txt
 # DepCCG models
 model/
 model.tar.gz
+
+# Visualisation files
+src/sentences.sem.xml
+src/sentences.html
+src/sentences.xml

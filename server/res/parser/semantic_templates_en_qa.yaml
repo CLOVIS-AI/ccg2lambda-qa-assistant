@@ -163,6 +163,13 @@
   semantics: \Q1 V2 Q2 K. V2(Q2,Q1,K)
   child0_category: NP
 
+## Unary rules for QA ##
+
+## existential type-raising from N to NP
+- category: NP
+  rule: lex
+  semantics: \E x.E(x)
+  child0_entity: I-GPE
 
 ##### Binary lexical rules #####
 
@@ -785,24 +792,43 @@
 
 ## nominal modifiers
 - category: (NP|NP)|NP
-  semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.exists e.(E(e,y) & (Subj(e) = x) & F1(x)))), F2)
+  # semantics: \E Q1 M Q2 F1 F2. Q2(\y.True,\y.Q1(\x.((E(y) = x) & M(\G1 G2.G1(x),\w.True,\w.True) & F1(x)), F2))
+  semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.exists e.((E(e)= y) & (Subj(e) = x) & F1(x)))), F2)
   coq_type: Event -> Entity -> Prop
   # semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.exists e.(E(e) & (Subj(e) = x) & (Dat(e) = y) & F1(x)))), F2)
   # coq_type: Event -> Prop
   # semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.(x = y)) & F1(x)), F2)
 
 # For QA:
-# - category: (NP|NP)|NP
-#   semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.(x = y)) & F1(x)), F2)
-#   surf: of
 
-# - category: (NP|NP)|NP
-#   semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y.(x = y)) & F1(x)), F2)
-#   surf: for
+# Prepositions
+- category: ((S|NP)|(S|NP))|NP
+  semantics: \E Q1 M Q2 F1 F2. Q2(\y.True,\y.Q1(\x.((E(y) = x) & M(\G1 G2.G1(x),\w.True,\w.True) & F1(x)), F2))
+  pos: IN
 
-# - category: ((NP|NP)|(NP|NP))|NP
-#   semantics: \E Q1 M Q2 F1 F2. Q2(\y.True,\y.Q1(\x.((x = y) & M(\G1 G2.G1(x),\w.True,\w.True) & F1(x)), F2))
-#   surf: of
+# Conjunction
+- category: (NP|NP)|NP
+  semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \y. exists e.((E(e) = y) & (Subj(e) = x) )) & F1(x)), F2)
+  # semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \e.(E(e) = x)) & F1(x)), F2)
+  pos: IN
+
+# Conjunction with POS tags recognition ######################################################################
+
+- category: (NP|NP)|NP
+  semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(x) & F1(x) & E(x)), F2)
+  pos: IN
+  entity: I-GPE
+
+# Adjectives concat
+
+- category: N
+  semantics: \E1 E2 x.(E1(\w.True, x) & E2(x))
+  child0_pos: JJ
+  child1_pos: NN
+  rule: fa
+
+
+# end QA block
 
 - category: PP|NP
   semantics: \E Q e. Q(\x.True, \x.E(e,x))
@@ -836,7 +862,8 @@
   coq_type: Event -> Prop
 
 - category: ((S|NP)|(S|NP))|NP
-  semantics: \E Q1 V Q2 K. V(Q2, \e.Q1(\x.True, \x.(E(e,x) & K(e))))
+  # semantics: \E Q1 V Q2 K. V(Q2, \e.Q1(\x.True, \x.(E(e,x) & K(e))))
+  semantics: \E Q1 V Q2 K. V(Q2, \e.Q1(\x.True, \x.((E(e) = x) & K(e))))
   coq_type: Event -> Entity -> Prop
   # plain semantics
   # semantics: \E Q1 V Q2 K. Q2(\x.True, \x.Q1(\y.True, \y.(V(\F1 F2.F2(x), \w.True) & E(x,y))))
@@ -1044,13 +1071,24 @@
 ### For QA
 
 - category: S|(S|NP)
-  semantics: \E V K. exists x. V(\G1 G2. (what(x) & G2(x)), \e.True)
+  semantics: \E V K. exists x. V(\G1 G2. (what(x) & QM(x) & G2(x)), \e.True)
   base: what
 
 - category: S|(S|NP)
-  semantics: \E V K. exists x. V(\G1 G2. (who(x) & G2(x)), \e.True)
+  semantics: \E V K. exists x. V(\G1 G2. (who(x) & QM(x) & G2(x)), \e.True)
   base: who
 
+- category: S|S
+  semantics: \E V K. exists x. V(\G1. (when(x) & QM(x) & (moment(G1) = x)))
+  base: when
+
+- category: S|S
+  semantics: \E V K. exists x. V(\G1. (where(x) & QM(x) & (loc(G1) = x)))
+  base: where
+
+- category: S|(S|NP)
+  semantics: \E V K. exists x. V(\G1 G2. (which(x) & QM(x) & G2(x)), \e.True)
+  base: which
 
 ##### Templates for connectives #####
 
@@ -1218,14 +1256,82 @@
 
 ##### QA entries ######
 
+# Noun phrases like "the United States of America"
+- category: NP
+  semantics: \E F1 F2 F3. exists x. (F1(x) & F2(x) & F3(x) & country(x))
+  # semantics: \E x. (country(x) & E(x))
+  child0_entity: B-GPE
+  child0_pos: DT
+  rule: fa
+
+# More general Noun
 - category: N
-  semantics: \E x. (organization(x) & E(x))
-  entity: I-ORG
+  semantics: \E x. (country(x) & E(x))
+  entity: B-GPE
+
+#- category: N
+#  semantics: \E x. (country(x) & E(x))
+#  entity: I-GPE
+
+- category: N
+  semantics: \E x. (location(x) & E(x))
+  entity: B-LOC
+
+- category: N
+  semantics: \E x. (location(x) & E(x))
+  entity: I-LOC
+
+- category: N
+  semantics: \E x. (group(x) & E(x))
+  entity: B-NORP
+
+- category: N
+  semantics: \E x. (group(x) & E(x))
+  entity: I-NORP
+
+- category: N
+  semantics: \E x. (event(x) & E(x))
+  entity: B-EVENT
+
+- category: N
+  semantics: \E x. (event(x) & E(x))
+  entity: I-EVENT
+
+- category: N
+  semantics: \E x. (art(x) & E(x))
+  entity: B-WORK_OF_ART
+
+- category: N
+  semantics: \E x. (art(x) & E(x))
+  entity: I-WORK_OF_ART
+
+- category: JJ
+  semantics: \E x. (ordinal(x) & E(x))
+  entity: B-ORDINAL
+
+- category: JJ
+  semantics: \E x. (ordinal(x) & E(x))
+  entity: I-ORDINAL
 
 - category: N
   semantics: \E x. (year(x) & E(x))
-  entity: I-DAT
+  entity: B-DATE
 
+- category: N
+  semantics: \E x. (people(x) & E(x))
+  entity: B-PERSON
+
+- category: N
+  semantics: \E x. (people(x) & E(x))
+  entity: I-PERSON
+
+- category: N
+  semantics: \E x. (language(x) & E(x))
+  entity: B-LANGUAGE
+
+- category: N
+  semantics: \E x. (language(x) & E(x))
+  entity: I-LANGUAGE
 
 ##### Lexical entries for NPs #####
 
