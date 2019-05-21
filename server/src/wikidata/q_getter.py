@@ -3,15 +3,19 @@ from requests import get
 import wikipedia
 # suppresses warning of other libs (that we didn't raise ourselves)
 import warnings
-# bot using wikidata API
 
 
-def get_q_number(wikiarticle):
+def get_q_number(item: str):
+    """
+    gets a list of objects found on Wikidata based on a searched string.
+    :param item: string of the search
+    :return: json containing the result
+    """
     resp = get('https://www.wikidata.org/w/api.php', {
         'action': 'wbsearchentities',
         'language': 'en',
         'type': 'item',
-        'search': wikiarticle,
+        'search': item,
         'format': 'json'
 
     }).json()
@@ -19,9 +23,26 @@ def get_q_number(wikiarticle):
     return resp
 
 
-def wikipedia_suggestion(words):
+def get_p_number(property: str):
     """
-    returns url of wikipedia page resulting of a search on words var
+
+    :param property:
+    :return:
+    """
+    resp = get('https://www.wikidata.org/w/api.php',{
+        'action': 'wbsearchentities',
+        'language': 'en',
+        'type': 'property',
+        'search': property,
+        'format': 'json'
+    }).json()
+
+    return resp
+
+
+def wikipedia_suggestion(words: str):
+    """
+    returns title of wikipedia page resulting of a search on words var
     :param words: the searched words
     :return: wikipedia page URL, None if not found
     """
@@ -43,9 +64,15 @@ def wikipedia_suggestion(words):
     return page.title
 
 
-def get_all_q_codes(words):
+def get_all_q_codes(words: str):
+    """
+    gets the list of codes relevant to the searched words passed in parameters.
+    :param words: string of searched words
+    :return: list of q-codes with, for each, a short description of the linked page.
+    """
+    answer = get_q_number(item=words)
     title = wikipedia_suggestion(words)
-    answer = get_q_number(wikiarticle=title)
+    answer = get_q_number(item=title)
     for string in answer['search']:
         try:
             desc = string['description']
@@ -54,5 +81,37 @@ def get_all_q_codes(words):
         print(string['id'] + " : " + desc)
 
 
+def get_tests(item: str):
+    resp = get('https://www.wikidata.org/w/api.php', {
+        'action': 'query',
+        'list': 'search',
+        'srsearch': item,
+        'format': 'json'
+
+    }).json()
+
+    return resp
+
+
+def get_q_number2(item: str):
+    """
+
+    :param item:
+    :return:
+    """
+    resp = get('https://www.wikidata.org/w/api.php',{
+        'action': 'wbgetentities',
+        'languages': 'en',
+        'ids': item,
+        'props': 'claims',
+        'format': 'json'
+    }).json()
+######### TODO: étudier le json (on récupère tous les claims) pour voir comment itérer dessus. Fonction pour itérer dessus?
+    return resp
+
 # get_all_q_codes(words="Aristude Briand")
-print(get_all_q_codes("Aristote Briand"))
+# get_all_q_codes("The U.S.")
+# print(get_p_number("location"))
+
+
+print(get_q_number2("Q30"))
