@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from conversion import init_paths
 from .converter import *
+from qalogging import verbose
 
 
 class TestConvertCcg2lambda(TestCase):
@@ -13,4 +14,4 @@ class TestConvertCcg2lambda(TestCase):
         test_questions.close()
 
     def test_convert(self):
-        [print(ast) for ast in convert(self.sentences, output_file = True)]
+        [verbose(ast) for ast in convert(self.sentences, output_file = True)]
