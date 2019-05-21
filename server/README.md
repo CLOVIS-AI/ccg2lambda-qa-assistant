@@ -40,3 +40,21 @@ Using such endpoint however requires some knowledge about its way of functionnin
  - Wikidata offers a [Wikidata Query Service](https://query.wikidata.org/) that allows its users to try SPARQL queries on the Wikidata service.
  
 Although this lists the most basic data about Wikidata, please note that some information may be missing.
+
+## Use the Command Line Interface (CLI)
+
+A simple CLI is available, written in the files [server.py](src/server.py) and [client.py](src/client.py). It is important to call them from the right directory; for this reason we have added a Make task for both of them, in the project's Makefile.
+
+First, you will need to run the server in a terminal:
+
+        make server
+
+This will setup the project and start the server.
+
+Then, open a new terminal (without killing the server) and run:
+
+        make client
+
+This will start the client. You can now use the `?` (`help`) command to display the list of options.
+
+To close the server, you can press `CTRL+C`: it will detect it and close cleanly.
