@@ -1,7 +1,7 @@
 from xml.etree import ElementTree
 
 
-def visualize(tree: ElementTree, filename : str) -> None:
+def visualize(tree: ElementTree, filename: str) -> None:
     """
     Creates an XML file to be used
     :param tree: the root of the tree

@@ -14,4 +14,4 @@ class TestConvertCcg2lambda(TestCase):
         test_questions.close()
 
     def test_convert(self):
-        [verbose(ast) for ast in convert(self.sentences, output_file = True)]
+        [verbose(ast) for ast in convert(self.sentences, output_file=True)]
