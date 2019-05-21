@@ -15,4 +15,4 @@ test-server:
     - docker
     - debian
     - python
-  retry: 1
+  retry: 2
