@@ -801,12 +801,7 @@
 
 # For QA:
 
-#This line is redundant if the next one works
-- category: ((NP|NP)|(NP|NP))|NP
-  semantics: \E Q1 M Q2 F1 F2. Q2(\y.True,\y.Q1(\x.((E(y) = x) & M(\G1 G2.G1(x),\w.True,\w.True) & F1(x)), F2))
-  surf: of
-
-# Doesn't work #############
+# Prepositions
 - category: ((S|NP)|(S|NP))|NP
   semantics: \E Q1 M Q2 F1 F2. Q2(\y.True,\y.Q1(\x.((E(y) = x) & M(\G1 G2.G1(x),\w.True,\w.True) & F1(x)), F2))
   pos: IN
@@ -824,7 +819,7 @@
   pos: IN
   entity: I-GPE
 
-# Testing 
+# Adjectives concat
 
 - category: N
   semantics: \E1 E2 x.(E1(\w.True, x) & E2(x))
@@ -1261,10 +1256,18 @@
 
 ##### QA entries ######
 
+# Noun phrases like "the United States of America"
 - category: NP
   semantics: \E F1 F2 F3. exists x. (F1(x) & F2(x) & F3(x) & country(x))
   # semantics: \E x. (country(x) & E(x))
   child0_entity: B-GPE
+  child0_pos: DT
+  rule: fa
+
+# More general Noun
+- category: N
+  semantics: \E x. (country(x) & E(x))
+  entity: B-GPE
 
 #- category: N
 #  semantics: \E x. (country(x) & E(x))

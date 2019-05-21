@@ -65,7 +65,7 @@ def __drs_to_python(all_drs: List[List[str]]) -> List[Expression]:
     return [lexpr(drs) for sentence in all_drs for drs in sentence]
 
 
-def convert(sentences: List[str]) -> List[Expression]:
+def convert(sentences: List[str], output_file=False) -> List[Expression]:
     """
     Converts a list of questions to an Abstract Syntax Tree (AST), using:
      - spaCy to annotate each word with its grammatical class,
@@ -83,13 +83,15 @@ def convert(sentences: List[str]) -> List[Expression]:
     announce("Beginning conversion of", len(sentences), "sentences, the first one is [", sentences[0], "]")
     annotated_sentences, split_sentences = __annotate_spacy(sentences)
     ccg_of_each_sentence = __convert_to_ccg(split_sentences)
-    print(annotated_sentences)
     lambda_expressions = __ccg_to_lambda(ccg_of_each_sentence, annotated_sentences)
 
-    # visualisation.visualize(lambda_expressions, "sentences.xml")
-
     formulas = __lambda_to_drs(lambda_expressions)
-    visualisation.visualize(lambda_expressions, "sentences.sem.xml")
+
+    # Creates an XML file to be used
+    if output_file:
+        # Can be used in ccg2lambda python script visualize.py to output sentences.html to give better overview
+        visualisation.visualize(lambda_expressions, "sentences.sem.xml")
+
     expr = __drs_to_python(formulas)
     verbose("Conversion done.")
     return expr
