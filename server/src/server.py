@@ -8,8 +8,7 @@ from network.client import Client
 from network.server import Server
 from qalogging import announce, set_client, set_verbose, verbose, error, warning, info
 from time import sleep
-
-set_verbose(True)
+from wikidata.ask import set_ask_function
 
 user_choice = None
 
@@ -79,4 +78,6 @@ def main():
     # The above method is blocking: the code never reaches this point
 
 
+set_verbose(True)
+set_ask_function(ask_client)
 main()
