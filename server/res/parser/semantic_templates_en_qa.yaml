@@ -163,7 +163,7 @@
   semantics: \Q1 V2 Q2 K. V2(Q2,Q1,K)
   child0_category: NP
 
-## Unary rules for QA ##
+#### Unary rules for QA ####
 
 ## existential type-raising from N to NP
 - category: NP
@@ -197,6 +197,25 @@
 - category: N|N
   rule: conj
   semantics: \L F1 F2 x. (F1(x) & F2(x))
+
+#### For QA #####
+
+- category: N|N
+  rule: conj
+  semantics: \E Q1 Q2 x z. (E(\y.Q1(y),\y.Q2(y), z, \y.True, x))
+  #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
+  child0_surf: "and"
+
+- category: N
+  rule: ba
+  semantics: \F1 F2 x.F2(\y.F1(y), \y.True, x) 
+  child1_child0_surf: "and"
+
+#### end QA block ####
+
+#- category: N|N
+#  rule: conj
+#  semantics: \L F1 F2 x. (F1(x) & F2(x))
 
 - category: PP|PP
   rule: conj
@@ -656,7 +675,7 @@
 
 ## Pronouns
 - category: NP
-  semantics: \E F1 F2. exists x. ((x = E) & F1(x) & F2(x))
+  semantics: \E F1 F2. exists x. (E(x) & F1(x) & F2(x))
   pos: PRP
 
 - category: NP|NP
@@ -759,7 +778,7 @@
   pos: VBN
 
 - category: (N|N)|NP
-  semantics: \E Q F x. Q(\y.True, \y.(E(x,y) & F(x)))
+  semantics: \E Q F x. Q(\y.True, \y.(exists e.((E(e) = y) & (Subj(e) = x) & F(x))))
   coq_type: Entity -> Entity -> Prop
 
 - category: (NP|NP)|N
@@ -1191,6 +1210,8 @@
   coq_type: Prop -> Prop
   # semantics: \E V Q K. V(Q, \e.(E(e) & K(e))) # flat semantics
   # coq_type: Event -> Prop
+
+# Changes for QA
 
 - category: (S|(S|NP))|NP
   semantics: \E Q V K. Q(\x.True, \x.V(\F1 F2.E(F2(x)),K)) # modal sentential operator
@@ -1697,7 +1718,9 @@
 ##### Connectives #####
 
 - category: conj
-  semantics: \E X. X
+  semantics: \E Q1 Q2 x y z.(E(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
+  #semantics: \E Q1 Q2 x y z.(exists x.(E(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x)))))
+  #semantics: \E X. X
   surf: "and"
 
 - category: (S|S)|S

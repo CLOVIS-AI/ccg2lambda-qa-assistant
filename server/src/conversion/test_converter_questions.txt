@@ -3,18 +3,13 @@ Who is the president of the USA ?
 Who is John Watson
 Who is John Watson ?
 John Watson is who ?
-How is John Watson
 How is John Watson ?
 Is my name John Watson ?
 My name is John Watson
 Gaetan is John Watson
 Cats are green but dogs are blue
-Can be cats green but dogs blue ?
-How many dogs were in my house in 2014 ?
 What do I want to eat for dinner ?
-Are all the dogs green ?
 Is my brick a real brick ?
-My cat is your cat.
 Is my cat your cat ?
 Is your cat a cat ?
 The son of the daugther of my grand-mother is me.
@@ -33,3 +28,11 @@ What is the name of the first river in chinese ?
 Who wrote Romeo and Juliet ?
 Who is the real president of the USA ?
 Who lives in USA ?
+The quick brown fox jumps over the lazy dog
+Where does Barack Obama live ?
+Where did you go ?
+Who did the Harlem shake ?
+What can a bird do ?
+Which pie did you ate ?
+What could you do ?
+Which president of the United States went to Hawaii in 2019 then met the French president of that time ?
