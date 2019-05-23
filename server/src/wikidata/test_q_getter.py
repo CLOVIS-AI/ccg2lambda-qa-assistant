@@ -21,5 +21,3 @@ class TestQGetter(unittest.TestCase):
 
         # Searches with a non existing word
         self.assertFalse(search_q_codes("erioereoiuzo", expected_result))
-
-

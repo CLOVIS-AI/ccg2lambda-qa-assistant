@@ -122,4 +122,3 @@ def __get_q_number_from_word(search: str):
     }).json()
 
     return resp
-
