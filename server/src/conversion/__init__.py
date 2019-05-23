@@ -16,6 +16,8 @@ from qalogging import verbose
 
 init_paths()
 
+verbose('Loading depccg...')
+
 depccg_options = dict(
     # A list of binary rules
     # By default: depccg.combinator.en_default_binary_rules
