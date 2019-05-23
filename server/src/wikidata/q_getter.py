@@ -12,44 +12,29 @@ from requests import get
 import wikipedia
 # suppresses warning of other libs (that we didn't raise ourselves)
 import warnings
+from qalogging import verbose, error
+from typing import List
 
 
-def get_q_number(item: str):
+def __get_wikidata_code(searched_words: str, object_type: str):
     """
-    gets a list of objects found on Wikidata based on a searched string.
-    :param item: string of the search
-    :return: json containing the result
+    Gets a list of objects found on Wikidata based on a searched string.
+    :param searched_words: string of the search
+    :param object_type: string reprensentif the type of the search. Must be either 'item' or 'property'
+    :return: json (inside a string) containing the result of the query
     """
     resp = get('https://www.wikidata.org/w/api.php', {
         'action': 'wbsearchentities',
         'language': 'en',
-        'type': 'item',
-        'search': item,
-        'format': 'json'
-
-    }).json()
-
-    return resp
-
-
-def get_p_number(search: str):
-    """
-
-    :param search:
-    :return:
-    """
-    resp = get('https://www.wikidata.org/w/api.php',{
-        'action': 'wbsearchentities',
-        'language': 'en',
-        'type': 'property',
-        'search': search,
+        'type': object_type,
+        'search': searched_words,
         'format': 'json'
     }).json()
 
     return resp
 
 
-def wikipedia_suggestion(words: str):
+def __wikipedia_suggestion(words: str):
     """
     returns title of wikipedia page resulting of a search on words var
     :param words: the searched words
@@ -66,44 +51,71 @@ def wikipedia_suggestion(words: str):
         try:
             suggestion = wikipedia.suggest(words)
             page = wikipedia.page(suggestion)
-        except wikipedia.exceptions.PageError:
-            return "[ERROR]: \"" + words + "\" does not match any pages. Try another name!"
+        except (wikipedia.exceptions.PageError, IndexError, ValueError):
+            return "[ERROR]: Item \"" + words + "\" does not match any pages. Try another id!"
 
-    print("page = " + page.title)
+    verbose("Wikipedia page found: " + page.title)
     return page.title
 
 
-def get_all_q_codes(words: str):
+def get_all_q_codes(words: str) -> List:
     """
-    gets the list of codes relevant to the searched words passed in parameters.
+    gets the list of items codes relevant to the searched words passed in parameters.
     :param words: string of searched words
     :return: list of q-codes with, for each, a short description of the linked page.
     """
-    title = wikipedia_suggestion(words)
+    # searches only on wikipedia network for now, as it is *usually* more efficient than Wikidata.
+    # Might propose later to the user to choose between Wikipedia *and* Wikidata results.
+    title = __wikipedia_suggestion(words)
+    items = []
     if not title.startswith("[ERROR]"):
-        answer = get_q_number(item=title)
+        answer = __get_wikidata_code(searched_words=title, object_type="item")
         for string in answer['search']:
             try:
                 desc = string['description']
             except KeyError:
                 desc = "No description available"
-            print(string['id'] + " : " + desc)
+            items.append((string['id'], string['title'], desc, string['url']))
+        return items
     else:
-        print(title)
+        error(title)
+        return items
+
+
+def get_all_p_codes(words: str) -> List:
+    """
+    gets the list of properties codes relevant to the searched words passed in parameters.
+    :param words: string of searched words
+    :return: list of p-codes with, for each, a short description of the linked page.
+    """
+    answer = __get_wikidata_code(searched_words=words, object_type="property")
+    properties = []
+    for string in answer['search']:
+        try:
+            desc = string['description']
+        except KeyError:
+            desc = "No description available"
+        properties.append((string['id'], string['title'], desc, string['url']))
+
+    if not properties:
+        error("[ERROR]: Property \"" + words + "\" does not match any pages. Try another id!")
+        return properties
+    else:
+        return properties
 
 
 @DeprecationWarning
-def get_q_number_from_word(item: str):
+def __get_q_number_from_word(search: str):
     """
     Currently unused function. Kept in order to have the key workds of the action wbgetentities
-    :param item:
+    :param search:
     :return:
     """
     resp = get('https://www.wikidata.org/w/api.php', {
         'action': 'wbgetentities',
         'languages': 'en',
         'sites': 'enwiki',
-        'titles': item,
+        'titles': search,
         'props': 'info',
         'normalize': '1',
         'format': 'json'
@@ -111,10 +123,3 @@ def get_q_number_from_word(item: str):
 
     return resp
 
-# get_all_q_codes(words="Aristude Briand")
-get_all_q_codes("Bertrand")
-# print(get_p_number("location"))
-
-
-# print(get_q_number2("Q30"))
-# print(get_q_number_from_word("homme"))

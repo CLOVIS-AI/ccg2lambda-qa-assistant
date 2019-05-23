@@ -1,41 +1,25 @@
-from unittest import TestCase
-from wikidata.q_getter import wikipedia_suggestion
-from wikidata.q_getter import get_all_q_codes
+import unittest
+from wikidata.q_getter import get_all_q_codes, get_all_p_codes
 
 
-class TestWikiSearcher(TestCase):
-    # will take some time
-    def test_search_wikipedia(self):
-        # only one result possible
-        searched_words = "Aristide Briand"
-        self.assertEqual("https://en.wikipedia.org/wiki/Aristide_Briand", wikipedia_suggestion(searched_words))
+def search_q_codes(words: str, expected_result: str) -> bool:
+    result_list = get_all_q_codes(words)
+    for result in result_list:
+        if result[1] == expected_result:
+            return True
+    return False
 
-        # several results possible, picks the first available
-        searched_words = "New York"
-        self.assertEqual("https://en.wikipedia.org/wiki/New_York_City", wikipedia_suggestion(searched_words))
 
-        # use of suggestion provided by Wikipedia (to correct minor typing errors)
-        searched_words = "Aristude Briand"
-        self.assertEqual("https://en.wikipedia.org/wiki/Aristide_Briand", wikipedia_suggestion(searched_words))
+class TestQGetter(unittest.TestCase):
+    def test_get_all_q_codes(self):
+        expected_result = "Q179888"
+        # Searches with a well-written name
+        self.assertTrue(search_q_codes("Aristide Briand", expected_result))
 
-        # nonsense with no result
-        searched_words = "erroeroeoreoreorer"
-        expected_err_msg = "\"" + searched_words + "\" does not match any pages. Try another id!"
-        self.assertEqual(expected_err_msg, wikipedia_suggestion(searched_words))
+        # Searches with a typo error
+        self.assertTrue(search_q_codes("Aristude Briand", expected_result))
 
-    # admits that search_wikipedia works.
-    def test_search_wikidata_label(self):
-        # search for items (q-codes in wikidata)
-        searched_words = "Aristide Briand"
-        ar_briand_q_code = "Q179888"
-        self.assertEqual(ar_briand_q_code, search_wikidata_q_label(searched_words))
+        # Searches with a non existing word
+        self.assertFalse(search_q_codes("erioereoiuzo", expected_result))
 
-        searched_words = "Aristude Briand"
-        self.assertEqual(ar_briand_q_code, search_wikidata_q_label(searched_words))
 
-        searched_words = "New York"
-        self.assertEqual("Q60", search_wikidata_q_label(searched_words))
-
-        # should return no result
-        searched_words = "erroeroereoreorero"
-        self.assertEqual(None, search_wikidata_q_label(searched_words))
