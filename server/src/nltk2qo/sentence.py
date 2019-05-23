@@ -3,7 +3,7 @@ from typing import List
 from nltk2qo.entity import Entity
 from nltk2qo.event import Event
 from nltk2qo.variable import Variable
-from qalogging import verbose
+from qalogging import verbose, info
 
 
 class Sentence:
@@ -69,12 +69,7 @@ class Sentence:
         else:
             e.variables.append((link_name, self.__get_variable(variable)))
             verbose(
-                " › New link from [",
-                event,
-                "] to [",
-                variable,
-                "]:",
-                link_name)
+                " › New link [", link_name, "] from [", event, "] to [", variable, "]")
 
     def get_entity(self, id_: str) -> Entity:
         """
@@ -120,18 +115,15 @@ class Sentence:
         """
         Graphically display this Sentence, to make it easier to see what's going on.
         """
-        verbose(" › Sentence:")
-        verbose("  " * 1 + " events:")
+        info(" events:")
         for e in self.events:
-            verbose("  " * 2 + " - " + e.id + ":",
-                    "[ tags:", *[t for t in e.tags], "]")
-            verbose("  " * 4 + " subject:", e.subject.id,
-                    "[ tags:", *[t for t in e.subject.tags], "]")
-            verbose("  " * 4 + " variables:")
+            info(" - " + e.id + ":",
+                 "[ tags:", *[t for t in e.tags], "]")
+            info("   subject:", e.subject.id,
+                 "[ tags:", *[t for t in e.subject.tags], "]")
+            info("   variables:")
             for v in e.variables:
-                verbose("  " *
-                        4 +
-                        " - " +
-                        v[0] +
-                        ":", v[1].id, "[ tags:", *
-                        [t for t in v[1].tags], "]")
+                info("   - " +
+                     v[0] +
+                     ":", v[1].id, "[ tags:", *
+                     [t for t in v[1].tags], "]")

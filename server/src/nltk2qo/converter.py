@@ -26,9 +26,9 @@ def nltk_to_query_objects(nltk_output: List[Expression]) -> List[Sentence]:
     :param nltk_output: The output from the ccg2lambda pipeline.
     :return: A list of Sentences, as Query Objects.
     """
-    info("Beginning conversion to Query Objects...")
+    info(" › nltk2qo: nltk Python Objects 🠦 Query Objects")
     sentences = [__parse(sentence) for sentence in nltk_output]
 
-    info("Conversion to Query Objects done.")
+    verbose("Conversion to Query Objects done.")
     # display some stats about the conversion
     return sentences
