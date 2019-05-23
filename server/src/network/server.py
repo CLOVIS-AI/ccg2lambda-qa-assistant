@@ -2,7 +2,7 @@ import atexit
 import socket
 from threading import Thread
 
-from qalogging import announce, warning, verbose, info
+from qalogging import announce, warning, verbose, info, error
 from .client import Client
 
 
@@ -50,10 +50,13 @@ class Server:
         Connects to a client.
         :param client: the client to connect to
         """
-
-        self.clients.append(client)
-        Client(self, client)
-        self.clients.remove(client)
+        c = Client(self, client)
+        self.clients.append(c)
+        verbose("Added", c, "to the list of connected clients.")
+        c.listen()
+        
+        self.clients.remove(c)
+        verbose("Removed", c, "from the list of connected clients.")
 
     def register_command(self, name: str, callback):
         """
@@ -76,4 +79,7 @@ class Server:
         info("Server: Disconnected.")
 
 
-server = Server(12800, 10)
+try:
+    server = Server(12800, 10)
+except OSError as e:
+    error("Cannot run the server.", e)
