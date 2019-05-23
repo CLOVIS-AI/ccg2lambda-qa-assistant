@@ -44,7 +44,7 @@ def choose(client, *args: str):
 
 # noinspection PyUnusedLocal
 def ast(client, ast_tree: str):
-    info('AST:', ast_tree)
+    verbose('AST:', ast_tree)
 
 
 # noinspection PyUnusedLocal
