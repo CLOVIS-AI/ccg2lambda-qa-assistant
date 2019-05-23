@@ -20,15 +20,18 @@ def request_sentence(sentence: str):
     client.run()
 
 
-def ast(client, ast):
+# noinspection PyUnusedLocal
+def ast(client, ast: str):
     info('AST:', ast)
 
 
+# noinspection PyUnusedLocal
 def server_info(client, *args: str):
     info(*args)
 
 
-def debug(client, msg):
+# noinspection PyUnusedLocal
+def debug(client, msg: str):
     if msg == 'received':
         info('The server has received the request and has started working on it...')
     else:
@@ -50,6 +53,7 @@ def main():
     print_help()
     while True:
         user = input("\nSend a request to the server: ")
+        # noinspection SpellCheckingInspection
         if user == "quit" or user == "q":
             break
         elif user == "help" or user == "h" or user == "?":
