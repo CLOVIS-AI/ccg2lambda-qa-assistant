@@ -99,7 +99,7 @@ def get_q_number2(item: str):
     :param item:
     :return:
     """
-    resp = get('https://www.wikidata.org/w/api.php',{
+    resp = get('https://www.wikidata.org/w/api.php', {
         'action': 'wbgetentities',
         'languages': 'en',
         'ids': item,
@@ -109,9 +109,29 @@ def get_q_number2(item: str):
 ######### TODO: étudier le json (on récupère tous les claims) pour voir comment itérer dessus. Fonction pour itérer dessus?
     return resp
 
+
+def get_q_number_from_word(item: str):
+    """
+
+    :param item:
+    :return:
+    """
+    resp = get('https://www.wikidata.org/w/api.php', {
+        'action': 'wbgetentities',
+        'languages': 'en',
+        'sites': 'enwiki',
+        'titles': item,
+        'props': 'info',
+        'normalize': '1',
+        'format': 'json'
+    }).json()
+
+    return resp
+
 # get_all_q_codes(words="Aristude Briand")
 # get_all_q_codes("The U.S.")
 # print(get_p_number("location"))
 
 
-print(get_q_number2("Q30"))
+# print(get_q_number2("Q30"))
+print(get_q_number_from_word("homme"))
