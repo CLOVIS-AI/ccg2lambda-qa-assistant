@@ -54,7 +54,7 @@ class Server:
         self.clients.append(c)
         verbose("Added", c, "to the list of connected clients.")
         c.listen()
-        
+
         self.clients.remove(c)
         verbose("Removed", c, "from the list of connected clients.")
 

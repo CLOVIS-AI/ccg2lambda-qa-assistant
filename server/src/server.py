@@ -25,9 +25,11 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
     elif len(options) == 1:
         warning('Asking a question with only one possible answer, the client will not be prompted.')
         return options[0][0]
-    
+
     from network.server import server
-    tmp = [str(i) + "|" + "|".join([o.replace('|', '~').replace(' ', '~') for o in options[i][1:4]]) for i in range(len(options))]
+    tmp = [str(i) + "|" + "|".join(
+        [o.replace('|', '~').replace(' ', '~') for o in options[i][1:4]]
+    ) for i in range(len(options))]
     verbose("I'm going to ask the client to choose between [", tmp, "]")
 
     if len(server.clients) == 0:
@@ -40,7 +42,7 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
     verbose("The question will be asked to client [", client, "]")
 
     client.send("choose", *tmp)
-    
+
     client.receive_message()
     info('The client chose [', user_choice, ']')
     user = int(user_choice)

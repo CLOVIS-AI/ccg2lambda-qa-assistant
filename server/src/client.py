@@ -25,25 +25,23 @@ def choose(client, *args: str):
     verbose('The server is asking:', *args)
     info('\nWhat did you mean?')
     options = [arg.replace('~', ' ').split('|') for arg in args]
-    
+
     for option in options:
         print(' › ' + option[0] + '\t' + option[1] + '\t' + option[2] + ' (' + option[3] + ')')
-    
-    user = ""
+
     while True:
-        user = input("Type the number of your choice: ")
-        
-        user = int(user)
-        if user >= 0 and user < len(options):
+        user: str = input("Type the number of your choice: ")
+
+        user_i: int = int(user)
+        if 0 <= user_i < len(options):
             break
-    
+
     client.send('choice', str(user))
-        
 
 
 # noinspection PyUnusedLocal
-def ast(client, ast: str):
-    info('AST:', ast)
+def ast(client, ast_tree: str):
+    info('AST:', ast_tree)
 
 
 # noinspection PyUnusedLocal
