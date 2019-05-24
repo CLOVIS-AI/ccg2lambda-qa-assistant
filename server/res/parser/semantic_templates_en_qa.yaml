@@ -200,12 +200,14 @@
 
 #### For QA #####
 
+## rules ##
 - category: N|N
   rule: conj
   semantics: \E Q1 Q2 x z. (E(\y.Q1(y),\y.Q2(y), z, \y.True, x))
   #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
   child0_surf: "and"
 
+## To link the "and" entity to the event
 - category: N
   rule: ba
   semantics: \F1 F2 x.F2(\y.F1(y), \y.True, x) 
