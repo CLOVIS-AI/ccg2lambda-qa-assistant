@@ -1,5 +1,5 @@
 import unittest
-from wikidata.q_getter import get_all_q_codes, get_all_p_codes
+from wikidata.wikicode_getter import get_all_q_codes, get_all_p_codes
 
 
 def search_q_codes(words: str, expected_result: str) -> bool:
@@ -18,7 +18,7 @@ def search_p_codes(words: str, expected_result: str) -> bool:
     return False
 
 
-class TestQGetter(unittest.TestCase):
+class TestWikicodeGetter(unittest.TestCase):
     def test_get_all_q_codes(self):
         expected_result = "Q179888"
         # Search with a well-written name
