@@ -95,13 +95,11 @@ def get_all_p_codes(words: str) -> List:
             desc = string['description']
         except KeyError:
             desc = "No description available"
-        properties.append((string['id'], string['title'], desc, string['url']))
+        properties.append((string['label'], string['id'], desc, string['url']))
 
     if not properties:
         error("[ERROR]: Property \"" + words + "\" does not match any pages. Try another id!")
-        return properties
-    else:
-        return properties
+    return properties
 
 
 @DeprecationWarning
