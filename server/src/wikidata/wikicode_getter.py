@@ -16,7 +16,7 @@ from qalogging import verbose, error
 from typing import List
 
 
-def __get_wikidata_code(searched_words: str, object_type: str):
+def __get_wikidata_code(searched_words: str, object_type: str) -> str:
     """
     Gets a list of objects found on Wikidata based on a searched string.
     :param searched_words: string of the search
@@ -34,7 +34,7 @@ def __get_wikidata_code(searched_words: str, object_type: str):
     return resp
 
 
-def __wikipedia_suggestion(words: str):
+def __wikipedia_suggestion(words: str) -> str:
     """
     returns title of wikipedia page resulting of a search on words var
     :param words: the searched words
@@ -100,23 +100,3 @@ def get_all_p_codes(words: str) -> List:
     if not properties:
         error("[ERROR]: Property \"" + words + "\" does not match any pages. Try another id!")
     return properties
-
-
-@DeprecationWarning
-def __get_q_number_from_word(search: str):
-    """
-    Currently unused function. Kept in order to have the key workds of the action wbgetentities
-    :param search:
-    :return:
-    """
-    resp = get('https://www.wikidata.org/w/api.php', {
-        'action': 'wbgetentities',
-        'languages': 'en',
-        'sites': 'enwiki',
-        'titles': search,
-        'props': 'info',
-        'normalize': '1',
-        'format': 'json'
-    }).json()
-
-    return resp
