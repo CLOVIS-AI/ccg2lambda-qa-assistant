@@ -2,7 +2,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 #
-# query wrapper to request to the source
+# query wrapper requesting to a specified endpoint.
 #
 
 
