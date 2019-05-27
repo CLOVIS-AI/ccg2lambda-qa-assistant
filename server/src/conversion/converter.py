@@ -26,33 +26,33 @@ def __annotate_spacy(sentences: List[str]) -> Tuple[List[List[Token]], List[List
 def __convert_to_ccg(sentences: List[List[str]]) -> List[List[Tuple[Tree]]]:
     """
     Converts a list of sentences (where each sentence is a list of words) to a list of CCG trees, where each tree
-    corresponds to the sentence with the same index in the given parameter, using DepCCG.
+    corresponds to the sentence with the same index in the given parameter, using depccg.
     :param sentences: A list of (sentence: list of words)
     :return: A list of CCG trees
     """
-    info(" › DepCCG: English 🠦 ccg")
+    info(" › depccg: English 🠦 CCG")
     return depccg_parser.parse_doc(sentences)
 
 
-def __ccg_to_jigg_xml(ccg: List[List[Tuple[Tree]]], annotated_sentences: List[List[Token]]) -> Any:
+def __ccg_to_jigg_xml(CCG: List[List[Tuple[Tree]]], annotated_sentences: List[List[Token]]) -> Any:
     """
     Converts a list of CCG trees to jigg xml format.
-    :param ccg: A list of CCG trees
+    :param CCG: A list of CCG trees
     :param annotated_sentences: A list of all annotated tokens in each of the given sentences
-    :return: A list of ccg trees in jigg xml.
+    :return: A list of CCG trees in jigg xml.
     """
-    info(" › ccg2lambda: ccg 🠦 ccg_jigg_xml")
-    return to_jigg_xml(ccg, annotated_sentences)
+    info(" › ccg2lambda: CCG 🠦 CCG in Jigg XML")
+    return to_jigg_xml(CCG, annotated_sentences)
 
 
 def __ccg_jigg_xml_to_lambda(ccg_trees_jigg_xml: Any) -> List[List[str]]:
     """
     Converts a list of CCG trees to a list of λ-expressions, using ccg2lambda and the TEMPLATE file specified in
     the paths.py file.
-    :param ccg_trees_jigg_xml: A list of ccg trees in jigg xml format.
+    :param ccg_trees_jigg_xml: A list of CCG trees in jigg xml format.
     :return: A list in which each element is the list of parsed semantic representations for each sentence.
     """
-    info(" › ccg2lambda: ccg jigg xml 🠦 λ")
+    info(" › ccg2lambda: CCG in Jigg XML 🠦 λ")
     return parse.parse(ccg_trees_jigg_xml, TEMPLATE)[1]
 
 
@@ -92,6 +92,7 @@ def convert(sentences: List[str], output_file=False) -> List[Expression]:
     # Creates an XML file to be used
     if output_file:
         # Can be used in ccg2lambda python script visualize.py to output sentences.html to give better overview
+        info("Creating visualisation in file sentences.sem.xml")
         visualisation.visualize(lambda_expressions, "sentences.sem.xml")
 
     expr = __lambda_to_python(formulas)
