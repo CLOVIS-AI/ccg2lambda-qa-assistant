@@ -42,7 +42,10 @@ class TestWikicodeGetter(unittest.TestCase):
         # Search with acronyms
         expected_result = "Q30"
         self.assertTrue(search_q_codes("usa", expected_result))
-        self.assertTrue(search_q_codes("United States of America", expected_result))
+        self.assertTrue(
+            search_q_codes(
+                "United States of America",
+                expected_result))
 
         # Search with a non existing word
         self.assertFalse(search_q_codes("erioereoiuzo", expected_result))

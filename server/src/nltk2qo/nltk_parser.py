@@ -19,7 +19,9 @@ def read_expressions(value: Expression, sentence: Sentence):
         read_expressions(value.first, sentence)
         read_expressions(value.second, sentence)
     elif t == ApplicationExpression:
-        sentence.add_tag(value.function.variable.name, value.argument.variable.name)
+        sentence.add_tag(
+            value.function.variable.name,
+            value.argument.variable.name)
     elif t == EqualityExpression:
         sentence.add_link(value.second.variable.name,
                           value.first.argument.variable.name,

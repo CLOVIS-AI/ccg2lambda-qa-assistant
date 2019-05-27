@@ -6,10 +6,12 @@ set_verbose(False)
 
 def request_sentence(sentence: str):
     if '§' in sentence:
-        warning('The character § is not allowed in requests, it will be replaced by underscores (_).')
+        warning(
+            'The character § is not allowed in requests, it will be replaced by underscores (_).')
         sentence.replace('§', '_')
     if '\n' in sentence:
-        warning('The character EOL (\\n) is not allowed in requests, it will be replaced by dots (.).')
+        warning(
+            'The character EOL (\\n) is not allowed in requests, it will be replaced by dots (.).')
         sentence.replace('\n', '.')
 
     client = CLIClient("127.0.0.1", 12800)
@@ -27,7 +29,8 @@ def choose(client, *args: str):
     options = [arg.replace('~', ' ').split('|') for arg in args]
 
     for option in options:
-        print(' › ' + option[0] + '\t' + option[1] + '\t' + option[2] + ' (' + option[3] + ')')
+        print(' › ' + option[0] + '\t' + option[1] +
+              '\t' + option[2] + ' (' + option[3] + ')')
 
     while True:
         user: str = input("Type the number of your choice: ")

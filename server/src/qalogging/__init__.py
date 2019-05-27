@@ -1,8 +1,10 @@
 PRINT_VERBOSE = True
-SEND_TO_CLIENT = False  # Union[bool, Client], cannot specify it because of circular imports
+# Union[bool, Client], cannot specify it because of circular imports
+SEND_TO_CLIENT = False
 
 
-def set_client(client):  # Union[bool, Client], cannot specify it because of circular imports
+# Union[bool, Client], cannot specify it because of circular imports
+def set_client(client):
     global SEND_TO_CLIENT
     SEND_TO_CLIENT = client
 

@@ -34,7 +34,8 @@ class Client:
         for message in byte_to_message(msg):
             if message.name in self.__server.commands:
                 verbose("Server:", self.coords, "sent [", message, "]")
-                self.__server.commands[message.name](self.__server, self, *message.args)
+                self.__server.commands[message.name](
+                    self.__server, self, *message.args)
             else:
                 warning("Server: Unknown command [", message.name, "]")
 
