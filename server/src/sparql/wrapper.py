@@ -46,7 +46,8 @@ class Wrapper:
         # Will end by a new empty line
         for result in results["results"]["bindings"]:
             p_code = result["property"]["value"].split('/')[-1]
-            string_result += result["propertyLabel"]["value"] + ':' + p_code + "\n"
+            string_result += result["propertyLabel"]["value"] + \
+                ':' + p_code + "\n"
             if "propertyAltLabel" in result:
                 for alias in result["propertyAltLabel"]["value"].split(", "):
                     string_result += alias + ':' + p_code + "\n"

@@ -38,7 +38,8 @@ class CLIClient:
 
             for message in byte_to_message(msg):
                 if message.name in self.__commands:
-                    verbose("Client:", self.socket.getpeername(), "sent [", message, "]")
+                    verbose("Client:", self.socket.getpeername(),
+                            "sent [", message, "]")
                     self.__commands[message.name](self, *message.args)
                 else:
                     warning("Client: Unknown command", message.name)

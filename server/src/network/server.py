@@ -28,7 +28,8 @@ class Server:
         self.socket.listen(max_connections)
         self.is_running = True
         info("Server: Connected on port", self.socket.getsockname()[1], "\n")
-        atexit.register(self.kill)  # Close the server automatically when the program is killed externally
+        # Close the server automatically when the program is killed externally
+        atexit.register(self.kill)
 
     def run(self):
         """

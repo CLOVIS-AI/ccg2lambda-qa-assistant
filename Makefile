@@ -93,6 +93,8 @@ test-server-local-unittest: ccg2lambda /tmp/dep-py ccg2lambda/coqlib.glob server
 
 .PHONY: test-server-local-lint
 test-server-local-lint: ccg2lambda /tmp/dep-py python-requirements
+	@echo -e "${GREEN}Formatting files with autopep8... ${RESET}"
+	source server/venv/bin/activate; autopep8 --in-place --aggressive --aggressive $(shell find server/src -name '*.py')
 	@echo -e "${GREEN}Linting Python code (PEP8)...${RESET}"
 	source server/venv/bin/activate; pycodestyle --show-source --show-pep8 --statistics --max-line-length=120 --benchmark server/src
 

@@ -68,7 +68,13 @@ class Sentence:
             verbose(" › The subject of [", event, "] is [", variable, "]")
         else:
             e.variables.append((link_name, self.__get_variable(variable)))
-            verbose(" › New link from [", event, "] to [", variable, "]:", link_name)
+            verbose(
+                " › New link from [",
+                event,
+                "] to [",
+                variable,
+                "]:",
+                link_name)
 
     def get_entity(self, id_: str) -> Entity:
         """
@@ -104,8 +110,11 @@ class Sentence:
         elif id_[0] == 'x':
             return False
         else:
-            raise Exception("Found [ " + id_ + "] which is neither an event (begins by e) nor a variable (begins by "
-                                               "x)...")
+            raise Exception(
+                "Found [ " +
+                id_ +
+                "] which is neither an event (begins by e) nor a variable (begins by "
+                "x)...")
 
     def pretty_print(self):
         """
@@ -114,8 +123,15 @@ class Sentence:
         verbose(" › Sentence:")
         verbose("  " * 1 + " events:")
         for e in self.events:
-            verbose("  " * 2 + " - " + e.id + ":", "[ tags:", *[t for t in e.tags], "]")
-            verbose("  " * 4 + " subject:", e.subject.id, "[ tags:", *[t for t in e.subject.tags], "]")
+            verbose("  " * 2 + " - " + e.id + ":",
+                    "[ tags:", *[t for t in e.tags], "]")
+            verbose("  " * 4 + " subject:", e.subject.id,
+                    "[ tags:", *[t for t in e.subject.tags], "]")
             verbose("  " * 4 + " variables:")
             for v in e.variables:
-                verbose("  " * 4 + " - " + v[0] + ":", v[1].id, "[ tags:", *[t for t in v[1].tags], "]")
+                verbose("  " *
+                        4 +
+                        " - " +
+                        v[0] +
+                        ":", v[1].id, "[ tags:", *
+                        [t for t in v[1].tags], "]")

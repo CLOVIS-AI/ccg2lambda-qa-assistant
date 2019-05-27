@@ -23,7 +23,8 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
         error('There is no questions to ask!')
         raise Exception('A question was asked, but no answer was provided.')
     elif len(options) == 1:
-        warning('Asking a question with only one possible answer, the client will not be prompted.')
+        warning(
+            'Asking a question with only one possible answer, the client will not be prompted.')
         return options[0][0]
 
     from network.server import server
@@ -36,7 +37,8 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
         error("No clients are connected at this point.")
         raise Exception("Trying to ask the client, but there's no client.")
     elif len(server.clients) > 1:
-        warning("Currently,", len(server.clients), "are connected; the first one will be selected.")
+        warning("Currently,", len(server.clients),
+                "are connected; the first one will be selected.")
 
     client = server.clients[0]
     verbose("The question will be asked to client [", client, "]")

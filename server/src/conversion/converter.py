@@ -13,14 +13,16 @@ from qalogging import info, verbose, announce
 from conversion import visualisation
 
 
-def __annotate_spacy(sentences: List[str]) -> Tuple[List[List[Token]], List[List[str]]]:
+def __annotate_spacy(
+        sentences: List[str]) -> Tuple[List[List[Token]], List[List[str]]]:
     """
     Annotates a list of sentences in English, using spaCy.
     :param sentences: A list of English sentences.
     :return: a tuple of a list of all annotated tokens in each sentence, and a list of each word in each sentence.
     """
     info(" › spaCy: annotating...")
-    return annotate_using_spacy([sentence.split(" ") for sentence in sentences], tokenize=True)
+    return annotate_using_spacy([sentence.split(" ")
+                                 for sentence in sentences], tokenize=True)
 
 
 def __convert_to_ccg(sentences: List[List[str]]) -> List[List[Tuple[Tree]]]:
@@ -34,7 +36,8 @@ def __convert_to_ccg(sentences: List[List[str]]) -> List[List[Tuple[Tree]]]:
     return depccg_parser.parse_doc(sentences)
 
 
-def __ccg_to_jigg_xml(CCG: List[List[Tuple[Tree]]], annotated_sentences: List[List[Token]]) -> Any:
+def __ccg_to_jigg_xml(CCG: List[List[Tuple[Tree]]],
+                      annotated_sentences: List[List[Token]]) -> Any:
     """
     Converts a list of CCG trees to jigg xml format.
     :param CCG: A list of CCG trees
@@ -80,18 +83,22 @@ def convert(sentences: List[str], output_file=False) -> List[Expression]:
     :return a list of ASTs that each correspond to one of the given sentences (in the same order).
     """
     if len(sentences) < 1:
-        raise Exception("Cannot run the pipeline with less than 1 sentence: " + str(len(sentences)))
+        raise Exception(
+            "Cannot run the pipeline with less than 1 sentence: " + str(len(sentences)))
 
-    announce("Beginning conversion of", len(sentences), "sentences, the first one is [", sentences[0], "]")
+    announce("Beginning conversion of", len(sentences),
+             "sentences, the first one is [", sentences[0], "]")
     annotated_sentences, split_sentences = __annotate_spacy(sentences)
     ccg_of_each_sentence = __convert_to_ccg(split_sentences)
-    lambda_expressions = __ccg_to_jigg_xml(ccg_of_each_sentence, annotated_sentences)
+    lambda_expressions = __ccg_to_jigg_xml(
+        ccg_of_each_sentence, annotated_sentences)
 
     formulas = __ccg_jigg_xml_to_lambda(lambda_expressions)
 
     # Creates an XML file to be used
     if output_file:
-        # Can be used in ccg2lambda python script visualize.py to output sentences.html to give better overview
+        # Can be used in ccg2lambda python script visualize.py to output
+        # sentences.html to give better overview
         info("Creating visualisation in file sentences.sem.xml")
         visualisation.visualize(lambda_expressions, "sentences.sem.xml")
 
