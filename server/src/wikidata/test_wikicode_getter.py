@@ -3,6 +3,12 @@ from wikidata.wikicode_getter import get_all_q_codes, get_all_p_codes
 
 
 def search_q_codes(words: str, expected_result: str) -> bool:
+    """
+    Search if the list of q-codes returned by the wikicode-getter contains an expected value.
+    :param words: the search words used in the query to get the list of q-codes
+    :param expected_result: the q-code we expect to find in the list
+    :return: True if the expected code is inside the list, false otherwise
+    """
     result_list = get_all_q_codes(words)
     for result in result_list:
         if result[1] == expected_result:
@@ -11,6 +17,12 @@ def search_q_codes(words: str, expected_result: str) -> bool:
 
 
 def search_p_codes(words: str, expected_result: str) -> bool:
+    """
+    Search if the list of p-codes returned by the wikicode-getter contains an expected value.
+    :param words: the search words used in the query to get the list of p-codes
+    :param expected_result: the p-code we expect to find in the list
+    :return: True if the expected code is inside the list, false otherwise
+    """
     result_list = get_all_p_codes(words)
     for result in result_list:
         if result[1] == expected_result:
