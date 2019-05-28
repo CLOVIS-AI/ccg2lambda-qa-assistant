@@ -4,7 +4,7 @@ from nltk import Expression
 
 from nltk2qo.nltk_parser import read_expressions
 from nltk2qo.sentence import Sentence
-from qalogging import verbose, info
+from qalogging import verbose, info, warning
 
 
 def __parse(nltk_output: Expression) -> Sentence:
@@ -17,6 +17,10 @@ def __parse(nltk_output: Expression) -> Sentence:
     read_expressions(nltk_output, sentence)
     verbose("Done with this sentence.")
     sentence.pretty_print()
+
+    if sentence.main is None:
+        warning("No Question Marker found! This sentence is not a question.")
+
     return sentence
 
 

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 from nltk2qo.entity import Entity
 from nltk2qo.event import Event
@@ -14,7 +14,7 @@ class Sentence:
         """
         self.events: List[Event] = []
         self.__variables: List[Variable] = []
-        self.main: Variable  # TODO : when w-words are introduced in the template
+        self.main: Union[Variable, None] = None
 
     def add(self, name: str):
         """
@@ -52,8 +52,16 @@ class Sentence:
         :param tag: The name of the tag
         :param entity: The entity on which the tag should be added
         """
-        self.get_entity(entity).tags.append(tag)
-        verbose(" › New tag [", tag, "] on [", entity, "]")
+        if tag == "QM":
+            if self.main is None:
+                self.main = self.__get_variable(entity)
+                verbose(" › Main subject of the sentence: [", entity, "]")
+            else:
+                warning("Already found the main subject! It looks like there are 2 QM markers. Keeping the first one, "
+                        "and ignoring this one on [", entity, "]")
+        else:
+            self.get_entity(entity).tags.append(tag)
+            verbose(" › New tag [", tag, "] on [", entity, "]")
 
     def add_link(self, variable: str, event: str, link_name: str):
         """
@@ -111,10 +119,13 @@ class Sentence:
         """
         Graphically display this Sentence, to make it easier to see what's going on.
         """
+        if self.main is not None:
+            info(" question marker:", self.main.id, "[", *self.main.tags, "]")
+        else:
+            info(" question marker not found, this sentence is not a question!")
+
         info(" events:")
         for e in self.events:
-            info(" - " + e.id + ":", "[ tags:", *[t for t in e.tags], "]")
-            info("   subject:", e.subject.id, "[ tags:", *[t for t in e.subject.tags], "]")
-            info("   variables:")
+            info(" - " + e.id + ":", "[", *e.tags, "]")
             for v in e.variables:
-                info("   - " + v[0] + ":", v[1].id, "[ tags:", *[t for t in v[1].tags], "]")
+                info("   - " + v[0] + ":", v[1].id, "[", *v[1].tags, "]")
