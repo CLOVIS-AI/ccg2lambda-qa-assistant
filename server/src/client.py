@@ -59,7 +59,8 @@ def server_logs(client, severity: str, *args: str):
         error(*args)
     else:
         verbose("Server: unknown severity:", *args)
-        warning("Received a message from the server, with unknown severity [", severity, "]")
+        warning(
+            "Received a message from the server, with unknown severity [", severity, "]")
 
 
 # noinspection PyUnusedLocal

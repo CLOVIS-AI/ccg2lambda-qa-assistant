@@ -29,7 +29,8 @@ def read_expressions(value: Expression, sentence: Sentence):
                           value.first.function.variable.name)
     elif t == AllExpression:
         verbose("nltk2qo: Found a AllExpression")
-        warning("It looks like this sentence is a yes/no question, and they are not supported currently.")
+        warning(
+            "It looks like this sentence is a yes/no question, and they are not supported currently.")
     else:
         error("Type [", t, "] unknown, aborting.")
         raise Exception("I do not know how to handle the type [", t, "] !")

@@ -57,8 +57,9 @@ class Sentence:
                 self.main = self.__get_variable(entity)
                 verbose(" › Main subject of the sentence: [", entity, "]")
             else:
-                warning("Already found the main subject! It looks like there are 2 QM markers. Keeping the first one, "
-                        "and ignoring this one on [", entity, "]")
+                warning(
+                    "Already found the main subject! It looks like there are 2 QM markers. Keeping the first one, "
+                    "and ignoring this one on [", entity, "]")
         else:
             self.get_entity(entity).tags.append(tag)
             verbose(" › New tag [", tag, "] on [", entity, "]")
@@ -73,7 +74,13 @@ class Sentence:
         e = self.get_event(event)
         e.variables.append((link_name, self.__get_variable(variable)))
         verbose(
-                " › New link [", link_name, "] from [", event, "] to [", variable, "]")
+            " › New link [",
+            link_name,
+            "] from [",
+            event,
+            "] to [",
+            variable,
+            "]")
 
     def get_entity(self, id_: str) -> Entity:
         """
