@@ -3,7 +3,7 @@ from typing import List
 from nltk2qo.entity import Entity
 from nltk2qo.event import Event
 from nltk2qo.variable import Variable
-from qalogging import verbose, info
+from qalogging import verbose, info, warning
 
 
 class Sentence:
@@ -63,12 +63,8 @@ class Sentence:
         :param link_name: The name of the link
         """
         e = self.get_event(event)
-        if link_name == "Subj":
-            e.subject = self.__get_variable(variable)
-            verbose(" › The subject of [", event, "] is [", variable, "]")
-        else:
-            e.variables.append((link_name, self.__get_variable(variable)))
-            verbose(
+        e.variables.append((link_name, self.__get_variable(variable)))
+        verbose(
                 " › New link [", link_name, "] from [", event, "] to [", variable, "]")
 
     def get_entity(self, id_: str) -> Entity:
@@ -117,13 +113,8 @@ class Sentence:
         """
         info(" events:")
         for e in self.events:
-            info(" - " + e.id + ":",
-                 "[ tags:", *[t for t in e.tags], "]")
-            info("   subject:", e.subject.id,
-                 "[ tags:", *[t for t in e.subject.tags], "]")
+            info(" - " + e.id + ":", "[ tags:", *[t for t in e.tags], "]")
+            info("   subject:", e.subject.id, "[ tags:", *[t for t in e.subject.tags], "]")
             info("   variables:")
             for v in e.variables:
-                info("   - " +
-                     v[0] +
-                     ":", v[1].id, "[ tags:", *
-                     [t for t in v[1].tags], "]")
+                info("   - " + v[0] + ":", v[1].id, "[ tags:", *[t for t in v[1].tags], "]")
