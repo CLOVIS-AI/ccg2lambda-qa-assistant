@@ -16,11 +16,14 @@ from qalogging import verbose
 
 init_paths()
 
+verbose('Loading depccg...')
+
 depccg_options = dict(
     # A list of binary rules
     # By default: depccg.combinator.en_default_binary_rules
     binary_rules=None,
-    # Penalize an application of a unary rule by adding this value (negative log probability)
+    # Penalize an application of a unary rule by adding this value (negative
+    # log probability)
     unary_penalty=0.1,
     # Prune supertags with low probabilities using this value
     beta=0.00001,

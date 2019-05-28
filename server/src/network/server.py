@@ -2,7 +2,7 @@ import atexit
 import socket
 from threading import Thread
 
-from qalogging import announce, warning, verbose, info
+from qalogging import announce, warning, verbose, info, error
 from .client import Client
 
 
@@ -28,7 +28,8 @@ class Server:
         self.socket.listen(max_connections)
         self.is_running = True
         info("Server: Connected on port", self.socket.getsockname()[1], "\n")
-        atexit.register(self.kill)  # Close the server automatically when the program is killed externally
+        # Close the server automatically when the program is killed externally
+        atexit.register(self.kill)
 
     def run(self):
         """
@@ -50,10 +51,13 @@ class Server:
         Connects to a client.
         :param client: the client to connect to
         """
+        c = Client(self, client)
+        self.clients.append(c)
+        verbose("Added", c, "to the list of connected clients.")
+        c.listen()
 
-        self.clients.append(client)
-        Client(self, client)
-        self.clients.remove(client)
+        self.clients.remove(c)
+        verbose("Removed", c, "from the list of connected clients.")
 
     def register_command(self, name: str, callback):
         """
@@ -76,4 +80,7 @@ class Server:
         info("Server: Disconnected.")
 
 
-server = Server(12800, 10)
+try:
+    server = Server(12800, 10)
+except OSError as e:
+    error("Cannot run the server.", e)

@@ -14,17 +14,16 @@ class Client:
         self.__server = server
         self.coords = socket.getpeername()
         info("Server:", self.__socket.getpeername(), "has connected.")
-        self.__listen()
 
-    def __listen(self):
+    def listen(self):
         while True:
             try:
-                self.__receive_messages()
+                self.receive_message()
             except (ConnectionResetError, OSError):
                 break
         self.close(clientside=True)
 
-    def __receive_messages(self):
+    def receive_message(self):
         # Receive maximum 8000 bytes from the socket
         msg = self.__socket.recv(8000)
 
@@ -35,7 +34,8 @@ class Client:
         for message in byte_to_message(msg):
             if message.name in self.__server.commands:
                 verbose("Server:", self.coords, "sent [", message, "]")
-                self.__server.commands[message.name](self.__server, self, *message.args)
+                self.__server.commands[message.name](
+                    self.__server, self, *message.args)
             else:
                 warning("Server: Unknown command [", message.name, "]")
 
