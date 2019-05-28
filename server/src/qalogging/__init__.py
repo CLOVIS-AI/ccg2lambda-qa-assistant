@@ -33,12 +33,16 @@ def print_format_table():
         print('\n')
 
 
-def info(*args) -> None:
-    print(*args)
+def send_logs_client(severity: str, *args: str):
     # noinspection PySimplifyBooleanCheck
     if SEND_TO_CLIENT is not False:
         # noinspection PyUnresolvedReferences
-        SEND_TO_CLIENT.send('info', *args)
+        SEND_TO_CLIENT.send('logs', severity, *[str(arg) for arg in args])
+
+
+def info(*args) -> None:
+    print(*args)
+    send_logs_client('info', *args)
 
 
 def announce(*args) -> None:
@@ -47,10 +51,12 @@ def announce(*args) -> None:
 
 def warning(*args) -> None:
     print('\x1b[33m', *args, '\x1b[0m')
+    send_logs_client('warning', *args)
 
 
 def error(*args) -> None:
     print('\x1b[1;37;41m', *args, '\x1b[0m')
+    send_logs_client('error', *args)
 
 
 def verbose(*args) -> None:

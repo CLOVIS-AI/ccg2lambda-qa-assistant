@@ -58,10 +58,12 @@ def client_choice(server: Server, client: Client, choice: str):
 
 # noinspection PyUnusedLocal
 def request(server: Server, client: Client, request: str):
+    from nltk2qo.converter import nltk_to_query_objects
     client.send('debug', 'received')
     set_client(client)
     ast = convert([request])
     client.send('ast', str(ast[0]))
+    qo = nltk_to_query_objects(ast)
     set_client(False)
     client.close()
 

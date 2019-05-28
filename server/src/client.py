@@ -1,5 +1,5 @@
 from network.cli_client import CLIClient
-from qalogging import announce, info, warning, set_verbose, verbose
+from qalogging import announce, info, warning, set_verbose, verbose, error
 
 set_verbose(False)
 
@@ -17,7 +17,7 @@ def request_sentence(sentence: str):
     client = CLIClient("127.0.0.1", 12800)
     client.register_command('debug', debug)
     client.register_command('ast', ast)
-    client.register_command('info', server_info)
+    client.register_command('logs', server_logs)
     client.register_command('choose', choose)
     client.send('request', sentence)
     client.run()
@@ -44,12 +44,23 @@ def choose(client, *args: str):
 
 # noinspection PyUnusedLocal
 def ast(client, ast_tree: str):
-    info('AST:', ast_tree)
+    verbose('AST:', ast_tree)
 
 
 # noinspection PyUnusedLocal
-def server_info(client, *args: str):
-    info(*args)
+def server_logs(client, severity: str, *args: str):
+    if severity == "verbose":
+        verbose("Server:", *args)
+    elif severity == "info":
+        info(*args)
+    elif severity == "warning":
+        warning('Server:', *args)
+    elif severity == "error":
+        error(*args)
+    else:
+        verbose("Server: unknown severity:", *args)
+        warning(
+            "Received a message from the server, with unknown severity [", severity, "]")
 
 
 # noinspection PyUnusedLocal
