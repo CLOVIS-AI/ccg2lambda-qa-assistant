@@ -16,5 +16,7 @@ class QueryBuilder:
         :return: the result of the query (JSON formatted string)
         """
         # closes the request with the end curly brace
-        wrapper = Wrapper("https://query.wikidata.org/sparql", self.__query + "}")
+        wrapper = Wrapper(
+            "https://query.wikidata.org/sparql",
+            self.__query + "}")
         return wrapper.make_request()
