@@ -394,19 +394,19 @@
   child0_surf: "or"
 
 #WIP ################################################################################################################
-- category: NP|NP
-  rule: conj
-  semantics: \E Q1 Q2 x y z. (E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), z, y, x))
-  #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
-  #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
-  child0_surf: or
+#- category: NP|NP
+#  rule: conj
+#  semantics: \E Q1 Q2 x y z. (E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), z, y, x))
+#  #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
+#  #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
+#  child0_surf: or
 
 ### rule ba to link the entities ###
 
-- category: NP
-  rule: ba
-  semantics: \Q1 Q2 F1 F2 z.(Q2(Q1(\y.(y = z)), \x.(F1(x) & F2(x)), \y.True, z))
-  child1_child0_surf: "or"
+#- category: NP
+#  rule: ba
+#  semantics: \Q1 Q2 F1 F2 z.(Q2(Q1(\y.(y = z)), \x.(F1(x) & F2(x)), \y.True, z))
+#  child1_child0_surf: "or"
 
 # ################################################################################################################
 #### QA Block : end ####
