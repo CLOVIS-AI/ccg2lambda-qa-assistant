@@ -8,18 +8,14 @@ Is my name John Watson ?
 My name is John Watson
 Gaetan is John Watson
 Cats are green but dogs are blue
-What do I want to eat for dinner ?
-Is my brick a real brick ?
+Are all the dogs green ?
+My cat is your cat.
 Is my cat your cat ?
 Is your cat a cat ?
-The son of the daugther of my grand-mother is me.
+The son of the daughter of my grand-mother is me.
 Who is the president of the United States of America in 2017 ?
 Who is Barack Obama ?
-Is Barack Obama a president?
-What do I want to eat for dinner ?
 Who is this person?
-The son of my mother is me
-Can you eat fish from 2018?
 When was the last snack?
 Where is the USA ?
 Which hot dog tastes better ?
@@ -28,17 +24,10 @@ What is the name of the first river in chinese ?
 Who is the real president of the USA ?
 Who lives in USA ?
 The quick brown fox jumps over the lazy dog
-Where does Barack Obama live ?
-Where did you go ?
-Who did the Harlem shake ?
-What can a bird do ?
-Which pie did you ate ?
-What could you do ?
 Which president of the United States went to Hawaii in 2019 then met the French president of that time ?
 Who went to France and USA ?
 Who wrote Romeo and Juliet ?
-What is a snake that eat a cat or an elephant ?
-Which is a reindeer with a red or blue nose ?
+What is a snake that eats a cat or an elephant ?
 What are the lessons of yesterday and the lessons of tomorrow ?
 Who is the nicest guy and who is the happy penguin ?
 What are the languages spoken in China ?

@@ -15,6 +15,7 @@ class TestConvertCcg2lambda(TestCase):
 
     def test_convert(self):
         i = 0
-        for ast in convert(self.sentences, output_file=True):
+        for ast in convert([s.replace("\n", "")
+                            for s in self.sentences], output_file=True):
             verbose(str(i) + " - " + str(ast))
             i += 1
