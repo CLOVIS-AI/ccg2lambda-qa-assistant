@@ -210,12 +210,22 @@
   #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
   child0_surf: "and"
 
-#WIP
-#- category: NP|NP
-#  rule: conj
-#  semantics: \E Q1 Q2 x z. (E(\y.Q1(y),\y.Q2(y), z, \y.True, x))
-#  #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
-#  child0_surf: "and"
+# "And" NP|NP case
+
+- category: NP|NP
+  rule: conj
+  semantics: \E Q1 Q2 x y. (E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), y, z, x))
+  #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
+  #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
+  child0_surf: and
+
+# linking future events of NP|NP
+
+- category: NP
+  rule: ba
+  semantics: \Q1 Q2 F1 F2.(exists y.Q2(\x.Q1(\x.True,\y.(x = y)), \x.True, y) & F1(y) & F2(y))
+  #semantics: \Q1 Q2 F1 F2 z.(Q2(Q1(\x.True,\y.(y = z)), \x.(F1(x) & F2(x)), \y.True, z))
+  child1_child0_surf: "and"
 
 ## To link the "and" entity to the event
 - category: N
@@ -393,20 +403,37 @@
   #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
   child0_surf: "or"
 
-#WIP ################################################################################################################
-#- category: NP|NP
+ ######################################################### Done but still needs experiments #########################################################
+### rule for NP|NP
+- category: NP|NP
+  rule: conj
+  semantics: \E Q1 Q2 x y. (E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), y, z, x))
+  #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
+  #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
+  child0_surf: or
+
+## rule ba to link the entities ###
+
+- category: NP
+  rule: ba
+  semantics: \Q1 Q2 F1 F2.(exists y.Q2(\x.Q1(\x.True,\y.(x = y)), \x.True, y) & F1(y) & F2(y))
+  #semantics: \Q1 Q2 F1 F2.(exists y.Q2(\x.Q1(\x.True,\y.(x = y)), \x.(F1(x) & F2(x)), y))
+  #semantics: \Q1 Q2 F1 F2 z.(Q2(Q1(\x.True,\y.(y = z)), \x.(F1(x) & F2(x)), \y.True, z))
+  child1_child0_surf: "or"
+
+### rule for (N|N)|(N|N), example : red or blue nose ### WIP 
+
+#- category: (N|N)|(N|N)
 #  rule: conj
-#  semantics: \E Q1 Q2 x y z. (E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), z, y, x))
-#  #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
-#  #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
+#  semantics: \L M2 M1 F x. (M1(F,x) | M2(F,x))
 #  child0_surf: or
 
-### rule ba to link the entities ###
-
-#- category: NP
-#  rule: ba
-#  semantics: \Q1 Q2 F1 F2 z.(Q2(Q1(\y.(y = z)), \x.(F1(x) & F2(x)), \y.True, z))
-#  child1_child0_surf: "or"
+- category: (N|N)|(N|N)
+  rule: conj
+  semantics: \E Q1 Q2 F y.(F(y) & E(\y.Q1(\y.True, y), \y.Q2(\y.True, y), y, x, x))
+  #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
+  #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
+  child0_surf: or
 
 # ################################################################################################################
 #### QA Block : end ####
@@ -423,12 +450,7 @@
   semantics: \L V2 V1 Q K. Q(\x.True, \x.(V1(\F1 F2.F2(x),K) | V2(\F1 F2.F2(x),K)))
   child0_surf: or
 
-- category: (N|N)|(N|N)
-  rule: conj
-  semantics: \L M2 M1 F x. (M1(F,x) | M2(F,x))
-  child0_surf: or
-
-- category: PP|PP
+- category: PP|P
   rule: conj
   semantics: \L K2 K1 e. (K1(e) | K2(e))
   child0_surf: or
@@ -1084,6 +1106,18 @@
 - category: ((S|S)|NP)|NP
   semantics: \E Q1 Q2 S K. Q2(\x.True, \x.Q1(\y.True, \y.exists e. (E(e) & (Subj(e) = x) & AccI(e,S(\w.True)) & (Dat(e) = y) & K(e))))
   coq_type: Event -> Prop
+
+##### QA block : Begin #####
+
+### Transitive verbs for conj ### WIP
+
+## rule for phrases like "I eat a banana or an apple" ##
+#- category: S|NP
+#  semantics: \Q1 Q2 K. Q2(K(\y.True))
+#  child1_child1_child0_surf: "or"
+#  rule: fa
+
+##### QA Block : End #####
 
 ### DEFAULT TEST ###
 - category: (((S|NP)|S)|(S|NP))|NP
