@@ -19,6 +19,7 @@ class QueryBuilder:
         self.__query = file.read()
         self.__sentence = sentence
         self.__namedVar = {}
+        self.__triples = []
         file.close()
 
     def __request(self) -> str:
@@ -38,6 +39,9 @@ class QueryBuilder:
         :param event: the event
         :return: true if the questionMarker is found, false otherwise
         """
+        # Create an empty triple
+        triple_pos = self.__triples.__len__()
+        self.__triples.append(("#","#","#"))
         if "_be" in event.tags:
             for var in event.variables:
                 # we define the property linked to the searched object
@@ -45,13 +49,15 @@ class QueryBuilder:
                 if var[0] == "Acc":
                     # add Conj management
                     attr = var[1].tags[0].split('_')[1]
-                    self.__namedVar[attr] = "wdt:" + ask_client(
+                    self.__namedVar[var[1].id] = "wdt:" + ask_client(
                         get_all_p_codes(attr))
+                    self.__triples[triple_pos][2] = self.__namedVar[var[1].id]
                 else:
-                    self.__namedVar[var[1].tags[0]] = "?item"
+                    self.__namedVar[var[1].id] = "?item"
+                    self.__triples[triple_pos][1] = self.__namedVar[var[1].id]
         else:
             for var in event.variables:
-                
+
 
 
     def __fill_dictionary(self) -> None:
