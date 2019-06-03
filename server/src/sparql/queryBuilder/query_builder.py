@@ -41,7 +41,7 @@ class QueryBuilder:
         """
         # Create an empty triple
         triple_pos = self.__triples.__len__()
-        self.__triples.append(("#","#","#"))
+        self.__triples.append(("#", "#", "#"))
         if "_be" in event.tags:
             for var in event.variables:
                 # we define the property linked to the searched object
@@ -51,14 +51,12 @@ class QueryBuilder:
                     attr = var[1].tags[0].split('_')[1]
                     self.__namedVar[var[1].id] = "wdt:" + ask_client(
                         get_all_p_codes(attr))
-                    self.__triples[triple_pos][2] = self.__namedVar[var[1].id]
+                    self.__triples[triple_pos] = (self.__triples[triple_pos][0],self.__triples[triple_pos][0],
+                                                  self.__namedVar[var[1].id])
                 else:
                     self.__namedVar[var[1].id] = "?item"
-                    self.__triples[triple_pos][1] = self.__namedVar[var[1].id]
-        else:
-            for var in event.variables:
-
-
+                    self.__triples[triple_pos] = (self.__triples[triple_pos][0], self.__namedVar[var[1].id],
+                                                  self.__triples[triple_pos][2])
 
     def __fill_dictionary(self) -> None:
         """
