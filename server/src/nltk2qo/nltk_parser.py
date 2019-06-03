@@ -1,7 +1,8 @@
-from nltk.sem.logic import ExistsExpression, Expression, AndExpression, ApplicationExpression, EqualityExpression
+from nltk.sem.logic import ExistsExpression, Expression, AndExpression, ApplicationExpression, EqualityExpression, \
+    AllExpression
 
 from nltk2qo.sentence import Sentence
-from qalogging import error
+from qalogging import error, warning, verbose
 
 
 def read_expressions(value: Expression, sentence: Sentence):
@@ -26,6 +27,10 @@ def read_expressions(value: Expression, sentence: Sentence):
         sentence.add_link(value.second.variable.name,
                           value.first.argument.variable.name,
                           value.first.function.variable.name)
+    elif t == AllExpression:
+        verbose("nltk2qo: Found a AllExpression")
+        warning(
+            "It looks like this sentence is a yes/no question, and they are not supported currently.")
     else:
         error("Type [", t, "] unknown, aborting.")
         raise Exception("I do not know how to handle the type [", t, "] !")

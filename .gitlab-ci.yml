@@ -10,7 +10,7 @@ test-server:
   stage: test
   image: masashiy/ccg2lambda
   script:
-    - make local
+    - FIX_PEP8=false make local
   tags:
     - docker
     - debian

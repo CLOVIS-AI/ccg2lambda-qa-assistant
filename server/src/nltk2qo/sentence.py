@@ -1,9 +1,9 @@
-from typing import List
+from typing import List, Union
 
 from nltk2qo.entity import Entity
 from nltk2qo.event import Event
 from nltk2qo.variable import Variable
-from qalogging import verbose
+from qalogging import verbose, info, warning
 
 
 class Sentence:
@@ -14,7 +14,7 @@ class Sentence:
         """
         self.events: List[Event] = []
         self.__variables: List[Variable] = []
-        self.main: Variable  # TODO : when w-words are introduced in the template
+        self.main: Union[Variable, None] = None
 
     def add(self, name: str):
         """
@@ -52,8 +52,17 @@ class Sentence:
         :param tag: The name of the tag
         :param entity: The entity on which the tag should be added
         """
-        self.get_entity(entity).tags.append(tag)
-        verbose(" › New tag [", tag, "] on [", entity, "]")
+        if tag == "QM":
+            if self.main is None:
+                self.main = self.__get_variable(entity)
+                verbose(" › Main subject of the sentence: [", entity, "]")
+            else:
+                warning(
+                    "Already found the main subject! It looks like there are 2 QM markers. Keeping the first one, "
+                    "and ignoring this one on [", entity, "]")
+        else:
+            self.get_entity(entity).tags.append(tag)
+            verbose(" › New tag [", tag, "] on [", entity, "]")
 
     def add_link(self, variable: str, event: str, link_name: str):
         """
@@ -63,18 +72,15 @@ class Sentence:
         :param link_name: The name of the link
         """
         e = self.get_event(event)
-        if link_name == "Subj":
-            e.subject = self.__get_variable(variable)
-            verbose(" › The subject of [", event, "] is [", variable, "]")
-        else:
-            e.variables.append((link_name, self.__get_variable(variable)))
-            verbose(
-                " › New link from [",
-                event,
-                "] to [",
-                variable,
-                "]:",
-                link_name)
+        e.variables.append((link_name, self.__get_variable(variable)))
+        verbose(
+            " › New link [",
+            link_name,
+            "] from [",
+            event,
+            "] to [",
+            variable,
+            "]")
 
     def get_entity(self, id_: str) -> Entity:
         """
@@ -120,18 +126,13 @@ class Sentence:
         """
         Graphically display this Sentence, to make it easier to see what's going on.
         """
-        verbose(" › Sentence:")
-        verbose("  " * 1 + " events:")
+        if self.main is not None:
+            info(" question marker:", self.main.id, "[", *self.main.tags, "]")
+        else:
+            info(" question marker not found, this sentence is not a question!")
+
+        info(" events:")
         for e in self.events:
-            verbose("  " * 2 + " - " + e.id + ":",
-                    "[ tags:", *[t for t in e.tags], "]")
-            verbose("  " * 4 + " subject:", e.subject.id,
-                    "[ tags:", *[t for t in e.subject.tags], "]")
-            verbose("  " * 4 + " variables:")
+            info(" - " + e.id + ":", "[", *e.tags, "]")
             for v in e.variables:
-                verbose("  " *
-                        4 +
-                        " - " +
-                        v[0] +
-                        ":", v[1].id, "[ tags:", *
-                        [t for t in v[1].tags], "]")
+                info("   - " + v[0] + ":", v[1].id, "[", *v[1].tags, "]")
