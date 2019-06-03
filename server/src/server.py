@@ -9,6 +9,7 @@ from network.server import Server
 from qalogging import announce, set_client, set_verbose, verbose, error, warning, info
 from time import sleep
 from wikidata.ask import set_ask_function
+from sparql.queryBuilder.query_builder import QueryBuilder
 
 user_choice = None
 
@@ -25,7 +26,7 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
     elif len(options) == 1:
         warning(
             'Asking a question with only one possible answer, the client will not be prompted.')
-        return options[0][0]
+        return options[0][1]
 
     from network.server import server
     tmp = [str(i) + "|" + "|".join(
@@ -48,7 +49,7 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
     client.receive_message()
     info('The client chose [', user_choice, ']')
     user = int(user_choice)
-    return options[user][0]
+    return options[user][1]
 
 
 def client_choice(server: Server, client: Client, choice: str):
@@ -64,6 +65,9 @@ def request(server: Server, client: Client, request: str):
     ast = convert([request])
     client.send('ast', str(ast[0]))
     qo = nltk_to_query_objects(ast)
+    for sentence in qo:
+        qb = QueryBuilder(sentence)
+        qb.build()
     set_client(False)
     client.close()
 

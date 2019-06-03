@@ -54,6 +54,7 @@ class TestWikicodeGetter(unittest.TestCase):
         expected_result = "P31"
         # Search with directly the name of the property
         self.assertTrue(search_p_codes("instance of", expected_result))
+        self.assertTrue(search_p_codes("is", expected_result))
 
         # Search with alias of the property
         self.assertTrue(search_p_codes("is a", expected_result))
