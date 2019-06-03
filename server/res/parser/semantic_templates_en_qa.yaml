@@ -233,6 +233,20 @@
   semantics: \F1 F2 x.F2(\y.F1(y), \y.True, x) 
   child1_child0_surf: "and"
 
+### rule for (N|N)|(N|N), example : red and blue nose ### 
+
+#- category: (N|N)|(N|N)
+#  rule: conj
+#  semantics: \L M1 M2 F x. M1(M2(F),x)
+
+- category: (N|N)|(N|N)
+  rule: conj
+  semantics: \E Q1 Q2 F y.(F(y) & E(\y.Q1(\y.True, y), \y.Q2(\y.True, y), y, x, x))
+  #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
+  #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
+  child0_surf: "and"
+
+
 #### end QA block ####
 
 #- category: N|N
@@ -251,10 +265,6 @@
 - category: ((S|NP)|PP)|((S|NP)|PP)
   rule: conj
   semantics: \L V1 V2 K1 Q K2. Q(\x.True,\x.(V2(\e.True,\F1 F2.F2(x),\e.(K1(e) & K2(e))) & V1(\e.True,\F1 F2.F2(x),\e.True)))
-
-- category: (N|N)|(N|N)
-  rule: conj
-  semantics: \L M1 M2 F x. M1(M2(F),x)
 
 - category: (N|PP)|(N|PP)
   rule: conj
@@ -421,7 +431,7 @@
   #semantics: \Q1 Q2 F1 F2 z.(Q2(Q1(\x.True,\y.(y = z)), \x.(F1(x) & F2(x)), \y.True, z))
   child1_child0_surf: "or"
 
-### rule for (N|N)|(N|N), example : red or blue nose ### WIP 
+### rule for (N|N)|(N|N), example : red or blue nose ###
 
 #- category: (N|N)|(N|N)
 #  rule: conj
@@ -435,7 +445,6 @@
   #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
   child0_surf: or
 
-# ################################################################################################################
 #### QA Block : end ####
 
 - category: NP|NP
@@ -760,24 +769,6 @@
 ## default existential interpretation
 - category: NP|N
   semantics: \E F1 F2 F3. exists x. (F1(x) & F2(x) & F3(x))
-
-
-#### QA block : begin ####
-
-### Warning, or and "and" fixs but can be a bit dangerous :)) ###
-
-## rule fa on determiner ##
-
-# WIP
-#
-#- category: NP
-#  semantics: \E F1 F2 F3 x.(F1(x))
-#  rule: fa
-#  child0_category: NP|N
-#  child0_pos: DT
-
-#### QA Block : End ####
-
 
 ##### Templates for Adverbs #####
 
@@ -1106,18 +1097,6 @@
 - category: ((S|S)|NP)|NP
   semantics: \E Q1 Q2 S K. Q2(\x.True, \x.Q1(\y.True, \y.exists e. (E(e) & (Subj(e) = x) & AccI(e,S(\w.True)) & (Dat(e) = y) & K(e))))
   coq_type: Event -> Prop
-
-##### QA block : Begin #####
-
-### Transitive verbs for conj ### WIP
-
-## rule for phrases like "I eat a banana or an apple" ##
-#- category: S|NP
-#  semantics: \Q1 Q2 K. Q2(K(\y.True))
-#  child1_child1_child0_surf: "or"
-#  rule: fa
-
-##### QA Block : End #####
 
 ### DEFAULT TEST ###
 - category: (((S|NP)|S)|(S|NP))|NP
