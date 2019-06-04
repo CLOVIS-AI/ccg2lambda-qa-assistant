@@ -28,7 +28,8 @@ def __get_wikidata_code(searched_words: str, object_type: str) -> str:
         'language': 'en',
         'type': object_type,
         'search': searched_words,
-        'format': 'json'
+        'format': 'json',
+        'limit': '10'
     }).json()
 
     return resp

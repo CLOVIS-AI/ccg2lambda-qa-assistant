@@ -1,8 +1,9 @@
 from sparql.wrapper import Wrapper
 from nltk2qo.sentence import Sentence
-from qalogging import error, verbose
+from qalogging import verbose, info, announce
 from wikidata.wikicode_getter import get_all_q_codes, get_all_p_codes
 from nltk2qo.event import Event
+from nltk2qo.entity import Entity
 
 
 class QueryBuilder:
@@ -32,6 +33,21 @@ class QueryBuilder:
             self.__query + "}")
         return wrapper.make_request()
 
+    @staticmethod
+    def __get_tags(tag_lists: Entity) -> str:
+        """
+        Creates a single string from a list of tags of an event
+        :param tag_lists: event
+        :return: string
+        """
+        result = ""
+        name_tag = (tag for tag in tag_lists.tags if tag.startswith('_'))
+        for tag in name_tag:
+            result += tag
+        result.replace('_', ' ')
+
+        return result[1:]
+
     def __manage_qm(self, event: Event) -> None:
         """
         Manages the question marker depending on the verb
@@ -47,24 +63,19 @@ class QueryBuilder:
                 # as the accusative of the qm event
                 if var[0] == "Acc":
                     # TODO: add Conj management here
-                    name_tag = next(
-                        tag for tag in var[1].tags if tag.startswith('_'))
-                    attr = name_tag.split('_')[1]
+                    attr = self.__get_tags(var[1])
                     pred = self.__namedVar[var[1].id] = "wdt:" + ask_client(
                         get_all_p_codes(attr))
                 else:
                     obj = self.__namedVar[var[1].id] = "?item"
         else:
             # TODO: make the verb under its common noun form
-            name_tag = next(tag for tag in event.tags if tag.startswith('_'))
-            attr = name_tag.split('_')[1]
+            attr = self.__get_tags(event)
             pred = self.__namedVar[event.id] = "wdt:" + ask_client(
                 get_all_p_codes(attr))
             for var in event.variables:
                 if var[0] == "Acc":
-                    name_tag = next(
-                        tag for tag in var[1].tags if tag.startswith('_'))
-                    attr = name_tag.split('_')[1]
+                    attr = self.__get_tags(var[1])
                     subj = self.__namedVar[var[1].id] = "wd:" + ask_client(
                         get_all_q_codes(attr))
                 else:
@@ -88,8 +99,6 @@ class QueryBuilder:
                 self.__manage_qm(event)
             # elif event.tags[0] == "":
 
-        error(str(self.__namedVar))
-
     def build(self):
         """
         Add triples to the basic query template (sparql/queryBuilder/query_template.sparql) and sends the request
@@ -99,5 +108,5 @@ class QueryBuilder:
         for triple in self.__triples:
             self.__query += ' ' + triple[0] + ' ' + triple[1] + \
                             ' ' + triple[2] + ' .'
-
-        print(self.__request())
+        announce("Sending query: " + self.__query)
+        info("The answer is: " + self.__request())
