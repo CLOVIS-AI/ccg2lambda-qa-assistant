@@ -72,7 +72,14 @@ class Sentence:
         :param link_name: The name of the link
         """
         e = self.get_event(event)
-        e.variables.append((link_name, self.__get_variable(variable)))
+        v = self.__get_variable(variable)
+
+        if e is None:
+            raise Exception("Trying to link [", e, "], but there's no such event!")
+        if v is None:
+            raise Exception("Trying to link to [", v, "], but there's no such variable!")
+
+        e.variables.append((link_name, v))
         verbose(
             " › New link [",
             link_name,
