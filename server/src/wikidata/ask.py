@@ -13,7 +13,7 @@ from qalogging import announce, verbose, error, warning, info
 def __not_loaded(options: List[Tuple[str, str, str, str]]) -> str:
     error("The 'ask_client' function has not been loaded!")
     warning("Falling back to the first choice provided.")
-    return options[0][1]
+    return options[0][0]
 
 
 ask_client: Callable = __not_loaded

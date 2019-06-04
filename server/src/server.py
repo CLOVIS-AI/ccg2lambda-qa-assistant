@@ -26,7 +26,7 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
     elif len(options) == 1:
         warning(
             'Asking a question with only one possible answer, the client will not be prompted.')
-        return options[0][1]
+        return options[0][0]
 
     from network.server import server
     tmp = [str(i) + "|" + "|".join(
@@ -49,7 +49,7 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
     client.receive_message()
     info('The client chose [', user_choice, ']')
     user = int(user_choice)
-    return options[user][1]
+    return options[user][0]
 
 
 def client_choice(server: Server, client: Client, choice: str):

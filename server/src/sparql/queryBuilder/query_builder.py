@@ -2,7 +2,6 @@ from sparql.wrapper import Wrapper
 from nltk2qo.sentence import Sentence
 from qalogging import error, verbose
 from wikidata.wikicode_getter import get_all_q_codes, get_all_p_codes
-from wikidata.ask import ask_client
 from nltk2qo.event import Event
 
 
@@ -40,23 +39,38 @@ class QueryBuilder:
         :return: true if the questionMarker is found, false otherwise
         """
         # Create an empty triple
-        triple_pos = self.__triples.__len__()
-        self.__triples.append(("#", "#", "#"))
+        subj = pred = obj = "#"
+        from wikidata.ask import ask_client
         if "_be" in event.tags:
             for var in event.variables:
                 # we define the property linked to the searched object
                 # as the accusative of the qm event
                 if var[0] == "Acc":
-                    # add Conj management
-                    attr = var[1].tags[0].split('_')[1]
-                    self.__namedVar[var[1].id] = "wdt:" + ask_client(
+                    # TODO: add Conj management here
+                    name_tag = next(
+                        tag for tag in var[1].tags if tag.startswith('_'))
+                    attr = name_tag.split('_')[1]
+                    pred = self.__namedVar[var[1].id] = "wdt:" + ask_client(
                         get_all_p_codes(attr))
-                    self.__triples[triple_pos] = (self.__triples[triple_pos][0],self.__triples[triple_pos][0],
-                                                  self.__namedVar[var[1].id])
                 else:
-                    self.__namedVar[var[1].id] = "?item"
-                    self.__triples[triple_pos] = (self.__triples[triple_pos][0], self.__namedVar[var[1].id],
-                                                  self.__triples[triple_pos][2])
+                    obj = self.__namedVar[var[1].id] = "?item"
+        else:
+            # TODO: make the verb under its common noun form
+            name_tag = next(tag for tag in event.tags if tag.startswith('_'))
+            attr = name_tag.split('_')[1]
+            pred = self.__namedVar[event.id] = "wdt:" + ask_client(
+                get_all_p_codes(attr))
+            for var in event.variables:
+                if var[0] == "Acc":
+                    name_tag = next(
+                        tag for tag in var[1].tags if tag.startswith('_'))
+                    attr = name_tag.split('_')[1]
+                    subj = self.__namedVar[var[1].id] = "wd:" + ask_client(
+                        get_all_q_codes(attr))
+                else:
+                    obj = self.__namedVar[var[1].id] = "?item"
+
+        self.__triples.append((subj, pred, obj))
 
     def __fill_dictionary(self) -> None:
         """
@@ -74,7 +88,6 @@ class QueryBuilder:
                 self.__manage_qm(event)
             # elif event.tags[0] == "":
 
-
         error(str(self.__namedVar))
 
     def build(self):
@@ -83,8 +96,8 @@ class QueryBuilder:
         :return: the result of the request.
         """
         self.__fill_dictionary()
-        self.__sentence.pretty_print()
-        # for e in self.__sentence.events:
-        #   for v in e.variables:
-        #      for tag in v[1].tags:
-        #         error(tag)
+        for triple in self.__triples:
+            self.__query += ' ' + triple[0] + ' ' + triple[1] + \
+                            ' ' + triple[2] + ' .'
+
+        print(self.__request())
