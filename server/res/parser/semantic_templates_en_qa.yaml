@@ -215,7 +215,6 @@
 - category: NP|NP
   rule: conj
   semantics: \E Q1 Q2 x y. (E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), y, z, x))
-  #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
   #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
   child0_surf: and
 
@@ -417,7 +416,7 @@
 ### rule for NP|NP
 - category: NP|NP
   rule: conj
-  semantics: \E Q1 Q2 x y.(E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), y, b, x))
+  semantics: \E Q1 Q2 x y.(E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), y, a, x))
   #semantics: \E Q1 Q2 x y. (E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), y, z, x))
   #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
   #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
@@ -900,7 +899,7 @@
   # semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(\w.True, \e.(E(e) = x)) & F1(x)), F2)
   pos: IN
 
-# Conjunction with POS tags recognition ######################################################################
+# Conjunction with POS tags recognition #
 
 - category: (NP|NP)|NP
   semantics: \E Q1 Q2 F1 F2. Q2(\x.(Q1(x) & F1(x) & E(x)), F2)

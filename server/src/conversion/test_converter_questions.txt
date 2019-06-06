@@ -8,7 +8,6 @@ Is my name John Watson ?
 My name is John Watson
 Gaetan is John Watson
 Cats are green but dogs are blue
-Are all the dogs green ?
 My cat is your cat.
 Is my cat your cat ?
 Is your cat a cat ?
@@ -34,9 +33,12 @@ Which crocodile has green and blue tooth ?
 Who is a bird and a red or blue bag ?
 What is a snake that eats a cat or an elephant ?
 What are the lessons of yesterday and the lessons of tomorrow ?
+I go and he drinks 
 Who is the nicest guy and who is the happy penguin ?
+What is a duck that fly ?
+Who is the man who stole my apple ?
 Who is a pig and a cooking pot ?
 What are the languages spoken in China ?
 What are the presidents of the USA ?
 Who is Barack Obama ?
-What a a bird eaten by a snake ?
+What is a bird eaten by a snake ?
