@@ -1,3 +1,5 @@
+from typing import Union
+
 from sparql.wrapper import Wrapper
 from nltk2qo.sentence import Sentence
 from qalogging import verbose, info, announce, error
@@ -35,7 +37,7 @@ class QueryBuilder:
         return wrapper.make_request()
 
     @staticmethod
-    def __get_tags(tag_lists: Entity) -> str:
+    def __get_tags(tag_lists: Entity) -> Union[str, None]:
         """
         Creates a single string from a list of tags of an event
         :param tag_lists: event
