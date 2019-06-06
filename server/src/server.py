@@ -1,6 +1,7 @@
 #
 # This is the main file of the software.
 #
+import traceback
 from typing import List, Tuple
 
 from conversion.converter import convert
@@ -21,8 +22,11 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
     :return The one the user chose
     """
     if len(options) == 0:
-        error('There is no questions to ask!')
-        raise Exception('A question was asked, but no answer was provided.')
+        error("The server just requested to ask a question to the client, but didn't provide any possible answer! "
+              "Skipping.")
+        verbose("Requested a question without providing an answer")
+        traceback.print_stack()
+        return ""
     elif len(options) == 1:
         warning(
             'Asking a question with only one possible answer, the client will not be prompted.')
