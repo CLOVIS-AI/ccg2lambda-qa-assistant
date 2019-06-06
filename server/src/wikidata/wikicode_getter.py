@@ -98,7 +98,8 @@ def get_all_p_codes(words: str) -> List:
             desc = string['description']
         except KeyError:
             desc = "No description available"
-        properties.append((string['id'], string['label'], desc, string['url']))
+        properties.append(
+            (string['id'], string['label'], desc, string['url']))
 
     if not properties:
         error("[ERROR]: Property \"" + words +
