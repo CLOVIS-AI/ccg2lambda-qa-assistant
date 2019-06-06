@@ -223,7 +223,7 @@
 
 - category: NP
   rule: ba
-  semantics: \Q1 Q2 F1 F2.(exists y.Q2(\x.Q1(\x.True,\y.(x = y)), \x.True, y) & F1(y) & F2(y))
+  semantics: \Q1 Q2 F1 F2.(exists x.(Q2(\x.Q1(\x.True,\y.(x = y)), \x.True, x) & F1(x) & F2(x)))
   #semantics: \Q1 Q2 F1 F2 z.(Q2(Q1(\x.True,\y.(y = z)), \x.(F1(x) & F2(x)), \y.True, z))
   child1_child0_surf: "and"
 
@@ -417,7 +417,8 @@
 ### rule for NP|NP
 - category: NP|NP
   rule: conj
-  semantics: \E Q1 Q2 x y. (E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), y, z, x))
+  semantics: \E Q1 Q2 x y.(E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), y, b, x))
+  #semantics: \E Q1 Q2 x y. (E(\x.Q1(\x.True,\y.(x = y)),\y.Q2(y), y, z, x))
   #semantics: \E Q1 Q2 x z.(_or(x) & Conj(x) & exists e y.(Q2(y) & (Acc(e) = y) & (Subj(e) = x) & exists e z.(Q1(z) & (Acc(e) = z) & (Subj(e) = x))))
   #semantics: \E Q1 Q2 x. (E(\y.Q1(y),\y.Q2(y), \z.True, \y.True, x))
   child0_surf: or
@@ -426,7 +427,7 @@
 
 - category: NP
   rule: ba
-  semantics: \Q1 Q2 F1 F2.(exists y.Q2(\x.Q1(\x.True,\y.(x = y)), \x.True, y) & F1(y) & F2(y))
+  semantics: \Q1 Q2 F1 F2.(exists x.(Q2(\x.Q1(\x.True,\y.(x = y)), \x.True, x) & F1(x) & F2(x)))
   #semantics: \Q1 Q2 F1 F2.(exists y.Q2(\x.Q1(\x.True,\y.(x = y)), \x.(F1(x) & F2(x)), y))
   #semantics: \Q1 Q2 F1 F2 z.(Q2(Q1(\x.True,\y.(y = z)), \x.(F1(x) & F2(x)), \y.True, z))
   child1_child0_surf: "or"

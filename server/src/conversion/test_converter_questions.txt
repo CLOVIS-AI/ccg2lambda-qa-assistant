@@ -12,6 +12,8 @@ Are all the dogs green ?
 My cat is your cat.
 Is my cat your cat ?
 Is your cat a cat ?
+Is it a cat or a dog ?
+Is it a cat and a dog ?
 The son of the daughter of my grand-mother is me.
 Who is the president of the United States of America in 2017 ?
 Who is Barack Obama ?
@@ -37,3 +39,4 @@ Who is a pig and a cooking pot ?
 What are the languages spoken in China ?
 What are the presidents of the USA ?
 Who is Barack Obama ?
+What a a bird eaten by a snake ?
