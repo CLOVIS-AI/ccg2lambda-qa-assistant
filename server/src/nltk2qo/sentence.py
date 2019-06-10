@@ -1,9 +1,9 @@
-from typing import List, Union
+from typing import List, Union, Tuple
 
 from nltk2qo.entity import Entity
 from nltk2qo.event import Event
 from nltk2qo.variable import Variable
-from qalogging import verbose, info, warning
+from qalogging import verbose, info, warning, error
 
 
 class Sentence:
@@ -15,6 +15,7 @@ class Sentence:
         self.events: List[Event] = []
         self.__variables: List[Variable] = []
         self.main: Union[Variable, None] = None
+        self.__couples: List[Tuple[str, str]] = []
 
     def add(self, name: str):
         """
@@ -72,7 +73,16 @@ class Sentence:
         :param link_name: The name of the link
         """
         e = self.get_event(event)
-        e.variables.append((link_name, self.__get_variable(variable)))
+        v = self.__get_variable(variable)
+
+        if e is None:
+            raise Exception(
+                "Trying to link [", e, "], but there's no such event!")
+        if v is None:
+            raise Exception(
+                "Trying to link to [", v, "], but there's no such variable!")
+
+        e.variables.append((link_name, v))
         verbose(
             " › New link [",
             link_name,
@@ -109,6 +119,34 @@ class Sentence:
         """
         return next((v for v in self.__variables if v.id == id_), None)
 
+    def mark_as_equal(self, first: str, second: str):
+        self.__couples.append((first, second))
+        verbose(" › The variables [", first, "] and [", second, "] are equal")
+
+    def fix(self):
+        for couple in self.__couples:
+            variables = [self.__get_variable(variable) for variable in couple]
+            first = variables[0]
+            second = variables[1]
+            verbose(
+                " › Fixing equal variables [",
+                first.id,
+                "] and [",
+                second.id,
+                "]...")
+            [first.tags.append(tag) for tag in second.tags]
+            second.tags = first.tags
+            second.id = first.id
+            if first != second:
+                error(
+                    "The two variables [",
+                    first,
+                    "] and [",
+                    second,
+                    "] should be equal, but they are not!")
+                raise Exception("Variables that should be equal are not!")
+        self.__couples.clear()
+
     @staticmethod
     def __is_event(id_: str):
         if id_[0] == 'e':
@@ -126,6 +164,12 @@ class Sentence:
         """
         Graphically display this Sentence, to make it easier to see what's going on.
         """
+        if len(self.__couples) != 0:
+            error(
+                "This sentence has not been fixed! There are still couples left: [",
+                self.__couples,
+                "]")
+
         if self.main is not None:
             info(" question marker:", self.main.id, "[", *self.main.tags, "]")
         else:

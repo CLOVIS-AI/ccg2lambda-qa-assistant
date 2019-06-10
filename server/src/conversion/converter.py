@@ -100,7 +100,7 @@ def convert(sentences: List[str], output_file=False) -> List[Expression]:
         # Can be used in ccg2lambda python script visualize.py to output
         # sentences.html to give better overview
         info("Creating visualisation in file sentences.sem.xml")
-        visualisation.visualize(lambda_expressions, "sentences.sem.xml")
+        visualisation.visualize(lambda_expressions, "sentences.html")
 
     expr = __lambda_to_python(formulas)
     verbose("Conversion done.")
