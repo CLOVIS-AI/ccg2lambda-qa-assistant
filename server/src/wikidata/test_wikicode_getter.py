@@ -25,7 +25,7 @@ def search_p_codes(words: str, expected_result: str) -> bool:
     """
     result_list = get_all_p_codes(words)
     for result in result_list:
-        if result[1] == expected_result:
+        if result[0] == expected_result:
             return True
     return False
 
@@ -54,6 +54,7 @@ class TestWikicodeGetter(unittest.TestCase):
         expected_result = "P31"
         # Search with directly the name of the property
         self.assertTrue(search_p_codes("instance of", expected_result))
+        self.assertTrue(search_p_codes("is", expected_result))
 
         # Search with alias of the property
         self.assertTrue(search_p_codes("is a", expected_result))

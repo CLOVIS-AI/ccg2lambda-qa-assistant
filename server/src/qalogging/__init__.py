@@ -61,7 +61,7 @@ def error(*args) -> None:
 
 def verbose(*args) -> None:
     if PRINT_VERBOSE:
-        print('\x1b[1;90m', *args, '\x1b[0m')
+        print('\x1b[1;35m', *args, '\x1b[0m')
 
 
 verbose("Loaded package 'qalogging'")

@@ -5,9 +5,11 @@ from sparql.wrapper import Wrapper
 
 class TestWrapper(TestCase):
     def setUp(self):
+        file = open("sparql/query.sparql")
         self.wrapper = Wrapper(
             "https://query.wikidata.org/sparql",
-            "sparql/query.sparql")
+            file.read())
+        file.close()
 
     def test_makeRequest(self):
         expected_result = open("sparql/test_wrapper_expected_result.txt", "r")

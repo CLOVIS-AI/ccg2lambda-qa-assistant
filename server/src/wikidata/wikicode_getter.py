@@ -28,7 +28,8 @@ def __get_wikidata_code(searched_words: str, object_type: str) -> str:
         'language': 'en',
         'type': object_type,
         'search': searched_words,
-        'format': 'json'
+        'format': 'json',
+        'limit': '10'
     }).json()
 
     return resp
@@ -92,12 +93,14 @@ def get_all_p_codes(words: str) -> List:
     """
     answer = __get_wikidata_code(searched_words=words, object_type="property")
     properties = []
-    for string in answer['search']:
-        try:
-            desc = string['description']
-        except KeyError:
-            desc = "No description available"
-        properties.append((string['label'], string['id'], desc, string['url']))
+    if 'search' in answer:
+        for string in answer['search']:
+            try:
+                desc = string['description']
+            except KeyError:
+                desc = "No description available"
+            properties.append(
+                (string['id'], string['label'], desc, string['url']))
 
     if not properties:
         error("[ERROR]: Property \"" + words +

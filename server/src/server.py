@@ -1,6 +1,7 @@
 #
 # This is the main file of the software.
 #
+import traceback
 from typing import List, Tuple
 
 from conversion.converter import convert
@@ -9,6 +10,7 @@ from network.server import Server
 from qalogging import announce, set_client, set_verbose, verbose, error, warning, info
 from time import sleep
 from wikidata.ask import set_ask_function
+from sparql.queryBuilder.query_builder import QueryBuilder
 
 user_choice = None
 
@@ -20,8 +22,12 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
     :return The one the user chose
     """
     if len(options) == 0:
-        error('There is no questions to ask!')
-        raise Exception('A question was asked, but no answer was provided.')
+        error(
+            "The server just requested to ask a question to the client, but didn't provide any possible answer! "
+            "Skipping.")
+        verbose("Requested a question without providing an answer")
+        traceback.print_stack()
+        return ""
     elif len(options) == 1:
         warning(
             'Asking a question with only one possible answer, the client will not be prompted.')
@@ -64,6 +70,9 @@ def request(server: Server, client: Client, request: str):
     ast = convert([request])
     client.send('ast', str(ast[0]))
     qo = nltk_to_query_objects(ast)
+    for sentence in qo:
+        qb = QueryBuilder(sentence)
+        qb.build()
     set_client(False)
     client.close()
 

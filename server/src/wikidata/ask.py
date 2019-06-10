@@ -1,7 +1,7 @@
 # Use this method to ask a question to the client.
 #
 # This method can be used in the exact same way than 'ask_client' from src/server.py.
-# Because of circular dependencies, however, it is not possible to important the real one.
+# Because of circular dependencies, however, it is not possible to import the real one.
 # To fix this problem, the 'ask_client' function in this file provides a link to the real function,
 # which is linked automatically by the server code when it starts up.
 #
