@@ -106,4 +106,3 @@ def get_all_p_codes(words: str) -> List:
         error("[ERROR]: Property \"" + words +
               "\" does not match any pages. Try another id!")
     return properties
-

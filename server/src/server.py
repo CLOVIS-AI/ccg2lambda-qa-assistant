@@ -22,8 +22,9 @@ def ask_client(options: List[Tuple[str, str, str, str]]) -> str:
     :return The one the user chose
     """
     if len(options) == 0:
-        error("The server just requested to ask a question to the client, but didn't provide any possible answer! "
-              "Skipping.")
+        error(
+            "The server just requested to ask a question to the client, but didn't provide any possible answer! "
+            "Skipping.")
         verbose("Requested a question without providing an answer")
         traceback.print_stack()
         return ""
