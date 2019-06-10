@@ -76,9 +76,11 @@ class Sentence:
         v = self.__get_variable(variable)
 
         if e is None:
-            raise Exception("Trying to link [", e, "], but there's no such event!")
+            raise Exception(
+                "Trying to link [", e, "], but there's no such event!")
         if v is None:
-            raise Exception("Trying to link to [", v, "], but there's no such variable!")
+            raise Exception(
+                "Trying to link to [", v, "], but there's no such variable!")
 
         e.variables.append((link_name, v))
         verbose(
@@ -126,12 +128,22 @@ class Sentence:
             variables = [self.__get_variable(variable) for variable in couple]
             first = variables[0]
             second = variables[1]
-            verbose(" › Fixing equal variables [", first.id, "] and [", second.id, "]...")
+            verbose(
+                " › Fixing equal variables [",
+                first.id,
+                "] and [",
+                second.id,
+                "]...")
             [first.tags.append(tag) for tag in second.tags]
             second.tags = first.tags
             second.id = first.id
             if first != second:
-                error("The two variables [", first, "] and [", second, "] should be equal, but they are not!")
+                error(
+                    "The two variables [",
+                    first,
+                    "] and [",
+                    second,
+                    "] should be equal, but they are not!")
                 raise Exception("Variables that should be equal are not!")
         self.__couples.clear()
 
@@ -153,7 +165,10 @@ class Sentence:
         Graphically display this Sentence, to make it easier to see what's going on.
         """
         if len(self.__couples) != 0:
-            error("This sentence has not been fixed! There are still couples left: [", self.__couples, "]")
+            error(
+                "This sentence has not been fixed! There are still couples left: [",
+                self.__couples,
+                "]")
 
         if self.main is not None:
             info(" question marker:", self.main.id, "[", *self.main.tags, "]")

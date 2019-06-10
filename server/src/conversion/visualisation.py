@@ -10,7 +10,9 @@ def visualize(tree: ElementTree, filename: str) -> None:
     :param filename: the name of the output file, need to be a .html
     """
     create_XML_file(tree, "sentences.sem.xml")
-    os.system("python ../../ccg2lambda/scripts/visualize.py sentences.sem.xml > " + filename)
+    os.system(
+        "python ../../ccg2lambda/scripts/visualize.py sentences.sem.xml > " +
+        filename)
 
 
 def create_XML_file(tree: ElementTree, filename: str) -> None:
@@ -21,4 +23,4 @@ def create_XML_file(tree: ElementTree, filename: str) -> None:
     """
     a = ElementTree.ElementTree()
     a._setroot(tree)
-    a.write(filename, encoding = "utf-8")
+    a.write(filename, encoding="utf-8")

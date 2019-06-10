@@ -7,7 +7,8 @@ class Variable(Entity):
         super().__init__(id)
 
     def __eq__(self, o: object) -> bool:
-        return type(o) is Variable and self.id is o.id and self.tags is o.tags
+        return isinstance(
+            o, Variable) and self.id is o.id and self.tags is o.tags
 
     def __str__(self) -> str:
-        return "Variable{id="+self.id+", tags=["+str(self.tags)+"]}"
+        return "Variable{id=" + self.id + ", tags=[" + str(self.tags) + "]}"

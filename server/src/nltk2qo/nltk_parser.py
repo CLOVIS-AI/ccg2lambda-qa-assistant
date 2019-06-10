@@ -26,14 +26,20 @@ def read_expressions(value: Expression, sentence: Sentence):
     elif t == EqualityExpression:
         first = type(value.first)
         if first == IndividualVariableExpression:  # (x1 = x2)
-            sentence.mark_as_equal(value.first.variable.name, value.second.variable.name)
+            sentence.mark_as_equal(
+                value.first.variable.name,
+                value.second.variable.name)
         elif first == ApplicationExpression:  # (link(e) = x)
             sentence.add_link(value.second.variable.name,
                               value.first.argument.variable.name,
                               value.first.function.variable.name)
         else:
-            error("Found an EqualityExpression but the first argument is a [", first, "], which is unforeseen!")
-            raise Exception("I do not know how to handle the type [", first, "] in a [", t, "] !")
+            error(
+                "Found an EqualityExpression but the first argument is a [",
+                first,
+                "], which is unforeseen!")
+            raise Exception(
+                "I do not know how to handle the type [", first, "] in a [", t, "] !")
     elif t == AllExpression:
         verbose("nltk2qo: Found a AllExpression")
         warning(

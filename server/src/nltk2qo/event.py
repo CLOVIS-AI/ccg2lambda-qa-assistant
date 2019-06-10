@@ -11,4 +11,5 @@ class Event(Entity):
         self.variables: List[Tuple[str, Variable]] = []
 
     def __str__(self) -> str:
-        return "Event{id="+self.id+", tags=["+str(self.tags)+"], variables=["+str(self.variables)+"]}"
+        return "Event{id=" + self.id + \
+            ", tags=[" + str(self.tags) + "], variables=[" + str(self.variables) + "]}"
