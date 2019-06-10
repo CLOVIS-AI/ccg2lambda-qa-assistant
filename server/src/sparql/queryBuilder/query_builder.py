@@ -164,9 +164,8 @@ class QueryBuilder:
 
     def __complete_triple(self, event: Event) -> None:
         """
-        Completes a triple are create a to-be-completed one in order
-        :param event:
-        :return:
+        Completes a triple or creates a to-be-completed triple in order to get it filled later.
+        :param event: the event parsed for this triple
         """
         contains_special_tag = False
         # Search for special tags like _of or _in
