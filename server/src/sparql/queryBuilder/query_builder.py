@@ -45,7 +45,8 @@ class QueryBuilder:
         """
         result = ""
         name_tag = (tag for tag in tag_lists.tags if tag.startswith('_'))
-        if name_tag:
+        len_name_tag = sum(1 for tag in tag_lists.tags if tag.startswith('_'))
+        if len_name_tag > 0:
             for tag in name_tag:
                 result += tag
             result.replace('_', ' ')
@@ -182,9 +183,9 @@ class QueryBuilder:
         :param event: the event
         """
         attr = self.__get_tags(event)
-        # if the event is not none, hence it is a verb, hence we need a new
+        # if the event has a tag, hence it is a verb, hence we need a new
         # triple
-        if attr != "":
+        if attr is not None:
             self.__create_new_event_triple(event, attr)
         else:
             self.__complete_triple(event)

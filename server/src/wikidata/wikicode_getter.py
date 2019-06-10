@@ -93,15 +93,17 @@ def get_all_p_codes(words: str) -> List:
     """
     answer = __get_wikidata_code(searched_words=words, object_type="property")
     properties = []
-    for string in answer['search']:
-        try:
-            desc = string['description']
-        except KeyError:
-            desc = "No description available"
-        properties.append(
-            (string['id'], string['label'], desc, string['url']))
+    if 'search' in answer:
+        for string in answer['search']:
+            try:
+                desc = string['description']
+            except KeyError:
+                desc = "No description available"
+            properties.append(
+                (string['id'], string['label'], desc, string['url']))
 
     if not properties:
         error("[ERROR]: Property \"" + words +
               "\" does not match any pages. Try another id!")
     return properties
+

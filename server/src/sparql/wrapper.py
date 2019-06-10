@@ -25,6 +25,6 @@ class Wrapper:
         string_result = ""
         # Will end by a new empty line.
         for result in results["results"]["bindings"]:
-            string_result += result["itemLabel"]["value"] + "\n"
+            string_result += result["itemLabel"]["value"] + ", "
 
-        return string_result
+        return string_result[0:-2]
