@@ -15,6 +15,8 @@ def __parse(nltk_output: Expression) -> Sentence:
     verbose("Now parsing [", nltk_output, "]")
     sentence = Sentence()
     read_expressions(nltk_output, sentence)
+    sentence.fix()
+
     verbose("Done with this sentence.")
     sentence.pretty_print()
 
