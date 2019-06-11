@@ -13,15 +13,15 @@ import wikipedia
 # suppresses warning of other libs (that we didn't raise ourselves)
 import warnings
 from qalogging import verbose, error
-from typing import List
+from typing import List, Tuple, Dict
 
 
-def __get_wikidata_code(searched_words: str, object_type: str) -> str:
+def __get_wikidata_code(searched_words: str, object_type: str) -> Dict:
     """
     Gets a list of objects found on Wikidata based on a searched string.
     :param searched_words: string of the search
     :param object_type: string reprensentif the type of the search. Must be either 'item' or 'property'
-    :return: json (inside a string) containing the result of the query
+    :return: json containing the result of the query
     """
     resp = get('https://www.wikidata.org/w/api.php', {
         'action': 'wbsearchentities',
@@ -70,15 +70,15 @@ def get_all_q_codes(words: str) -> List:
     # Might propose later to the user to choose between Wikipedia *and*
     # Wikidata results.
     title = __wikipedia_suggestion(words)
-    items = []
+    items: List[Tuple[str, str, str, str]] = []
     if not title.startswith("[ERROR]"):
         answer = __get_wikidata_code(searched_words=title, object_type="item")
         for string in answer['search']:
             try:
-                desc = string['description']
+                desc: str = string['description']
             except KeyError:
                 desc = "No description available"
-            items.append((string['id'], string['title'], desc, string['url']))
+            items.append((string['id'], string['label'], desc, string['url']))
         return items
     else:
         error(title)

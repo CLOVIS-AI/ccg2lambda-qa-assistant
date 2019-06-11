@@ -11,7 +11,7 @@ def search_q_codes(words: str, expected_result: str) -> bool:
     """
     result_list = get_all_q_codes(words)
     for result in result_list:
-        if result[1] == expected_result:
+        if result[0] == expected_result:
             return True
     return False
 
