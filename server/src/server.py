@@ -8,9 +8,8 @@ from conversion.converter import convert
 from network.client import Client
 from network.server import Server
 from qalogging import announce, set_client, set_verbose, verbose, error, warning, info
-from time import sleep
-from wikidata.ask import set_ask_function
 from sparql.queryBuilder.query_builder import QueryBuilder
+from wikidata.ask import set_ask_function
 
 user_choice = None
 

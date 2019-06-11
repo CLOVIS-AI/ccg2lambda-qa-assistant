@@ -25,12 +25,20 @@ def request_sentence(sentence: str):
 
 def choose(client, *args: str):
     verbose('The server is asking:', *args)
-    info('\nWhat did you mean?')
+    announce('\nWhat did you mean?')
     options = [arg.replace('~', ' ').split('|') for arg in args]
 
     for option in options:
-        print(' › ' + option[0] + '\t' + option[1] +
-              '\t' + option[2] + ' (' + option[3] + ')')
+        print(
+            ' › ' +
+            option[0] +
+            '\t\x1b[32m' +
+            option[1] +
+            '\x1b[0m\t' +
+            option[2] +
+            ' \x1b[1;35mhttps:' +
+            option[3] +
+            '\x1b[0m')
 
     while True:
         user: str = input("Type the number of your choice: ")
